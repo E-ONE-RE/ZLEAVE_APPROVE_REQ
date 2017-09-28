@@ -1,0 +1,104 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" 
+xmlns:core="sap.ui.core" 
+xmlns="sap.m" 
+xmlns:semantic="sap.m.semantic" 
+controllerName="zetms.controller.Master"
+xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<semantic:MasterPage id="page" title="{masterView>/title}" navButtonPress="onNavBack" showNavButton="true">
+	
+	  <html:style>
+
+   #application-LeaveRequestApproval-display-component---master--iconTabBar1--header {
+
+                                        width: 110%
+
+                                 }
+
+          </html:style>
+          
+			<PullToRefresh id="pullToRefresh" visible="{device>/support/touch}" refresh="onRefresh"/>
+            
+				<IconTabBar
+				id="iconTabBar1"
+				class="sapUiResponsiveContentPadding"
+					select="onQuickFilter"
+					backgroundDesign="Translucent"
+					applyContentPadding="true">	
+				
+				<items>
+					<IconTabFilter
+					key="pending"
+						id="filter1"
+						icon="sap-icon://pending"
+						iconColor="Critical"
+						tooltip="In attesa di approvazione"
+						count="{masterView>/pending}"
+						text="Pending"
+						>
+					</IconTabFilter>
+					<IconTabFilter
+					key="approved"
+						id="filter2"
+						icon="sap-icon://accept"
+						iconColor="Positive"
+						tooltip="Richieste approvate"
+						count="{masterView>/approved}"
+						text="Approvate">
+					</IconTabFilter>
+					<IconTabFilter
+					key="rejected"
+						id="filter3"
+						icon="sap-icon://decline"
+						iconColor="Negative"
+						tooltip="Richieste rifiutate"
+						count="{masterView>/rejected}"
+						text="Non approvate">
+					</IconTabFilter>
+				</items>
+		
+			</IconTabBar>
+	
+		<semantic:content>
+			<!-- For client side filtering add this to the items attribute:  parameters: {operationMode: 'Client'}}" -->
+			<List id="list" 
+			items="{      path: '/LeaveRequestSet',      
+			sorter: {       path: 'ZrequestId',       
+			descending: true       },     
+			groupHeaderFactory: '.createGroupHeader'}"
+			busyIndicatorDelay="{masterView>/delay}" 
+			noDataText="{masterView>/noDataText}" 
+			mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" 
+			growing="true" 
+			growingScrollToLoad="true" 
+			updateFinished="onUpdateFinished" 
+			selectionChange="onSelectionChange">
+				<infoToolbar>
+					<Toolbar active="true" id="filterBar" visible="{masterView>/isFilterBarVisible}" press="onOpenViewSettings">
+						<Title id="filterBarLabel" text="{masterView>/filterBarLabel}"/>
+					</Toolbar>
+				</infoToolbar>
+				<items>
+					<ObjectListItem type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}" 
+					press="onSelectionChange" 
+					title="{Tmsuser}">
+					<attributes>
+					<ObjectAttribute text="Data: { path: 'ZdateRec', formatter: '.formatter.formatDate'}"/>
+					<ObjectAttribute text="Tipo: {ZabsType}" />
+				    </attributes>
+				<firstStatus>
+					<ObjectStatus
+						text="{ZreqStatus}"
+						state = "Success"
+					 />
+				</firstStatus>
+					</ObjectListItem>
+				</items>
+			</List>
+		
+		</semantic:content>
+	
+		
+	</semantic:MasterPage>
+
+</mvc:View>
