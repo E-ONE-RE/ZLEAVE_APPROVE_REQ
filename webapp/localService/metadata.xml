@@ -1,0 +1,95 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZLEAVE_REQUEST_SRV" xml:lang="it" sap:schema-version="1">
+            <EntityType Name="Approver" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Tmsuser"/>
+                </Key>
+                <Property Name="Tmsuser" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="LeaveRequestPos" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ZrequestId"/>
+                    <PropertyRef Name="ZrequestPos"/>
+                </Key>
+                <Property Name="ZrequestId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="id" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ZrequestPos" Type="Edm.Int32" Nullable="false" sap:label="Posizione" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Tmsuser" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Zdate" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Data assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ztimestart" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Ora inizio assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ztimeend" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Ora fine assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZdateRec" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Data" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZtimeRec" Type="Edm.Time" Nullable="false" Precision="0" sap:label="Ora" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zdeleted" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Flag di cancellazione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="LeaveRequest" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ZrequestId"/>
+                </Key>
+                <Property Name="ZrequestId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="id" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Tmsuser" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Tmsapprover" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ZabsType" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Tipo assennza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZreqStatus" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Stato richiesta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZdateRec" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Data" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZtimeRec" Type="Edm.Time" Nullable="false" Precision="0" sap:label="Ora" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zdeleted" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Flag di cancellazione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Znote" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Note" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="ToLeaveReqPos" Relationship="ZLEAVE_REQUEST_SRV.LeaveReqToPos" FromRole="FromRole_LeaveReqToPos" ToRole="ToRole_LeaveReqToPos"/>
+            </EntityType>
+            <EntityType Name="MsgReturn" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Type"/>
+                </Key>
+                <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Message" Type="Edm.String" Nullable="false" MaxLength="50" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="AbsenceType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdAbs"/>
+                </Key>
+                <Property Name="IdAbs" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Identificativo del tipo assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TipoAbs" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Tipo di assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <ComplexType Name="ItAbsType">
+                <Property Name="IdAbs" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Identificativo del tipo assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TipoAbs" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Tipo di assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <Association Name="LeaveReqToPos" sap:content-version="1">
+                <End Type="ZLEAVE_REQUEST_SRV.LeaveRequest" Multiplicity="1" Role="FromRole_LeaveReqToPos"/>
+                <End Type="ZLEAVE_REQUEST_SRV.LeaveRequestPos" Multiplicity="*" Role="ToRole_LeaveReqToPos"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_LeaveReqToPos">
+                        <PropertyRef Name="ZrequestId"/>
+                    </Principal>
+                    <Dependent Role="ToRole_LeaveReqToPos">
+                        <PropertyRef Name="ZrequestId"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZLEAVE_REQUEST_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ApproverSet" EntityType="ZLEAVE_REQUEST_SRV.Approver" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="LeaveRequestPosSet" EntityType="ZLEAVE_REQUEST_SRV.LeaveRequestPos" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="LeaveRequestSet" EntityType="ZLEAVE_REQUEST_SRV.LeaveRequest" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="MsgReturnCollection" EntityType="ZLEAVE_REQUEST_SRV.MsgReturn" sap:content-version="1"/>
+                <EntitySet Name="AbsenceTypeSet" EntityType="ZLEAVE_REQUEST_SRV.AbsenceType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="LeaveReqToPosSet" Association="ZLEAVE_REQUEST_SRV.LeaveReqToPos" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="LeaveRequestSet" Role="FromRole_LeaveReqToPos"/>
+                    <End EntitySet="LeaveRequestPosSet" Role="ToRole_LeaveReqToPos"/>
+                </AssociationSet>
+                <FunctionImport Name="ZNote" ReturnType="ZLEAVE_REQUEST_SRV.MsgReturn" EntitySet="MsgReturnCollection" m:HttpMethod="POST">
+                    <Parameter Name="ZnoteText" Type="Edm.String" Mode="In" MaxLength="50000"/>
+                    <Parameter Name="ZrequestId" Type="Edm.String" Mode="In" MaxLength="10"/>
+                </FunctionImport>
+            </EntityContainer>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZLEAVE_REQUEST_SRV/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZLEAVE_REQUEST_SRV/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>
