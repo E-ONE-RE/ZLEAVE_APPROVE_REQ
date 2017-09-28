@@ -1,0 +1,136 @@
+<mvc:View
+	controllerName="zetms.controller.Detail"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic"
+	xmlns:footerbar="sap.ushell.ui.footerbar">
+
+	<semantic:DetailPage
+		id="page"
+		navButtonPress="onNavBack"
+		showNavButton="{device>/system/phone}"
+		title="{i18n>detailTitle}"
+		busy="{detailView>/busy}"
+		busyIndicatorDelay="{detailView>/delay}">
+
+		<semantic:content>
+			<ObjectHeader
+				id="objectHeader"
+				title="{ZrequestId}"
+				number=""
+				numberUnit="Day(s)"
+>
+				<attributes>
+					<ObjectAttribute
+					text="{ZabsType}"
+					/>
+				<ObjectAttribute
+					text="{Tmsuser}"
+					/>
+						<ObjectAttribute
+					text="{Znote}"
+					/>
+				</attributes>
+				<statuses>
+				<ObjectStatus
+				text="{ZreqStatus}"
+				state="Success"/>
+				</statuses>
+			</ObjectHeader>
+			<IconTabBar
+				id="iconTabBar"
+				class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter
+						id="iconTabBarFilter1"
+						icon="sap-icon://hint"
+						tooltip="{i18n>detailIconTabBarInfo}">
+							<Table
+				id="lineItemsList"
+				width="auto"
+				items="{ToLeaveReqPos}"
+				updateFinished="onListUpdateFinished"
+				noDataText="{i18n>detailLineItemTableNoDataText}"
+				busyIndicatorDelay="{detailView>/lineItemTableDelay}"
+				class="sapUiResponsiveMargin">
+				<headerToolbar>
+					<Toolbar id="lineItemsToolbar">
+						<Title
+							id="lineItemsHeader"
+							text="{detailView>/lineItemListTitle}"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn}"/>
+					</Column>
+					<Column
+						minScreenWidth="Tablet"
+						demandPopin="true"
+						hAlign="Right">
+						<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier
+								title="{}"
+								text="{}"/>
+							<ObjectNumber
+								number="{
+									path: 'ZrequestPos',
+									formatter: '.formatter.currencyValue'
+								}"
+/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+					</IconTabFilter>
+					<IconTabFilter
+						id="iconTabBarFilter2"
+						icon="sap-icon://attachment"
+						tooltip="Allegati">
+					</IconTabFilter>
+						<IconTabFilter
+						id="iconTabBarFilter3"
+						icon="sap-icon://notes"
+						tooltip="Note">
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		
+		</semantic:content>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction
+				id="shareEmail"
+				press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+		<semantic:shareInJamAction>
+			<semantic:ShareInJamAction
+				id="shareInJam"
+				visible="{FLP>/isShareInJamActive}"
+				press="onShareInJamPress"/>
+		</semantic:shareInJamAction>
+		
+
+
+		<semantic:saveAsTileAction>
+			<footerbar:AddBookmarkButton
+				id="shareTile"
+				title="{detailView>/saveAsTileTitle}"/>
+		</semantic:saveAsTileAction>
+		
+		<semantic:positiveAction>
+					<semantic:PositiveAction id="btn1" text="Approva" press="onButtonPress"/>
+				</semantic:positiveAction>
+				<semantic:negativeAction>
+					<semantic:NegativeAction id="btn2" text="Rifiuta" press="onButtonPress"/>
+				</semantic:negativeAction>
+		
+	</semantic:DetailPage>
+
+</mvc:View>
