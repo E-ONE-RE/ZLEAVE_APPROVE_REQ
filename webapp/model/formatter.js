@@ -17,6 +17,22 @@ sap.ui.define([
 
 				return parseFloat(sValue).toFixed(2);
 			},
+			
+		formatReqStatus : function(sValue) {
+			
+		switch (sValue){
+			case "I":
+			    return "Warning";
+				break;
+			case "A":	
+					return "Success";
+				break;
+			case "R":	
+				return "Error";
+				
+		}
+			
+		},	
 
 	formatTime	: function(oTime) { 
 		if(oTime){
@@ -29,9 +45,19 @@ sap.ui.define([
 			}
 },
 	formatDate: function(sDate){
-		var sYear = sDate.substring(0,4);
-		var sMonth = sDate.substring(4,6);
-		var sDay = sDate.substring(6,8);
+		var sYear,
+		    sMonth,
+		    sDay;
+		
+		if(sDate.indexOf("-") == -1){
+		sYear = sDate.substring(0,4);
+	    sMonth = sDate.substring(4,6);
+		sDay = sDate.substring(6,8);
+		}else{
+		sYear = sDate.substring(0,4);
+		sMonth = sDate.substring(5,7);
+	    sDay = sDate.substring(8,10);
+		}
   // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
   var oDate= new Date(sYear, sMonth - 1, sDay); 
  oDate.setDate(oDate.getDate() + 1);
@@ -41,7 +67,30 @@ sap.ui.define([
 			}else{
 				return oDate;
 			}
-		}
+		},
+		
+		
+ formatAbsence: function(sAbtType){
+ 	
+ 	switch (sAbtType){
+ 		case "0001":
+ 			return "permesso";
+ 			break;
+ 	    case "0002":
+ 	    	return "ferie";
+ 	    	break;
+ 	   case "0003":
+ 	        return "recupero";
+ 	    	
+ 	}
+ 	
+ 	
+ }
+		
+		
+		
+		
+		
 		};
 
 	}

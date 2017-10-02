@@ -3,7 +3,8 @@
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.m.semantic"
-	xmlns:footerbar="sap.ushell.ui.footerbar">
+	xmlns:footerbar="sap.ushell.ui.footerbar"
+	xmlns:html="http://www.w3.org/1999/xhtml">
 
 	<semantic:DetailPage
 		id="page"
@@ -12,29 +13,34 @@
 		title="{i18n>detailTitle}"
 		busy="{detailView>/busy}"
 		busyIndicatorDelay="{detailView>/delay}">
+		
+		
+			  <html:style>
+	  	
+	 
+
+   #application-LeaveRequestApproval-display-component---detail--objectHeader {
+
+
+                                 }
+
+          </html:style>
 
 		<semantic:content>
 			<ObjectHeader
 				id="objectHeader"
-				title="{ZrequestId}"
-				number=""
-				numberUnit="Day(s)"
->
+				title="Richiesta n° {ZrequestId}"
+				numberUnit="Giorno/i"
+				icon="sap-icon://general-leave-request">
 				<attributes>
-					<ObjectAttribute
-					text="{ZabsType}"
-					/>
 				<ObjectAttribute
-					text="{Tmsuser}"
-					/>
-						<ObjectAttribute
-					text="{Znote}"
+					text="Richiesta di { path:'ZabsType', formatter:'.formatter.formatAbsence'} inserita da {Tmsuser}"
 					/>
 				</attributes>
 				<statuses>
 				<ObjectStatus
 				text="{ZreqStatus}"
-				state="Success"/>
+				state="{ path: 'ZreqStatus', formatter: '.formatter.formatReqStatus'}"/>
 				</statuses>
 			</ObjectHeader>
 			<IconTabBar
@@ -45,7 +51,7 @@
 						id="iconTabBarFilter1"
 						icon="sap-icon://hint"
 						tooltip="{i18n>detailIconTabBarInfo}">
-							<Table
+			   <Table
 				id="lineItemsList"
 				width="auto"
 				items="{ToLeaveReqPos}"
@@ -64,25 +70,22 @@
 					<Column>
 						<Text text="{i18n>detailLineItemTableIDColumn}"/>
 					</Column>
-					<Column
-						minScreenWidth="Tablet"
-						demandPopin="true"
-						hAlign="Right">
-						<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
+							<Column>
+						<Text text="Ora inizio"/>
+					</Column>
+							<Column>
+						<Text text="Ora fine"/>
 					</Column>
 				</columns>
 				<items>
 					<ColumnListItem>
 						<cells>
 							<ObjectIdentifier
-								title="{}"
-								text="{}"/>
-							<ObjectNumber
-								number="{
-									path: 'ZrequestPos',
-									formatter: '.formatter.currencyValue'
-								}"
-/>
+								title="{path: 'Zdate', formatter:'.formatter.formatDate'}"/>
+									<ObjectIdentifier
+								title="{Ztimestart}"/>
+									<ObjectIdentifier
+								title="{Ztimeend}"/>
 						</cells>
 					</ColumnListItem>
 				</items>
@@ -97,6 +100,20 @@
 						id="iconTabBarFilter3"
 						icon="sap-icon://notes"
 						tooltip="Note">
+								<List id="commentList"
+								showSeparators="Inner"
+							    noDataText="Nothing to show"
+						        backgroundDesign="Translucent">
+								<items>
+								<FeedListItem
+								    sender="{Tmsuser}"
+								    timestamp="{ path: 'ZtimeRec', formatter: '.formatter.formatTime'}"
+								    info="Richiesta {ZabsType}"
+									icon="sap-icon://employee"
+									iconDensityAware="false"
+									text="{Znote}"/>
+									</items>
+								</List>
 					</IconTabFilter>
 				</items>
 			</IconTabBar>
@@ -124,12 +141,13 @@
 				title="{detailView>/saveAsTileTitle}"/>
 		</semantic:saveAsTileAction>
 		
-		<semantic:positiveAction>
+		       <semantic:positiveAction>
 					<semantic:PositiveAction id="btn1" text="Approva" press="onButtonPress"/>
 				</semantic:positiveAction>
 				<semantic:negativeAction>
 					<semantic:NegativeAction id="btn2" text="Rifiuta" press="onButtonPress"/>
 				</semantic:negativeAction>
+	
 		
 	</semantic:DetailPage>
 

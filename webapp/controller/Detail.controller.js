@@ -3,7 +3,7 @@ sap.ui.define([
 		"zetms/controller/BaseController",
 		"sap/ui/model/json/JSONModel",
 		"zetms/model/formatter"
-	], function (BaseController, JSONModel, formatter) {
+	], function (BaseController, JSONModel, formatter, MessageToast) {
 		"use strict";
 
 		return BaseController.extend("zetms.controller.Detail", {
@@ -29,6 +29,8 @@ sap.ui.define([
 				this.setModel(oViewModel, "detailView");
 
 				this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
+				
+				
 			
 			},
 
@@ -42,7 +44,7 @@ sap.ui.define([
 			 */
 			 
 			 //Funzione per gestire l'approvazione o il rifiuto di una richiesta
-			 onButtonPress: function(oEvent){
+					 onButtonPress: function(oEvent){
 			    var oModel = this.getView().getModel();
                 var oEntry = {}; 
                 var oView = this.getView();
@@ -56,11 +58,21 @@ sap.ui.define([
                 
                 oModel.update("/LeaveRequestSet("+"'"+ sObjId +"'"+")", oEntry, {
     method: "PUT",
-    success: function(data) {
-     alert("success");
+    success: function() {
+     	var msg = "Success";
+        					sap.m.MessageToast.show(msg, { duration: 5000,
+        					autoClose: true,
+        					 closeOnBrowserNavigation: false
+        					});
     },
-    error: function(e) {
-     alert("error");
+    
+    error: function(oData) {
+	var msg2 = "Error";
+        					sap.m.MessageToast.show(msg2, { duration: 5000,
+        					autoClose: true,
+        					 closeOnBrowserNavigation: false
+        						
+        					});
     }
    });
                 

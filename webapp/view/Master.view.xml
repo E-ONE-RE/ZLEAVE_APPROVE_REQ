@@ -6,7 +6,8 @@ controllerName="zetms.controller.Master"
 xmlns:html="http://www.w3.org/1999/xhtml">
 
 	<semantic:MasterPage id="page" title="{masterView>/title}" navButtonPress="onNavBack" showNavButton="true">
-	
+
+
 	  <html:style>
 
    #application-LeaveRequestApproval-display-component---master--iconTabBar1--header {
@@ -14,8 +15,22 @@ xmlns:html="http://www.w3.org/1999/xhtml">
                                         width: 110%
 
                                  }
-
+                                 
+                                 
+                                 .myclass {
+                                 background-color: rgba(209,73,0, 0.5)!important
+                                 }
           </html:style>
+          
+          <semantic:customHeaderContent>
+	     <Button
+                icon="sap-icon://synchronize"
+                press="onClickRefresh" 
+                type="Emphasized"
+                tooltip="Aggiorna"/>
+</semantic:customHeaderContent>
+
+
           
 			<PullToRefresh id="pullToRefresh" visible="{device>/support/touch}" refresh="onRefresh"/>
             
@@ -63,8 +78,6 @@ xmlns:html="http://www.w3.org/1999/xhtml">
 			<!-- For client side filtering add this to the items attribute:  parameters: {operationMode: 'Client'}}" -->
 			<List id="list" 
 			items="{      path: '/LeaveRequestSet',      
-			sorter: {       path: 'ZrequestId',       
-			descending: true       },     
 			groupHeaderFactory: '.createGroupHeader'}"
 			busyIndicatorDelay="{masterView>/delay}" 
 			noDataText="{masterView>/noDataText}" 
@@ -83,13 +96,13 @@ xmlns:html="http://www.w3.org/1999/xhtml">
 					press="onSelectionChange" 
 					title="{Tmsuser}">
 					<attributes>
-					<ObjectAttribute text="Data: { path: 'ZdateRec', formatter: '.formatter.formatDate'}"/>
-					<ObjectAttribute text="Tipo: {ZabsType}" />
+					<ObjectAttribute text="Inserita il: { path: 'ZdateRec', formatter: '.formatter.formatDate'}"/>
+					<ObjectAttribute text="Tipo: {path: 'ZabsType', formatter:'.formatter.formatAbsence' }" />
 				    </attributes>
 				<firstStatus>
 					<ObjectStatus
 						text="{ZreqStatus}"
-						state = "Success"
+						state = "{ path: 'ZreqStatus', formatter: '.formatter.formatReqStatus'}"
 					 />
 				</firstStatus>
 					</ObjectListItem>
@@ -97,7 +110,8 @@ xmlns:html="http://www.w3.org/1999/xhtml">
 			</List>
 		
 		</semantic:content>
-	
+		
+		 
 		
 	</semantic:MasterPage>
 
