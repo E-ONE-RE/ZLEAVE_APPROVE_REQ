@@ -34,7 +34,7 @@
 				icon="sap-icon://general-leave-request">
 				<attributes>
 				<ObjectAttribute
-					text="Richiesta di { path:'ZabsType', formatter:'.formatter.formatAbsence'} inserita da {Tmsuser}"
+					text="Richiesta di { path:'ZabsType', formatter:'.formatter.formatAbsence'} inserita da {UnameToName/NameLast} {UnameToName/NameFirst}"
 					/>
 				</attributes>
 				<statuses>

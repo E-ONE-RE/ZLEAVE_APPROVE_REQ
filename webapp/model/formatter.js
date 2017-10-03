@@ -2,7 +2,9 @@ sap.ui.define([
 	], function () {
 		"use strict";
 
+
 		return {
+
 			/**
 			 * Rounds the currency value to 2 digits
 			 *
@@ -48,6 +50,7 @@ sap.ui.define([
 		var sYear,
 		    sMonth,
 		    sDay;
+		    
 		
 		if(sDate.indexOf("-") == -1){
 		sYear = sDate.substring(0,4);
@@ -85,11 +88,10 @@ sap.ui.define([
  	}
  	
  	
- }
-		
-		
-		
-		
+ },
+ 
+ 
+ 
 		
 		};
 
