@@ -3,7 +3,7 @@ sap.ui.define([
 		"zetms/controller/BaseController",
 		"sap/ui/model/json/JSONModel",
 		"zetms/model/formatter"
-	], function (BaseController, JSONModel, formatter, MessageToast) {
+	], function (BaseController, JSONModel, formatter, MessageToast, MessageBox) {
 		"use strict";
 
 		return BaseController.extend("zetms.controller.Detail", {
@@ -50,7 +50,22 @@ sap.ui.define([
                 var oView = this.getView();
                 var oObject = oView.getBindingContext().getObject();
                 var sObjId = oObject.ZrequestId;
-                if(oEvent.getSource().getId() == this.getView().byId("btn1").getId()){
+                var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+                var sClicked = oEvent.getSource().getId();
+                var oView = this.getView();
+                
+                //MP: Dialog di conferma con all'interno la logica per l'accettazione o il rifiuto di una richiesta
+                	sap.m.MessageBox.confirm(
+				    "Vuoi confermare l'azione?", {
+					styleClass: bCompact ? "sapUiSizeCompact" : "",
+					initialFocus : sap.m.MessageBox.Action.CANCEL,
+		            
+		
+		//MP: logica per l'approvazione o il rifiuto di una richiesta			
+					 onClose : function(sButton) {
+        if (sButton === sap.m.MessageBox.Action.OK) {
+        	
+        	  if(sClicked == oView.byId("btn1").getId()){
                 	oEntry.ZreqStatus = 'A';
                 }else{
                 	oEntry.ZreqStatus = 'R';
@@ -76,6 +91,19 @@ sap.ui.define([
     }
    });
                 
+            
+				}else{
+				
+				return 0;	
+					
+				}
+					 	
+					 }
+				}
+			); 
+     //MP: fine message box
+                
+              
 			 },
 			 
 			 

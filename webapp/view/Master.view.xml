@@ -78,7 +78,8 @@ xmlns:html="http://www.w3.org/1999/xhtml">
 			<!-- For client side filtering add this to the items attribute:  parameters: {operationMode: 'Client'}}" -->
 			<List id="list" 
 			items="{      path: '/LeaveRequestSet',      
-			groupHeaderFactory: '.createGroupHeader'}"
+			groupHeaderFactory: '.createGroupHeader',
+			parameters : {expand:'UnameToName'}}"
 			busyIndicatorDelay="{masterView>/delay}" 
 			noDataText="{masterView>/noDataText}" 
 			mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" 
@@ -92,9 +93,9 @@ xmlns:html="http://www.w3.org/1999/xhtml">
 					</Toolbar>
 				</infoToolbar>
 				<items>
-					<ObjectListItem type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}" 
+					<ObjectListItem id="objList" type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}" 
 					press="onSelectionChange" 
-					title="{Tmsuser}">
+					title="{UnameToName/NameLast} {UnameToName/NameFirst}">
 					<attributes>
 					<ObjectAttribute text="Inserita il: { path: 'ZdateRec', formatter: '.formatter.formatDate'}"/>
 					<ObjectAttribute text="Tipo: {path: 'ZabsType', formatter:'.formatter.formatAbsence' }" />

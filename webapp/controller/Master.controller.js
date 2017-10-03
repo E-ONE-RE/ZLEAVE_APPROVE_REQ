@@ -87,9 +87,8 @@ sap.ui.define([
         					});
         					
     		},300000);
-    		               
-	
-              
+    		     
+    		     
 			},
 
 			/* =========================================================== */
@@ -192,10 +191,13 @@ sap.ui.define([
 					});
 				});
 				        // MP: impongo che al passaggio da un iconTabFilter a un'altro
-				        // si selezioni il primo elemento e la paggina di dettaglio
+				        // si selezioni il primo elemento e la pagina di dettaglio
 				        // mostri automaticamente quello.
 						this._oList.setSelectedItem(this._oList.getItems()[0],true);
 						this._showDetail(this._oList.getItems()[0]);
+						
+					
+    		
 			},
 
 			/**
