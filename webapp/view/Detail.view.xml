@@ -102,13 +102,14 @@
 						tooltip="Note">
 								<List id="commentList"
 								showSeparators="Inner"
-							    noDataText="Nothing to show"
+							    noDataText="Nessun commento alla richiesta"
 						        backgroundDesign="Translucent">
 								<items>
 								<FeedListItem
-								    sender="{Tmsuser}"
+								    id="FLI"
+								    sender="{UnameToName/NameLast} {UnameToName/NameFirst}"
 								    timestamp="{ path: 'ZtimeRec', formatter: '.formatter.formatTime'}"
-								    info="Richiesta {ZabsType}"
+								    info="Richiesta {path : 'ZabsType', formatter: '.formatter.formatAbsence'}"
 									icon="sap-icon://employee"
 									iconDensityAware="false"
 									text="{Znote}"/>
