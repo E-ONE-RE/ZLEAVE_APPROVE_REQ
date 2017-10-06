@@ -127,13 +127,14 @@ sap.ui.define([
 			// delle richieste approvate o di quelle rifiutate.
 			var oButton1 = sap.ui.getCore().byId("application-LeaveRequestApproval-display-component---detail--btn1");
 			var oButton2 = sap.ui.getCore().byId("application-LeaveRequestApproval-display-component---detail--btn2");
-			if(_sKey == "approved" || _sKey == "rejected"){
+			if(_sKey == "approved"){
+				oButton1.setEnabled(false);
+			}else if(_sKey == "rejected"){
 				oButton1.setEnabled(false);
 				oButton2.setEnabled(false);
 			}else{
 				oButton1.setEnabled(true);
 				oButton2.setEnabled(true);
-			   
 			}
 			
 		},

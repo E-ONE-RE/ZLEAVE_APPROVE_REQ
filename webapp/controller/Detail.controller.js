@@ -3,7 +3,7 @@ sap.ui.define([
 		"zetms/controller/BaseController",
 		"sap/ui/model/json/JSONModel",
 		"zetms/model/formatter"
-	], function (BaseController, JSONModel, formatter, MessageToast, MessageBox) {
+	], function (BaseController, JSONModel, formatter, MessageToast, MessageBox, Dialog, Button, Label, TextArea) {
 		"use strict";
 
 		return BaseController.extend("zetms.controller.Detail", {
@@ -55,21 +55,30 @@ sap.ui.define([
                 var oView = this.getView();
                 
                 //MP: Dialog di conferma con all'interno la logica per l'accettazione o il rifiuto di una richiesta
-                	sap.m.MessageBox.confirm(
-				    "Vuoi confermare l'azione?", {
-					styleClass: bCompact ? "sapUiSizeCompact" : "",
-					initialFocus : sap.m.MessageBox.Action.CANCEL,
-		            
-		
-		//MP: logica per l'approvazione o il rifiuto di una richiesta			
-					 onClose : function(sButton) {
-        if (sButton === sap.m.MessageBox.Action.OK) {
-        	
-        	  if(sClicked == oView.byId("btn1").getId()){
+                var dialog = new sap.m.Dialog({
+				title: 'Confermare?',
+				type: 'Message',
+				content: [
+					new sap.m.Label({ text: 'Sei sicuro di voler continuare?', labelFor: 'approveDialogTextarea'}),
+					new sap.m.TextArea('approveDialogTextarea', {
+						width: '100%',
+						placeholder: 'Aggiungi note (opzionale)'
+					})
+				],
+				//MP: logica per l'approvazione o il rifiuto di una richiesta	
+				beginButton: new sap.m.Button({
+					text: 'Conferma',
+					press: function () {
+						var sText = sap.ui.getCore().byId('approveDialogTextarea').getValue();
+						
+				// MP: Logica per fare l'update sullo stato ed eventualmente sulle note		
+				if(sClicked == oView.byId("btn1").getId()){
                 	oEntry.ZreqStatus = 'A';
                 }else{
                 	oEntry.ZreqStatus = 'R';
                 }
+                
+                oEntry.ZnoteAPP = sText;
                 
                 oModel.update("/LeaveRequestSet("+"'"+ sObjId +"'"+")", oEntry, {
     method: "PUT",
@@ -90,21 +99,27 @@ sap.ui.define([
         					});
     }
    });
-                
-            
-				}else{
+						dialog.close();
+						
+					}
+				}),
 				
-				return 0;	
-					
+				
+	endButton: new sap.m.Button({
+					text: 'Annulla',
+					press: function () {
+						dialog.close();
+					}
+				}),
+				afterClose: function() {
+					dialog.destroy();
 				}
-					 	
-					 }
-				}
-			); 
-     //MP: fine message box
+			});
+
+			dialog.open();
                 
-              
-			 },
+               
+	},
 			 
 			 
 			 
@@ -164,6 +179,17 @@ sap.ui.define([
 				var oBinding = oTable.getBinding("items");
 			
                oHeader.setNumber(oBinding.getLength());
+               
+               var oListItem = this.getView().byId("commentList");
+               var oItem = oListItem.getItems();
+               var sComment = oItem["0"].getText();
+               
+           if(sComment==""){
+               oListItem.setVisible(false);
+               }else{
+               	oListItem.setVisible(true);
+               }
+
 
 			},
 
