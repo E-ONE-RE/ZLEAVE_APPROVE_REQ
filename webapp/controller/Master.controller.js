@@ -129,6 +129,7 @@ sap.ui.define([
 			var oButton2 = sap.ui.getCore().byId("application-LeaveRequestApproval-display-component---detail--btn2");
 			if(_sKey == "approved"){
 				oButton1.setEnabled(false);
+				oButton2.setEnabled(true);
 			}else if(_sKey == "rejected"){
 				oButton1.setEnabled(false);
 				oButton2.setEnabled(false);
