@@ -75,7 +75,7 @@ sap.ui.define([
 
 					iShouldBeOnTheObjectNPage : function (iObjIndex) {
 						return this.waitFor(this.createAWaitForAnEntitySet({
-							entitySet : "LeaveRequestSet",
+							entitySet : "LeaveRequestAppSet",
 							success : function (aEntitySet) {
 								var sItemName = aEntitySet[iObjIndex].Name;
 
@@ -127,7 +127,7 @@ sap.ui.define([
 
 					theLineItemsListShouldHaveTheCorrectNumberOfItems : function () {
 						return this.waitFor(this.createAWaitForAnEntitySet({
-							entitySet : "ToLeaveReqPos",
+							entitySet : "ToLeaveReqAppPos",
 							success : function (aEntitySet) {
 
 								return this.waitFor({

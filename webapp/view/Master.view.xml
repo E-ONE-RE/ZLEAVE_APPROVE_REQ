@@ -77,9 +77,9 @@ xmlns:html="http://www.w3.org/1999/xhtml">
 		<semantic:content>
 			<!-- For client side filtering add this to the items attribute:  parameters: {operationMode: 'Client'}}" -->
 			<List id="list" 
-			items="{      path: '/LeaveRequestSet',      
+			items="{      path: '/LeaveRequestAppSet',      
 			groupHeaderFactory: '.createGroupHeader',
-			parameters : {expand:'UnameToName'}}"
+			parameters : {expand:'UnameAppToName'}}"
 			busyIndicatorDelay="{masterView>/delay}" 
 			noDataText="{masterView>/noDataText}" 
 			mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" 
@@ -95,10 +95,11 @@ xmlns:html="http://www.w3.org/1999/xhtml">
 				<items>
 					<ObjectListItem id="objList" type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}" 
 					press="onSelectionChange" 
-					title="{UnameToName/NameLast} {UnameToName/NameFirst}">
+					title="{UnameAppToName/NameLast} {UnameAppToName/NameFirst}">
 					<attributes>
 					<ObjectAttribute text="Inserita il: { path: 'ZdateRec', formatter: '.formatter.formatDate'}"/>
 					<ObjectAttribute text="Tipo: {path: 'ZabsType', formatter:'.formatter.formatAbsence' }" />
+					<ObjectAttribute text="Approvatore: {Tmsapprover} " />
 				    </attributes>
 				<firstStatus>
 					<ObjectStatus

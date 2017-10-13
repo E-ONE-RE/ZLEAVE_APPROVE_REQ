@@ -200,7 +200,7 @@ sap.ui.define([
 			var oModel = this.getModel(),
 				oViewModel = this.getModel("masterView");
 			jQuery.each(this._mFilters, function(sFilterKey, oFilter) {
-				oModel.read("/LeaveRequestSet/$count", {
+				oModel.read("/LeaveRequestAppSet/$count", {
 					filters: oFilter,
 					success: function(oData) {
 						var sPath = "/" + sFilterKey;

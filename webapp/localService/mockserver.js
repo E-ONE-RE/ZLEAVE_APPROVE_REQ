@@ -19,11 +19,11 @@ sap.ui.define([
 				var oUriParameters = jQuery.sap.getUriParameters(),
 					sJsonFilesUrl = jQuery.sap.getModulePath(_sJsonFilesModulePath),
 					sManifestUrl = jQuery.sap.getModulePath(_sAppModulePath + "manifest", ".json"),
-					sEntity = "LeaveRequestSet",
+					sEntity = "LeaveRequestAppSet",
 					sErrorParam = oUriParameters.get("errorType"),
 					iErrorCode = sErrorParam === "badRequest" ? 400 : 500,
 					oManifest = jQuery.sap.syncGetJSON(sManifestUrl).data,
-					oMainDataSource = oManifest["sap.app"].dataSources.mainService,
+					oMainDataSource = oManifest["sap.app"].dataSources.ZLEAVE_REQUEST_SRV,
 					sMetadataUrl = jQuery.sap.getModulePath(_sAppModulePath + oMainDataSource.settings.localUri.replace(".xml", ""), ".xml"),
 					// ensure there is a trailing slash
 					sMockServerUrl = /.*\/$/.test(oMainDataSource.uri) ? oMainDataSource.uri : oMainDataSource.uri + "/";

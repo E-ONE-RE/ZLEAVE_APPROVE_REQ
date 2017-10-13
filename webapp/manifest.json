@@ -10,18 +10,18 @@
 			"version": "1.0.0"
 		},
 		"dataSources": {
-			"mainService": {
+			"ZLEAVE_REQUEST_SRV": {
 				"uri": "/sap/opu/odata/sap/ZLEAVE_REQUEST_SRV/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
-					"localUri": "localService/metadata.xml"
+					"localUri": "localService/ZLEAVE_REQUEST_SRV/metadata.xml"
 				}
 			}
 		},
 		"sourceTemplate": {
-			"id": "sap.ui.ui5-template-plugin.2masterdetail",
-			"version": "1.38.3"
+			"id": "servicecatalog.connectivityComponent",
+			"version": "0.0.0"
 		}
 	},
 	"sap.ui": {
@@ -80,7 +80,7 @@
 				}
 			},
 			"": {
-				"dataSource": "mainService",
+				"dataSource": "ZLEAVE_REQUEST_SRV",
 				"preload": true
 			}
 		},
@@ -109,7 +109,7 @@
 					]
 				},
 				{
-					"pattern": "LeaveRequestSet/{objectId}",
+					"pattern": "LeaveRequestAppSet/{objectId}",
 					"name": "object",
 					"target": [
 						"master",

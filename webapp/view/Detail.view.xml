@@ -42,7 +42,7 @@
 						<ObjectAttribute
 					
 					/>
-				<ObjectAttribute title="Inserita da" text="{UnameToName/NameLast} {UnameToName/NameFirst}  { path: 'ZdateRec', formatter: '.formatter.formatDate'} { path: 'ZtimeRec', formatter: '.formatter.formatTime'}"/>
+				<ObjectAttribute title="Inserita da" text="{UnameAppToName/NameLast} {UnameAppToName/NameFirst}  { path: 'ZdateRec', formatter: '.formatter.formatDate'} { path: 'ZtimeRec', formatter: '.formatter.formatTime'}"/>
 			    <ObjectAttribute title="Elaborata da" text="{ZuserAction}  { path: 'ZdateAction', formatter: '.formatter.formatDate'} { path: 'ZtimeAction', formatter: '.formatter.formatTime'}"/>
 			    
 				</attributes>
@@ -70,7 +70,7 @@
 			   <Table
 				id="lineItemsList"
 				width="auto"
-				items="{ToLeaveReqPos}"
+				items="{ToLeaveReqAppPos}"
 				updateFinished="onListUpdateFinished"
 				noDataText="{i18n>detailLineItemTableNoDataText}"
 				busyIndicatorDelay="{detailView>/lineItemTableDelay}"
@@ -126,7 +126,7 @@
 								<items>
 								<FeedListItem
 								    id="FLI"
-								    sender="{UnameToName/NameLast} {UnameToName/NameFirst}"
+								    sender="{UnameAppToName/NameLast} {UnameAppToName/NameFirst}"
 								    timestamp="{ path: 'ZdateRec', formatter: '.formatter.formatDate'} { path: 'ZtimeRec', formatter: '.formatter.formatTime'}"
 								    info="Richiesta {path : 'ZabsType', formatter: '.formatter.formatAbsence'}"
 									icon="sap-icon://employee"

@@ -28,10 +28,10 @@
       "entitySet": "UNBINDKEY"
     },
     "/webapp/view/Master.view.xml": {
-      "entitySet": "LeaveRequestSet"
+      "entitySet": "LeaveRequestAppSet"
     },
     "/webapp/view/Detail.view.xml": {
-      "entitySet": "LeaveRequestSet"
+      "entitySet": "LeaveRequestAppSet"
     }
   },
   "generation": [
@@ -39,6 +39,11 @@
       "templateId": "sap.ui.ui5-template-plugin.2masterdetail",
       "templateVersion": "1.38.3",
       "dateTimeStamp": "Fri, 22 Sep 2017 08:53:42 GMT"
+    },
+    {
+      "templateId": "servicecatalog.connectivityComponent",
+      "templateVersion": "0.0.0",
+      "dateTimeStamp": "Fri, 13 Oct 2017 19:03:38 GMT"
     }
   ],
   "translation": {

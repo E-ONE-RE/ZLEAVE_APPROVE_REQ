@@ -80,7 +80,7 @@ sap.ui.define([
                 
                 oEntry.ZnoteAPP = sText;
                 
-                oModel.update("/LeaveRequestSet("+"'"+ sObjId +"'"+")", oEntry, {
+                oModel.update("/LeaveRequestAppSet("+"'"+ sObjId +"'"+")", oEntry, {
     method: "PUT",
     success: function() {
      	var msg = "Success";
@@ -206,7 +206,7 @@ sap.ui.define([
 			_onObjectMatched : function (oEvent) {
 				var sObjectId =  oEvent.getParameter("arguments").objectId;
 				this.getModel().metadataLoaded().then( function() {
-					var sObjectPath = this.getModel().createKey("LeaveRequestSet", {
+					var sObjectPath = this.getModel().createKey("LeaveRequestAppSet", {
 						ZrequestId :  sObjectId
 					});
 					this._bindView("/" + sObjectPath);
