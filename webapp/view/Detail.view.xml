@@ -34,14 +34,30 @@
 				icon="sap-icon://general-leave-request">
 				<attributes>
 				<ObjectAttribute
-					text="Richiesta di { path:'ZabsType', formatter:'.formatter.formatAbsence'} inserita da {UnameToName/NameLast} {UnameToName/NameFirst}"
+					title="Tipo"  text="{ path:'ZabsType', formatter:'.formatter.formatAbsence'}"
 					/>
+						<ObjectAttribute
+				
+					/>
+						<ObjectAttribute
+					
+					/>
+				<ObjectAttribute title="Inserita da" text="{UnameToName/NameLast} {UnameToName/NameFirst}  { path: 'ZdateRec', formatter: '.formatter.formatDate'} { path: 'ZtimeRec', formatter: '.formatter.formatTime'}"/>
+			    <ObjectAttribute title="Elaborata da" text="{ZuserAction}  { path: 'ZdateAction', formatter: '.formatter.formatDate'} { path: 'ZtimeAction', formatter: '.formatter.formatTime'}"/>
+			    
 				</attributes>
+			
+				 
 				<statuses>
-				<ObjectStatus
+				<!--<ObjectStatus
 				text="{ZreqStatus}"
 				state="{ path: 'ZreqStatus', formatter: '.formatter.formatReqStatus'}"/>
-				</statuses>
+				-->
+				<ObjectStatus title="Stato" 	icon="{ path: 'ZreqStatus', formatter: '.formatter.formatIconStatus'}"/>
+				<ObjectStatus title="Ore totali" text="{ZoreTotali}"/>
+				
+			    
+			    </statuses>
 			</ObjectHeader>
 			<IconTabBar
 				id="iconTabBar"
@@ -76,6 +92,10 @@
 							<Column>
 						<Text text="Ora fine"/>
 					</Column>
+					
+						<Column>
+						<Text text="Ore assenza"/>
+					</Column>
 				</columns>
 				<items>
 					<ColumnListItem>
@@ -86,20 +106,19 @@
 								title="{Ztimestart}"/>
 									<ObjectIdentifier
 								title="{Ztimeend}"/>
+								<ObjectIdentifier
+								title="{Zorep}"/>
 						</cells>
 					</ColumnListItem>
 				</items>
 			</Table>
 					</IconTabFilter>
-					<IconTabFilter
-						id="iconTabBarFilter2"
-						icon="sap-icon://attachment"
-						tooltip="Allegati">
-					</IconTabFilter>
+				
+					
 						<IconTabFilter
 						id="iconTabBarFilter3"
 						icon="sap-icon://notes"
-						tooltip="Note">
+						tooltip="Note Utente">
 								<List id="commentList"
 								showSeparators="Inner"
 							    noDataText="Nessun commento alla richiesta"
@@ -108,7 +127,7 @@
 								<FeedListItem
 								    id="FLI"
 								    sender="{UnameToName/NameLast} {UnameToName/NameFirst}"
-								    timestamp="{ path: 'ZtimeRec', formatter: '.formatter.formatTime'}"
+								    timestamp="{ path: 'ZdateRec', formatter: '.formatter.formatDate'} { path: 'ZtimeRec', formatter: '.formatter.formatTime'}"
 								    info="Richiesta {path : 'ZabsType', formatter: '.formatter.formatAbsence'}"
 									icon="sap-icon://employee"
 									iconDensityAware="false"
@@ -116,6 +135,36 @@
 									</items>
 								</List>
 					</IconTabFilter>
+					
+				
+						<IconTabFilter
+						id="iconTabBarFilter4"
+						icon="sap-icon://approvals"
+						tooltip="Note Approvatore">
+								<List id="commentListApp"
+								showSeparators="Inner"
+							    noDataText="Nessun commento alla richiesta"
+						        backgroundDesign="Translucent">
+								<items>
+								<FeedListItem
+								    id="FLI_APP"
+								    sender="{ZuserAction}"
+								    timestamp="{ path: 'ZdateAction', formatter: '.formatter.formatDate'} { path: 'ZtimeAction', formatter: '.formatter.formatTime'}"
+								    info="Richiesta {path : 'ZabsType', formatter: '.formatter.formatAbsence'}"
+									icon="sap-icon://employee-approvals"
+									iconDensityAware="false"
+									text="{ZnoteAPP}"/>
+									</items>
+								</List>
+					</IconTabFilter>
+					
+						<IconTabFilter
+						id="iconTabBarFilter2"
+						icon="sap-icon://attachment"
+						tooltip="Allegati">
+					</IconTabFilter>
+					
+					
 				</items>
 			</IconTabBar>
 		
@@ -127,12 +176,12 @@
 				press="onShareEmailPress"/>
 		</semantic:sendEmailAction>
 
-		<semantic:shareInJamAction>
+<!--		<semantic:shareInJamAction>
 			<semantic:ShareInJamAction
 				id="shareInJam"
 				visible="{FLP>/isShareInJamActive}"
 				press="onShareInJamPress"/>
-		</semantic:shareInJamAction>
+		</semantic:shareInJamAction>-->
 		
 
 

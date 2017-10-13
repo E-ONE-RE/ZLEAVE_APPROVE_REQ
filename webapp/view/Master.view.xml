@@ -102,8 +102,9 @@ xmlns:html="http://www.w3.org/1999/xhtml">
 				    </attributes>
 				<firstStatus>
 					<ObjectStatus
-						text="{ZreqStatus}"
-						state = "{ path: 'ZreqStatus', formatter: '.formatter.formatReqStatus'}"
+			
+						icon = "{ path: 'ZreqStatus', formatter: '.formatter.formatIconStatus'}"
+						
 					 />
 				</firstStatus>
 					</ObjectListItem>
