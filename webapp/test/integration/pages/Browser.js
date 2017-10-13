@@ -14,7 +14,7 @@ sap.ui.define([
 						return this.waitFor(this.createAWaitForAnEntitySet({
 							entitySet : "Objects",
 							success : function (aEntitySet) {
-								Opa5.getHashChanger().setHash("/LeaveRequestSet/" + aEntitySet[iObjIndex].ZrequestId);
+								Opa5.getHashChanger().setHash("/LeaveRequestAppSet/" + aEntitySet[iObjIndex].ZrequestId);
 							}
 						}));
 					},
@@ -23,7 +23,7 @@ sap.ui.define([
 						return this.waitFor({
 							success : function () {
 								var sObjectId = this.getContext().currentItem.id;
-								Opa5.getHashChanger().setHash("/LeaveRequestSet/" + sObjectId);
+								Opa5.getHashChanger().setHash("/LeaveRequestAppSet/" + sObjectId);
 							}
 						});
 					},
@@ -46,7 +46,7 @@ sap.ui.define([
 							success : function (aEntitySet) {
 								var oHashChanger = Opa5.getHashChanger(),
 									sHash = oHashChanger.getHash();
-								Opa5.assert.strictEqual(sHash, "LeaveRequestSet/" + aEntitySet[iObjIndex].ZrequestId, "The Hash is not correct");
+								Opa5.assert.strictEqual(sHash, "LeaveRequestAppSet/" + aEntitySet[iObjIndex].ZrequestId, "The Hash is not correct");
 							}
 						}));
 					},
@@ -57,7 +57,7 @@ sap.ui.define([
 								var sObjectId = this.getContext().currentItem.id,
 									oHashChanger = Opa5.getHashChanger(),
 									sHash = oHashChanger.getHash();
-								Opa5.assert.strictEqual(sHash, "LeaveRequestSet/" + sObjectId, "The Hash is not correct");
+								Opa5.assert.strictEqual(sHash, "LeaveRequestAppSet/" + sObjectId, "The Hash is not correct");
 							}
 						});
 					},

@@ -35,14 +35,51 @@ sap.ui.define([
 		}
 			
 		},	
+		
+			formatIconStatus : function(sValue) {
+			
+		switch (sValue){
+			case "I":
+			    return "sap-icon://pending";
+				break;
+			case "A":	
+					return "sap-icon://accept";
+				break;
+			case "R":	
+				return "sap-icon://decline";
+				
+		}
+			
+		},	
+		
+				 formatStatus: function(sStatus){
+ 	
+ 	switch (sStatus){
+ 		case "I":
+ 			return "Inviata";
+ 			break;
+ 	    case "A":
+ 	    	return "Approvata";
+ 	    	break;
+ 	   case "R":
+ 	        return "Rifiutata";
+ 	    	
+ 	}
+ 	
+ 	
+ },
 
 	formatTime	: function(oTime) { 
 		if(oTime){
 			var oTimeFormat = sap.ui.core.format.DateFormat.getTimeInstance({pattern: "HH:mm:ss"});
 			var TZOffsetMs = new Date(0).getTimezoneOffset()*60*1000;                             
-			var timeStr = oTimeFormat.format(new Date(oTime.ms + TZOffsetMs));                      
+			var timeStr = oTimeFormat.format(new Date(oTime.ms + TZOffsetMs));       
+				if (timeStr === "00:00:00") 
+					{
+						timeStr = "";
+					}
 			return timeStr;}
-			else{
+			else {
 				return oTime;
 			}
 },
@@ -51,25 +88,26 @@ sap.ui.define([
 		    sMonth,
 		    sDay;
 		    
-		
-		if(sDate.indexOf("-") == -1){
-		sYear = sDate.substring(0,4);
-	    sMonth = sDate.substring(4,6);
-		sDay = sDate.substring(6,8);
-		}else{
-		sYear = sDate.substring(0,4);
-		sMonth = sDate.substring(5,7);
-	    sDay = sDate.substring(8,10);
-		}
-  // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
-  var oDate= new Date(sYear, sMonth - 1, sDay); 
- oDate.setDate(oDate.getDate() + 1);
-			if(oDate){
-				var oDateFormat = sap.ui.core.format.DateFormat.getDateInstance();
-				return oDateFormat.format(oDate, 1);
-			}else{
-				return oDate;
-			}
+				if(sDate){
+					if(sDate.indexOf("-") == -1){
+					sYear = sDate.substring(0,4);
+				    sMonth = sDate.substring(4,6);
+					sDay = sDate.substring(6,8);
+					}else{
+					sYear = sDate.substring(0,4);
+					sMonth = sDate.substring(5,7);
+				    sDay = sDate.substring(8,10);
+					}
+			  // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
+			  var oDate= new Date(sYear, sMonth - 1, sDay); 
+			 oDate.setDate(oDate.getDate() + 1);
+						if(oDate){
+							var oDateFormat = sap.ui.core.format.DateFormat.getDateInstance();
+							return oDateFormat.format(oDate, 1);
+						}else{
+							return oDate;
+						}
+				}		
 		},
 		
 		
@@ -77,13 +115,13 @@ sap.ui.define([
  	
  	switch (sAbtType){
  		case "0001":
- 			return "permesso";
+ 			return "Permesso";
  			break;
  	    case "0002":
- 	    	return "ferie";
+ 	    	return "Ferie";
  	    	break;
  	   case "0003":
- 	        return "recupero";
+ 	        return "Recupero";
  	    	
  	}
  	

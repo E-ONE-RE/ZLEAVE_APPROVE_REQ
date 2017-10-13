@@ -5,8 +5,8 @@ QUnit.config.autostart = false;
 
 // We cannot provide stable mock data out of the template.
 // If you introduce mock data, by adding .json files in your webapp/localService/mockdata folder you have to provide the following minimum data:
-// * At least 3 LeaveRequestSet in the list
-// * All 3 LeaveRequestSet have at least one ToLeaveReqPos
+// * At least 3 LeaveRequestAppSet in the list
+// * All 3 LeaveRequestAppSet have at least one ToLeaveReqAppPos
 
 sap.ui.require([
 	"sap/ui/test/Opa5",
