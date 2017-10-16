@@ -43,7 +43,7 @@
 					
 					/>
 				<ObjectAttribute title="Inserita da" text="{UnameAppToName/NameLast} {UnameAppToName/NameFirst}  { path: 'ZdateRec', formatter: '.formatter.formatDate'} { path: 'ZtimeRec', formatter: '.formatter.formatTime'}"/>
-			    <ObjectAttribute title="Elaborata da" text="{ZuserAction}  { path: 'ZdateAction', formatter: '.formatter.formatDate'} { path: 'ZtimeAction', formatter: '.formatter.formatTime'}"/>
+			    <ObjectAttribute id = "elab_text" title="Elaborata da" text="{UnameAppToNameApprover/NameLast} {UnameAppToNameApprover/NameFirst} { path: 'ZdateAction', formatter: '.formatter.formatDate'} { path: 'ZtimeAction', formatter: '.formatter.formatTime'}"/>
 			    
 				</attributes>
 			
@@ -148,7 +148,7 @@
 								<items>
 								<FeedListItem
 								    id="FLI_APP"
-								    sender="{ZuserAction}"
+								    sender="{UnameAppToNameApprover/NameLast} {UnameAppToNameApprover/NameFirst}"
 								    timestamp="{ path: 'ZdateAction', formatter: '.formatter.formatDate'} { path: 'ZtimeAction', formatter: '.formatter.formatTime'}"
 								    info="Richiesta {path : 'ZabsType', formatter: '.formatter.formatAbsence'}"
 									icon="sap-icon://employee-approvals"

@@ -79,7 +79,7 @@ xmlns:html="http://www.w3.org/1999/xhtml">
 			<List id="list" 
 			items="{      path: '/LeaveRequestAppSet',      
 			groupHeaderFactory: '.createGroupHeader',
-			parameters : {expand:'UnameAppToName'}}"
+			parameters : {expand:'UnameAppToName,UnameAppToNameApprover'}}"
 			busyIndicatorDelay="{masterView>/delay}" 
 			noDataText="{masterView>/noDataText}" 
 			mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" 
@@ -97,9 +97,10 @@ xmlns:html="http://www.w3.org/1999/xhtml">
 					press="onSelectionChange" 
 					title="{UnameAppToName/NameLast} {UnameAppToName/NameFirst}">
 					<attributes>
+				    <ObjectAttribute text="n° {ZrequestId}"/>
 					<ObjectAttribute text="Inserita il: { path: 'ZdateRec', formatter: '.formatter.formatDate'}"/>
 					<ObjectAttribute text="Tipo: {path: 'ZabsType', formatter:'.formatter.formatAbsence' }" />
-					<ObjectAttribute text="Approvatore: {Tmsapprover} " />
+					<ObjectAttribute text="Approvatore: {UnameAppToNameApprover/NameLast} {UnameAppToNameApprover/NameFirst} " />
 				    </attributes>
 				<firstStatus>
 					<ObjectStatus

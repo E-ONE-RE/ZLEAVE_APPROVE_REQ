@@ -70,12 +70,14 @@ sap.ui.define([
 					text: 'Conferma',
 					press: function () {
 						var sText = sap.ui.getCore().byId('approveDialogTextarea').getValue();
-						
+						var sAction;
 				// MP: Logica per fare l'update sullo stato ed eventualmente sulle note		
 				if(sClicked == oView.byId("btn1").getId()){
                 	oEntry.ZreqStatus = 'A';
+                	sAction = "approvata"
                 }else{
                 	oEntry.ZreqStatus = 'R';
+                	sAction = "rifiutata"
                 }
                 
                 oEntry.ZnoteAPP = sText;
@@ -83,7 +85,8 @@ sap.ui.define([
                 oModel.update("/LeaveRequestAppSet("+"'"+ sObjId +"'"+")", oEntry, {
     method: "PUT",
     success: function() {
-     	var msg = "Success";
+     	var msg = "Operazione eseguita con successo";
+     	var msg = "Richiesta " + sAction + " con successo.\nID: " + sObjId + "";
         					sap.m.MessageToast.show(msg, { duration: 5000,
         					autoClose: true,
         					 closeOnBrowserNavigation: false
@@ -178,6 +181,7 @@ sap.ui.define([
 				var oTable = oView.byId("lineItemsList");
 				var oBinding = oTable.getBinding("items");
 			
+			   
                oHeader.setNumber(oBinding.getLength());
                
                var oListItem = this.getView().byId("commentList");
@@ -260,6 +264,16 @@ sap.ui.define([
 					sObjectId = oObject.ZrequestId,
 					sObjectName = oObject.ZrequestId,
 					oViewModel = this.getModel("detailView");
+					
+					oView.byId("elab_text").setVisible(true);
+					oView.byId("elab_text").rerender();	
+					
+					//nascondo riga di testo ELaborata: in caso di richiesta pending
+					if (oObject.ZreqStatus === "I") {
+					oView.byId("elab_text").setVisible(false);	
+					oView.byId("elab_text").rerender();	
+					}
+				
 
 				this.getOwnerComponent().oListSelector.selectAListItem(sPath);
 
