@@ -43,7 +43,7 @@
 					
 					/>
 				<ObjectAttribute title="Inserita da" text="{UnameAppToName/NameLast} {UnameAppToName/NameFirst}  { path: 'ZdateRec', formatter: '.formatter.formatDate'} { path: 'ZtimeRec', formatter: '.formatter.formatTime'}"/>
-			    <ObjectAttribute title="Elaborata da" text="{ZuserAction}  { path: 'ZdateAction', formatter: '.formatter.formatDate'} { path: 'ZtimeAction', formatter: '.formatter.formatTime'}"/>
+			    <ObjectAttribute title="Elaborata da" text="{UnameAppToNameApprover/NameLast} {UnameAppToNameApprover/NameFirst} { path: 'ZdateAction', formatter: '.formatter.formatDate'} { path: 'ZtimeAction', formatter: '.formatter.formatTime'}"/>
 			    
 				</attributes>
 			
@@ -53,7 +53,8 @@
 				text="{ZreqStatus}"
 				state="{ path: 'ZreqStatus', formatter: '.formatter.formatReqStatus'}"/>
 				-->
-				<ObjectStatus title="Stato" 	icon="{ path: 'ZreqStatus', formatter: '.formatter.formatIconStatus'}"/>
+				<ObjectStatus title="Stato" 	icon="{ path: 'ZreqStatus', formatter: '.formatter.formatIconStatus'}"
+				state = "{ path: 'ZreqStatus', formatter: '.formatter.formatReqStatus'}"/>
 				<ObjectStatus title="Ore totali" text="{ZoreTotali}"/>
 				
 			    
@@ -148,7 +149,7 @@
 								<items>
 								<FeedListItem
 								    id="FLI_APP"
-								    sender="{ZuserAction}"
+								    sender="{UnameAppToNameApprover/NameLast} {UnameAppToNameApprover/NameFirst}"
 								    timestamp="{ path: 'ZdateAction', formatter: '.formatter.formatDate'} { path: 'ZtimeAction', formatter: '.formatter.formatTime'}"
 								    info="Richiesta {path : 'ZabsType', formatter: '.formatter.formatAbsence'}"
 									icon="sap-icon://employee-approvals"
