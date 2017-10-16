@@ -157,6 +157,7 @@ sap.ui.define([
 					oButton2.setEnabled(true);
 				}
 			}
+			
 
 		},
 
@@ -173,7 +174,8 @@ sap.ui.define([
 				animationDuration: 1000, // default
 				closeOnBrowserNavigation: true // default
 			});
-
+			
+			
 		},
 
 		onUpdateFinished: function(oEvent) {
@@ -208,11 +210,20 @@ sap.ui.define([
 					}
 				});
 			});
-			// MP: impongo che al passaggio da un iconTabFilter a un'altro
+			
+			
+				// MP: impongo che al passaggio da un iconTabFilter a un'altro
 			// si selezioni il primo elemento e la pagina di dettaglio
-			// mostri automaticamente quello.
+			// mostri automaticamente quello. Inoltre, se non sono presenti
+			// elementi nella lista, si naviga verso la vista DetailNoObjectsAvailable
+			
+			if(this._oList.getItems().length == 0){
+				this.getRouter().getTargets().display("detailNoObjectsAvailable");
+			}else{
 			this._oList.setSelectedItem(this._oList.getItems()[0], true);
 			this._showDetail(this._oList.getItems()[0]);
+			}
+		
 
 		},
 

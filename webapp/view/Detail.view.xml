@@ -43,7 +43,9 @@
 					
 					/>
 				<ObjectAttribute title="Inserita da" text="{UnameAppToName/NameLast} {UnameAppToName/NameFirst}  { path: 'ZdateRec', formatter: '.formatter.formatDate'} { path: 'ZtimeRec', formatter: '.formatter.formatTime'}"/>
+
 			    <ObjectAttribute id = "elab_text" title="Elaborata da" text="{UnameAppToNameApprover/NameLast} {UnameAppToNameApprover/NameFirst} { path: 'ZdateAction', formatter: '.formatter.formatDate'} { path: 'ZtimeAction', formatter: '.formatter.formatTime'}"/>
+
 			    
 				</attributes>
 			
@@ -53,7 +55,8 @@
 				text="{ZreqStatus}"
 				state="{ path: 'ZreqStatus', formatter: '.formatter.formatReqStatus'}"/>
 				-->
-				<ObjectStatus title="Stato" 	icon="{ path: 'ZreqStatus', formatter: '.formatter.formatIconStatus'}"/>
+				<ObjectStatus title="Stato" 	icon="{ path: 'ZreqStatus', formatter: '.formatter.formatIconStatus'}"
+				state = "{ path: 'ZreqStatus', formatter: '.formatter.formatReqStatus'}"/>
 				<ObjectStatus title="Ore totali" text="{ZoreTotali}"/>
 				
 			    
