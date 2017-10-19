@@ -184,15 +184,27 @@ sap.ui.define([
 			   
                oHeader.setNumber(oBinding.getLength());
                
+               // MP: controllo che ci siano i commenti.
+               // Se non ci sono commenti non mostro nulla.
+               
                var oListItem = this.getView().byId("commentList");
                var oItem = oListItem.getItems();
                var sComment = oItem["0"].getText();
+               var oListItemApp = this.getView().byId("commentListApp");
+               var oItemApp = oListItemApp.getItems();
+               var sCommentApp = oItemApp["0"].getText();
                
            if(sComment==""){
                oListItem.setVisible(false);
                }else{
                	oListItem.setVisible(true);
                }
+               
+            if(sCommentApp == ""){
+            	  oListItemApp.setVisible(false);
+            }else{
+            	  oListItemApp.setVisible(true);
+            }
 
 
 			},

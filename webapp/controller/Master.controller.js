@@ -10,8 +10,8 @@ sap.ui.define([
 	"zetms/model/formatter"
 ], function(BaseController, JSONModel, History, Filter, FilterOperator, GroupHeaderListItem, Device, formatter) {
 	"use strict";
-	var c = 1;
 	var sAdmin;
+	var count, countFilter1, countFilter2, countFilter3;
 
 	return BaseController.extend("zetms.controller.Master", {
 
@@ -66,27 +66,25 @@ sap.ui.define([
 			this.getRouter().getRoute("master").attachPatternMatched(this._onMasterMatched, this);
 			this.getRouter().attachBypassed(this.onBypassed, this);
 
-			if (c == 1) {
-				this._oList.setBusy(true);
-			}
+		
 
 			/// MP refresh tabella richieste
 			setInterval(function() {
 				oList.getBinding("items").refresh();
-
 				var msg = "Updating...";
 				sap.m.MessageToast.show(msg, {
 					duration: 3000,
 					autoClose: true,
 					closeOnBrowserNavigation: true
 				});
-
 			}, 300000);
+			
+		
 
 			// MP: per differenziare comportamento pagina per accesso Admin o Team Leader
 			// logica per l'abilitazione dei bottoni se l'utente che entra è un admin.
 			var oModel = this.getOwnerComponent().getModel();
-		
+             
 			var sPath = "/UserLoggedSet";
 			oModel.read(sPath, {
 
@@ -104,11 +102,19 @@ sap.ui.define([
 			function fnReadE(oError) {
 
 			}
-
-		
+	
 
 		},
-
+		
+		
+		// MP: workaround per fare in modo che il tab che viene selezionato per primo 
+		// nell'iconTabBar sia quello delle richieste da approvare e che le richieste
+		// siano filtrate in base a questo.
+		onAfterRendering: function(){
+		    this.getView().byId("iconTabBar1").setSelectedKey("pending");
+			this._oList.getBinding("items").filter(this._mFilters["pending"]);
+		},
+		
 		/* =========================================================== */
 		/* event handlers                                              */
 		/* =========================================================== */
@@ -124,6 +130,7 @@ sap.ui.define([
 		//MP: Quick filter per filtrare tra gli stati delle richieste
 
 		onQuickFilter: function(oEvent, sTabKey) {
+			
 			if (oEvent) {
 				var sKey = oEvent.getParameter("selectedKey");
 
@@ -143,9 +150,9 @@ sap.ui.define([
 			// MP: Codice per disabilitare i bottoni approva e rifiuta nel caso in cui ci si trovi nel tab 
 			// delle richieste approvate o di quelle rifiutate. Nel caso in cui l'utente loggato è amministratore,
 			// allora tutti i bottoni rimangono in stato enabled.
-			if (sAdmin !== 'X') {
 				var oButton1 = sap.ui.getCore().byId("application-LeaveRequestApproval-display-component---detail--btn1");
 				var oButton2 = sap.ui.getCore().byId("application-LeaveRequestApproval-display-component---detail--btn2");
+			if (sAdmin !== 'X') {
 				if (_sKey == "approved") {
 					oButton1.setEnabled(false);
 					oButton2.setEnabled(true);
@@ -156,17 +163,34 @@ sap.ui.define([
 					oButton1.setEnabled(true);
 					oButton2.setEnabled(true);
 				}
+
+			} else {
+				if (_sKey == "approved") {
+					oButton1.setEnabled(false);
+					oButton2.setEnabled(true);
+				} else if (_sKey == "rejected") {
+					oButton1.setEnabled(true);
+					oButton2.setEnabled(false);
+				} else {
+					oButton1.setEnabled(true);
+					oButton2.setEnabled(true);
+				}
+
 			}
-			
 
 		},
 
 		// MP: per il refresh del binding della lista delle richieste
 		onClickRefresh: function() {
+				 
 			var oView = this.getView();
 			var oList = oView.byId("list");
-			oList.getBinding("items").refresh();
-
+			
+			   this._oList.getBinding("items").refresh();
+			   
+			   // MP: per aggiorare il contatore delle richieste
+			   this._updateTotal();
+			   
 			var msg = "Updated";
 			sap.m.MessageToast.show(msg, {
 				duration: 1500, // default
@@ -174,33 +198,21 @@ sap.ui.define([
 				animationDuration: 1000, // default
 				closeOnBrowserNavigation: true // default
 			});
-			
-			
+
 		},
 
 		onUpdateFinished: function(oEvent) {
+			
+		
 
-			// MP: per mantenere nel contatore il totale delle richieste;
-			// nei filtri sono divisi per tipo (pending, approvate, rifiutate)
-			if (c == 1) {
-				this._updateListItemCount(oEvent.getParameter("total"));
-			}
-			// MP: workaround per fare in modo che il tab che viene selezionato per primo 
-			// nell'iconTabBar sia quello delle richieste da approvare
-			if (c == 1) {
-				var oEvt = false;
-				var sTabKey = "pending";
-				this.onQuickFilter(oEvt, sTabKey);
-				c += 1;
-				this._oList.setBusy(false);
-			}
+				var oModel = this.getModel(),
+				oViewModel = this.getModel("masterView");
 
 			// update the master list object counter after new data is loaded
 
 			// hide pull to refresh if necessary
 			this.byId("pullToRefresh").hide();
-			var oModel = this.getModel(),
-				oViewModel = this.getModel("masterView");
+		
 			jQuery.each(this._mFilters, function(sFilterKey, oFilter) {
 				oModel.read("/LeaveRequestAppSet/$count", {
 					filters: oFilter,
@@ -211,21 +223,38 @@ sap.ui.define([
 				});
 			});
 			
-			
-				// MP: impongo che al passaggio da un iconTabFilter a un'altro
+		
+			// MP: impongo che al passaggio da un iconTabFilter a un'altro
 			// si selezioni il primo elemento e la pagina di dettaglio
 			// mostri automaticamente quello. Inoltre, se non sono presenti
 			// elementi nella lista, si naviga verso la vista DetailNoObjectsAvailable
-			
-			if(this._oList.getItems().length == 0){
-				this.getRouter().getTargets().display("detailNoObjectsAvailable");
-			}else{
-			this._oList.setSelectedItem(this._oList.getItems()[0], true);
-			this._showDetail(this._oList.getItems()[0]);
-			}
 		
-
+			if (this._oList.getItems().length == 0) {
+				this.getRouter().getTargets().display("detailNoObjectsAvailable");
+			} else {
+				this._oList.setSelectedItem(this._oList.getItems()[0], true);
+                this._showDetail(this._oList.getItems()[0]);
+                this.getRouter().getTargets().display("object");
+			}
+			
+			// MP: Logica per aggiornare il numero totale delle richieste
+			// man mano che queste vengono inserite
+				if(count == undefined || isNaN(count)){
+			    this._oList.getBinding("items").refresh();
+				this._updateTotal();
+				this._updateListItemCount(count);
+			}
+		if(!isNaN(count)){
+			this._oList.getBinding("items").refresh();
+			this._updateTotal();
+			this._updateListItemCount(count);
+     }
+          
+			
+		
 		},
+		
+		
 
 		/**
 		 * Event handler for the master search field. Applies current
@@ -320,7 +349,6 @@ sap.ui.define([
 				});
 			}
 
-			c = 1;
 		},
 
 		/* =========================================================== */
@@ -393,11 +421,12 @@ sap.ui.define([
 			// MP: parte commentata per far si che il contatore delle richieste
 			// totali non venga modificato sulla base di quello che è mostrato
 			// nella lista per ciascun filtro.
-
-			/*	if (this._oList.getBinding("items").isLengthFinal()) {
+ 
+				if (this._oList.getBinding("items").isLengthFinal()) {
 					sTitle = this.getResourceBundle().getText("masterTitleCount", [iTotalItems]);
 					this.getModel("masterView").setProperty("/title", sTitle);
-				}*/
+				}
+			
 		},
 
 		/**
@@ -435,6 +464,15 @@ sap.ui.define([
 			var oViewModel = this.getModel("masterView");
 			oViewModel.setProperty("/isFilterBarVisible", (this._oListFilterState.aFilter.length > 0));
 			oViewModel.setProperty("/filterBarLabel", this.getResourceBundle().getText("masterFilterBarText", [sFilterBarText]));
+		},
+		
+		_updateTotal: function(){
+				
+				countFilter1 = parseInt(this.getView().byId("filter1").getCount(), 10);
+				countFilter2 = parseInt(this.getView().byId("filter2").getCount(), 10);
+				countFilter3 = parseInt(this.getView().byId("filter3").getCount(), 10);
+				count = countFilter1 + countFilter2 + countFilter3;
+		
 		}
 
 	});
