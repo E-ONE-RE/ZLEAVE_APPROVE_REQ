@@ -77,7 +77,7 @@ xmlns:html="http://www.w3.org/1999/xhtml">
 		<semantic:content>
 			<!-- For client side filtering add this to the items attribute:  parameters: {operationMode: 'Client'}}" -->
 			<List id="list" 
-			items="{      path: '/LeaveRequestAppSet',      
+			items="{  path: '/LeaveRequestAppSet',      
 			groupHeaderFactory: '.createGroupHeader',
 			parameters : {expand:'UnameAppToName,UnameAppToNameApprover'}}"
 			busyIndicatorDelay="{masterView>/delay}" 
