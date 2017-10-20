@@ -150,8 +150,12 @@ sap.ui.define([
 			// MP: Codice per disabilitare i bottoni approva e rifiuta nel caso in cui ci si trovi nel tab 
 			// delle richieste approvate o di quelle rifiutate. Nel caso in cui l'utente loggato è amministratore,
 			// allora tutti i bottoni rimangono in stato enabled.
-				var oButton1 = sap.ui.getCore().byId("application-LeaveRequestApproval-display-component---detail--btn1");
-				var oButton2 = sap.ui.getCore().byId("application-LeaveRequestApproval-display-component---detail--btn2");
+			var sOwnerId = this.getView()._sOwnerId;
+var sId1 = sOwnerId + "---detail"+"--btn1";
+var sId2 = sOwnerId + "---detail"+"--btn2";
+		
+				var oButton1 = sap.ui.getCore().byId(sId1);
+				var oButton2 = sap.ui.getCore().byId(sId2);
 			if (sAdmin !== 'X') {
 				if (_sKey == "approved") {
 					oButton1.setEnabled(false);

@@ -5,7 +5,6 @@ sap.ui.define([
 		"zetms/model/formatter"
 	], function (BaseController, JSONModel, formatter, MessageToast, MessageBox, Dialog, Button, Label, TextArea) {
 		"use strict";
-
 		return BaseController.extend("zetms.controller.Detail", {
 
 			formatter: formatter,
@@ -42,6 +41,9 @@ sap.ui.define([
 			 * Event handler when the share by E-Mail button has been clicked
 			 * @public
 			 */
+		
+			 	
+			 
 			 
 			 //Funzione per gestire l'approvazione o il rifiuto di una richiesta
 					 onButtonPress: function(oEvent){
