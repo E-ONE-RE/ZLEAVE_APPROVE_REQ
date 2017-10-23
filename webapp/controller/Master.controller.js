@@ -47,7 +47,6 @@ sap.ui.define([
 				aFilter: [],
 				aSearch: []
 			};
-
 			this.setModel(oViewModel, "masterView");
 			// Make sure, busy indication is showing immediately so there is no
 			// break after the busy indication for loading the view's meta data is
@@ -111,8 +110,7 @@ sap.ui.define([
 		// nell'iconTabBar sia quello delle richieste da approvare e che le richieste
 		// siano filtrate in base a questo.
 		onAfterRendering: function(){
-		    this.getView().byId("iconTabBar1").setSelectedKey("pending");
-			this._oList.getBinding("items").filter(this._mFilters["pending"]);
+		     this._oList.getBinding("items").filter(this._mFilters["pending"]);
 		},
 		
 		/* =========================================================== */
@@ -130,6 +128,7 @@ sap.ui.define([
 		//MP: Quick filter per filtrare tra gli stati delle richieste
 
 		onQuickFilter: function(oEvent, sTabKey) {
+			
 			
 			if (oEvent) {
 				var sKey = oEvent.getParameter("selectedKey");
@@ -181,6 +180,8 @@ var sId2 = sOwnerId + "---detail"+"--btn2";
 				}
 
 			}
+			
+		
 
 		},
 
@@ -228,19 +229,7 @@ var sId2 = sOwnerId + "---detail"+"--btn2";
 			});
 			
 		
-			// MP: impongo che al passaggio da un iconTabFilter a un'altro
-			// si selezioni il primo elemento e la pagina di dettaglio
-			// mostri automaticamente quello. Inoltre, se non sono presenti
-			// elementi nella lista, si naviga verso la vista DetailNoObjectsAvailable
 		
-			if (this._oList.getItems().length == 0) {
-				this.getRouter().getTargets().display("detailNoObjectsAvailable");
-			} else {
-				this._oList.setSelectedItem(this._oList.getItems()[0], true);
-                this._showDetail(this._oList.getItems()[0]);
-                this.getRouter().getTargets().display("object");
-			}
-			
 			// MP: Logica per aggiornare il numero totale delle richieste
 			// man mano che queste vengono inserite
 				if(count == undefined || isNaN(count)){
