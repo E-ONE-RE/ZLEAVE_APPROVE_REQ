@@ -79,7 +79,7 @@ xmlns:html="http://www.w3.org/1999/xhtml">
 			<List id="list" 
 			items="{  path: '/LeaveRequestAppSet',      
 			groupHeaderFactory: '.createGroupHeader',
-			parameters : {expand:'UnameAppToName,UnameAppToNameApprover'}}"
+			parameters : {expand:'UnameAppToName,UnameAppToNameApprover', operationMode: 'Client'}}"
 			busyIndicatorDelay="{masterView>/delay}" 
 			noDataText="{masterView>/noDataText}" 
 			mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" 

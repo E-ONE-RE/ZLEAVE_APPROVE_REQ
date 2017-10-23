@@ -14,6 +14,7 @@ sap.ui.define([
 			 */
 
 			constructor : function () {
+				
 				this._oWhenListHasBeenSet = new Promise(function (fnResolveListHasBeenSet) {
 					this._fnResolveListHasBeenSet = fnResolveListHasBeenSet;
 				}.bind(this));
@@ -31,6 +32,7 @@ sap.ui.define([
 											error : true
 										});
 									}
+									
 									var oFirstListItem = oList.getItems()[0];
 									if (oFirstListItem) {
 										// Have to make sure that first list Item is selected
@@ -51,6 +53,8 @@ sap.ui.define([
 							);
 						});
 				}.bind(this));
+				
+			
 			},
 
 			/**
@@ -72,7 +76,6 @@ sap.ui.define([
 			 * @public
 			 */
 			selectAListItem : function (sBindingPath) {
-
 				this.oWhenListLoadingIsDone.then(
 					function () {
 						var oList = this._oList,
