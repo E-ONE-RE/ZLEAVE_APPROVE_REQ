@@ -128,6 +128,14 @@ sap.ui.define([
  	
  },
  
+  formatRequestId: function(sRequestId){
+ 
+    sRequestId = +sRequestId;	
+ //	parseInt(sRequestId, 10);
+ 	
+ 		return sRequestId;
+ }
+ 
  
  
 		

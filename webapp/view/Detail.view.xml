@@ -15,21 +15,12 @@
 		busyIndicatorDelay="{detailView>/delay}">
 		
 		
-			  <html:style>
-	  	
-	 
 
-   #application-LeaveRequestApproval-display-component---detail--objectHeader {
-
-
-                                 }
-
-          </html:style>
 
 		<semantic:content>
 			<ObjectHeader
 				id="objectHeader"
-				title="Richiesta n° {ZrequestId}"
+				title="Richiesta n° {path:'ZrequestId', formatter: '.formatter.formatRequestId'}"
 				numberUnit="Giorno/i"
 				icon="sap-icon://general-leave-request">
 				<attributes>
