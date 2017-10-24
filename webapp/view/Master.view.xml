@@ -15,7 +15,14 @@ xmlns:html="http://www.w3.org/1999/xhtml">
                                         width: 110%
 
                                  }
-                                 
+                                  
+    <!-- app deployata cambia il suffisso -->
+    #application-ZLeaveApprove-display-component---master--iconTabBar1--header {
+
+                                        width: 110%
+
+                                 }
+                                                               
                                  
                                  .myclass {
                                  background-color: rgba(209,73,0, 0.5)!important
