@@ -329,18 +329,15 @@ var sId2 = sOwnerId + "---detail"+"--btn2";
 		 * @public
 		 */
 		onNavBack: function() {
-			var sPreviousHash = History.getInstance().getPreviousHash(),
-				oCrossAppNavigator = sap.ushell.Container.getService("CrossApplicationNavigation");
+				var oCrossAppNavigator = sap.ushell.Container.getService("CrossApplicationNavigation");
 
-			if (sPreviousHash !== undefined || !oCrossAppNavigator.isInitialNavigation()) {
-				history.go(-1);
-			} else {
+		
 				oCrossAppNavigator.toExternal({
 					target: {
 						shellHash: "#Shell-home"
 					}
 				});
-			}
+			
 
 		},
 
@@ -381,7 +378,11 @@ var sId2 = sOwnerId + "---detail"+"--btn2";
 					if (mParams.error) {
 						return;
 					}
-					this.getRouter().getTargets().display("detailNoObjectsAvailable");
+					if (sap.ui.Device.system.phone){
+					this.getRouter().getTargets().display("master");
+				    }else{
+				    	this.getRouter().getTargets().display("detailNoObjectsAvailable");	
+				    }
 				}.bind(this)
 			);
 
@@ -398,6 +399,7 @@ var sId2 = sOwnerId + "---detail"+"--btn2";
 			this.getRouter().navTo("object", {
 				objectId: oItem.getBindingContext().getProperty("ZrequestId")
 			}, bReplace);
+			
 		},
 
 		/**

@@ -71,7 +71,7 @@ sap.ui.define([
 			}
 			var oSplitApp = this.getView().getParent().getParent();
 			var oMaster = oSplitApp.getMasterPages()[0];
-			oSplitApp.toMaster(oMaster, "flip");
+			oSplitApp.toMaster(oMaster, "slide");
 	
 				}
 			}
