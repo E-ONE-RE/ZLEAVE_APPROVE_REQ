@@ -53,7 +53,7 @@ sap.ui.define([
 			}
 			var oSplitApp = this.getView().getParent().getParent();
 			var oMaster = oSplitApp.getMasterPages()[0];
-			oSplitApp.toMaster(oMaster, "flip");
+			oSplitApp.toMaster(oMaster, "slide");
 		},
 
 		//Funzione per gestire l'approvazione o il rifiuto di una richiesta
@@ -274,7 +274,7 @@ sap.ui.define([
 
 			// No data for the binding
 			if (!oElementBinding.getBoundContext()) {
-				this.getRouter().getTargets().display("detailObjectNotFound");
+				//this.getRouter().getTargets().display("detailObjectNotFound");
 				// if object could not be found, the selection in the master list
 				// does not make sense anymore.
 				this.getOwnerComponent().oListSelector.clearMasterListSelection();
