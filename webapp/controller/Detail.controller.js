@@ -138,6 +138,17 @@ sap.ui.define([
 			});
 
 			dialog.open();
+			
+			
+			var sOwnerId = this.getView()._sOwnerId;
+			var sId = sOwnerId + "---master" + "--list";
+			var oList = sap.ui.getCore().byId(sId);
+		    var oItem = oList.getSelectedItems();
+		    // MP: Logica per riselezionare l'item e avere i campi aggiornati (note approvatore ad esempio)
+		    //deselezione
+		    oList.setSelectedItem(oItem, false);
+		    //riselezione
+		    oList.setSelectedItem(oItem, true);
 
 		},
 
