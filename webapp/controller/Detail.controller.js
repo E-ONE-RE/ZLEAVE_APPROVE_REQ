@@ -42,7 +42,12 @@ sap.ui.define([
 
 		// MP: per andare indietro alla vista master da smartphone. 
 		onNavBack: function(oEvent) {
-			var sOwnerId = this.getView()._sOwnerId;
+		
+		
+		var sOwnerId = this.getView()._sOwnerId;
+				
+		
+		
 			var sId = sOwnerId + "---master" + "--list";
 
 			var oList = sap.ui.getCore().byId(sId);
@@ -124,8 +129,26 @@ sap.ui.define([
 						});
 						dialog.close();
 							
-		
+		  // MP: refresh al modello e ritorno indietro alla vista Master
 		    oView.getModel().refresh(true);
+		     	var oSplitApp = oView.getParent().getParent();
+			var oMaster = oSplitApp.getMasterPages()[0];
+			oSplitApp.toMaster(oMaster, "slide");
+			var sOwnerId = oView._sOwnerId;
+			var sId = sOwnerId + "---master" + "--iconTabBar1";
+			var sId2 = sOwnerId + "---master" + "--list";
+			var oIconTabBar = sap.ui.getCore().byId(sId);
+			var oList = sap.ui.getCore().byId(sId2);
+			var oFilter, oBinding, oMasterView;
+			oMasterView = sap.ui.getCore().byId(sOwnerId+"---master");
+			
+			if(oEntry.ZreqStatus == "A"){
+				oIconTabBar.setSelectedKey("approved");
+					sap.ui.controller("zetms.controller.Master").onQuickFilter(undefined, "A", oList, oMasterView);
+			}else if(oEntry.ZreqStatus == "R"){
+	                    oIconTabBar.setSelectedKey("rejected");
+			     		sap.ui.controller("zetms.controller.Master").onQuickFilter(undefined, "R", oList, oMasterView);
+			}
 
 					}
 				}),
@@ -200,7 +223,10 @@ sap.ui.define([
 			var oHeader = oView.byId("objectHeader");
 			var oTable = oView.byId("lineItemsList");
 			var oBinding = oTable.getBinding("items");
-
+            
+            
+            
+         
 			oHeader.setNumber(oBinding.getLength());
 
 			// MP: controllo che ci siano i commenti.
@@ -224,6 +250,8 @@ sap.ui.define([
 			} else {
 				oListItemApp.setVisible(true);
 			}
+			
+			
 
 		},
 
