@@ -65,8 +65,6 @@ sap.ui.define([
 			this.getRouter().getRoute("master").attachPatternMatched(this._onMasterMatched, this);
 			this.getRouter().attachBypassed(this.onBypassed, this);
 
-		
-
 			/// MP refresh tabella richieste
 			setInterval(function() {
 				oList.getBinding("items").refresh();
@@ -77,13 +75,11 @@ sap.ui.define([
 					closeOnBrowserNavigation: true
 				});
 			}, 300000);
-			
-		
 
 			// MP: per differenziare comportamento pagina per accesso Admin o Team Leader
 			// logica per l'abilitazione dei bottoni se l'utente che entra è un admin.
 			var oModel = this.getOwnerComponent().getModel();
-             
+
 			var sPath = "/UserLoggedSet";
 			oModel.read(sPath, {
 
@@ -101,18 +97,16 @@ sap.ui.define([
 			function fnReadE(oError) {
 
 			}
-	
 
 		},
-		
-		
+
 		// MP: workaround per fare in modo che il tab che viene selezionato per primo 
 		// nell'iconTabBar sia quello delle richieste da approvare e che le richieste
 		// siano filtrate in base a questo.
-		onAfterRendering: function(){
-		     this._oList.getBinding("items").filter(this._mFilters["pending"]);
+		onAfterRendering: function() {
+			this._oList.getBinding("items").filter(this._mFilters["pending"]);
 		},
-		
+
 		/* =========================================================== */
 		/* event handlers                                              */
 		/* =========================================================== */
@@ -128,8 +122,7 @@ sap.ui.define([
 		//MP: Quick filter per filtrare tra gli stati delle richieste
 
 		onQuickFilter: function(oEvent, sTabKey) {
-			
-			
+
 			if (oEvent) {
 				var sKey = oEvent.getParameter("selectedKey");
 
@@ -150,11 +143,11 @@ sap.ui.define([
 			// delle richieste approvate o di quelle rifiutate. Nel caso in cui l'utente loggato è amministratore,
 			// allora tutti i bottoni rimangono in stato enabled.
 			var sOwnerId = this.getView()._sOwnerId;
-var sId1 = sOwnerId + "---detail"+"--btn1";
-var sId2 = sOwnerId + "---detail"+"--btn2";
-		
-				var oButton1 = sap.ui.getCore().byId(sId1);
-				var oButton2 = sap.ui.getCore().byId(sId2);
+			var sId1 = sOwnerId + "---detail" + "--btn1";
+			var sId2 = sOwnerId + "---detail" + "--btn2";
+
+			var oButton1 = sap.ui.getCore().byId(sId1);
+			var oButton2 = sap.ui.getCore().byId(sId2);
 			if (sAdmin !== 'X') {
 				if (_sKey == "approved") {
 					oButton1.setEnabled(false);
@@ -180,22 +173,20 @@ var sId2 = sOwnerId + "---detail"+"--btn2";
 				}
 
 			}
-			
-		
 
 		},
 
 		// MP: per il refresh del binding della lista delle richieste
 		onClickRefresh: function() {
-				 
+
 			var oView = this.getView();
 			var oList = oView.byId("list");
-			
-			   this._oList.getBinding("items").refresh();
-			   
-			   // MP: per aggiorare il contatore delle richieste
-			   this._updateTotal();
-			   
+
+			this._oList.getBinding("items").refresh();
+
+			// MP: per aggiorare il contatore delle richieste
+			this._updateTotal();
+
 			var msg = "Updated";
 			sap.m.MessageToast.show(msg, {
 				duration: 1500, // default
@@ -207,17 +198,15 @@ var sId2 = sOwnerId + "---detail"+"--btn2";
 		},
 
 		onUpdateFinished: function(oEvent) {
-			
-		
 
-				var oModel = this.getModel(),
+			var oModel = this.getModel(),
 				oViewModel = this.getModel("masterView");
 
 			// update the master list object counter after new data is loaded
 
 			// hide pull to refresh if necessary
 			this.byId("pullToRefresh").hide();
-		
+
 			jQuery.each(this._mFilters, function(sFilterKey, oFilter) {
 				oModel.read("/LeaveRequestAppSet/$count", {
 					filters: oFilter,
@@ -227,27 +216,21 @@ var sId2 = sOwnerId + "---detail"+"--btn2";
 					}
 				});
 			});
-			
-		
-		
+
 			// MP: Logica per aggiornare il numero totale delle richieste
 			// man mano che queste vengono inserite
-				if(count == undefined || isNaN(count)){
-			    this._oList.getBinding("items").refresh();
+			if (count == undefined || isNaN(count)) {
+				this._oList.getBinding("items").refresh();
 				this._updateTotal();
 				this._updateListItemCount(count);
 			}
-		if(!isNaN(count)){
-			this._oList.getBinding("items").refresh();
-			this._updateTotal();
-			this._updateListItemCount(count);
-     }
-          
-			
-		
+			if (!isNaN(count)) {
+				this._oList.getBinding("items").refresh();
+				this._updateTotal();
+				this._updateListItemCount(count);
+			}
+
 		},
-		
-		
 
 		/**
 		 * Event handler for the master search field. Applies current
@@ -293,8 +276,12 @@ var sId2 = sOwnerId + "---detail"+"--btn2";
 		 * @public
 		 */
 		onSelectionChange: function(oEvent) {
+		
 			// get the list item, either from the listItem parameter or from the event's source itself (will depend on the device-dependent mode).
 			this._showDetail(oEvent.getParameter("listItem") || oEvent.getSource());
+		    // MP: per navigare alla pagina di dettaglio cliccando sull'item precedentemente selezionato
+			this.getRouter().getTargets().display("object");
+
 		},
 
 		/**
@@ -329,15 +316,13 @@ var sId2 = sOwnerId + "---detail"+"--btn2";
 		 * @public
 		 */
 		onNavBack: function() {
-				var oCrossAppNavigator = sap.ushell.Container.getService("CrossApplicationNavigation");
+			var oCrossAppNavigator = sap.ushell.Container.getService("CrossApplicationNavigation");
 
-		
-				oCrossAppNavigator.toExternal({
-					target: {
-						shellHash: "#Shell-home"
-					}
-				});
-			
+			oCrossAppNavigator.toExternal({
+				target: {
+					shellHash: "#Shell-home"
+				}
+			});
 
 		},
 
@@ -378,11 +363,11 @@ var sId2 = sOwnerId + "---detail"+"--btn2";
 					if (mParams.error) {
 						return;
 					}
-					if (sap.ui.Device.system.phone){
-					this.getRouter().getTargets().display("master");
-				    }else{
-				    	this.getRouter().getTargets().display("detailNoObjectsAvailable");	
-				    }
+					if (sap.ui.Device.system.phone) {
+						this.getRouter().getTargets().display("master");
+					} else {
+						this.getRouter().getTargets().display("detailNoObjectsAvailable");
+					}
 				}.bind(this)
 			);
 
@@ -399,7 +384,6 @@ var sId2 = sOwnerId + "---detail"+"--btn2";
 			this.getRouter().navTo("object", {
 				objectId: oItem.getBindingContext().getProperty("ZrequestId")
 			}, bReplace);
-			
 		},
 
 		/**
@@ -416,12 +400,12 @@ var sId2 = sOwnerId + "---detail"+"--btn2";
 			// MP: parte commentata per far si che il contatore delle richieste
 			// totali non venga modificato sulla base di quello che è mostrato
 			// nella lista per ciascun filtro.
- 
-				if (this._oList.getBinding("items").isLengthFinal()) {
-					sTitle = this.getResourceBundle().getText("masterTitleCount", [iTotalItems]);
-					this.getModel("masterView").setProperty("/title", sTitle);
-				}
-			
+
+			if (this._oList.getBinding("items").isLengthFinal()) {
+				sTitle = this.getResourceBundle().getText("masterTitleCount", [iTotalItems]);
+				this.getModel("masterView").setProperty("/title", sTitle);
+			}
+
 		},
 
 		/**
@@ -460,14 +444,14 @@ var sId2 = sOwnerId + "---detail"+"--btn2";
 			oViewModel.setProperty("/isFilterBarVisible", (this._oListFilterState.aFilter.length > 0));
 			oViewModel.setProperty("/filterBarLabel", this.getResourceBundle().getText("masterFilterBarText", [sFilterBarText]));
 		},
-		
-		_updateTotal: function(){
-				
-				countFilter1 = parseInt(this.getView().byId("filter1").getCount(), 10);
-				countFilter2 = parseInt(this.getView().byId("filter2").getCount(), 10);
-				countFilter3 = parseInt(this.getView().byId("filter3").getCount(), 10);
-				count = countFilter1 + countFilter2 + countFilter3;
-		
+
+		_updateTotal: function() {
+
+			countFilter1 = parseInt(this.getView().byId("filter1").getCount(), 10);
+			countFilter2 = parseInt(this.getView().byId("filter2").getCount(), 10);
+			countFilter3 = parseInt(this.getView().byId("filter3").getCount(), 10);
+			count = countFilter1 + countFilter2 + countFilter3;
+
 		}
 
 	});
