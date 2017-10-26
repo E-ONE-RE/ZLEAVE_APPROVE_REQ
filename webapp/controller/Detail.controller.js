@@ -67,6 +67,7 @@ sap.ui.define([
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 			var sClicked = oEvent.getSource().getId();
 			var oView = this.getView();
+			var sOwnerId = this.getView()._sOwnerId;
 
 			//MP: Dialog di conferma con all'interno la logica per l'accettazione o il rifiuto di una richiesta
 			var dialog = new sap.m.Dialog({
@@ -122,6 +123,9 @@ sap.ui.define([
 							}
 						});
 						dialog.close();
+							
+		
+		    oView.getModel().refresh(true);
 
 					}
 				}),
@@ -139,16 +143,7 @@ sap.ui.define([
 
 			dialog.open();
 			
-			
-			var sOwnerId = this.getView()._sOwnerId;
-			var sId = sOwnerId + "---master" + "--list";
-			var oList = sap.ui.getCore().byId(sId);
-		    var oItem = oList.getSelectedItems();
-		    // MP: Logica per riselezionare l'item e avere i campi aggiornati (note approvatore ad esempio)
-		    //deselezione
-		    oList.setSelectedItem(oItem, false);
-		    //riselezione
-		    oList.setSelectedItem(oItem, true);
+		
 
 		},
 
