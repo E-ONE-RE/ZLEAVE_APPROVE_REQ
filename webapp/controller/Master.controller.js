@@ -152,8 +152,10 @@ sap.ui.define([
 				oBinding = oList.getBinding("items");
 			}else{
 				oBinding = this._oList.getBinding("items");
+				if (!sap.ui.Device.system.Phone){
 				this._oList.removeSelections();
 				this.getRouter().getTargets().display("select");
+				}
 			}
 			
 			if (oFilter) {
