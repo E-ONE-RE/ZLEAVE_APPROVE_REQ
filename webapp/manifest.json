@@ -141,7 +141,7 @@
 					"viewName": "NotFound",
 					"viewId": "notFound"
 				},
-					"select": {
+				"select": {
 					"viewName": "Select",
 					"viewId": "select"
 				}
