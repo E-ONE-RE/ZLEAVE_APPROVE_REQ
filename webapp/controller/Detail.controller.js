@@ -54,6 +54,7 @@ sap.ui.define([
 			var oSplitApp = this.getView().getParent().getParent();
 			var oMaster = oSplitApp.getMasterPages()[0];
 			oSplitApp.toMaster(oMaster, "slide");
+			oList.removeSelections();
 		},
 
 		//Funzione per gestire l'approvazione o il rifiuto di una richiesta
