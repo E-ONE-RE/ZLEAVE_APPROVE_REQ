@@ -106,6 +106,13 @@ sap.ui.define([
 		onAfterRendering: function() {
 			this._oList.getBinding("items").filter(this._mFilters["pending"]);
 		},
+			//pulisco il contatore dell'auto refresh
+			onExit:function() {
+			   // You should stop the interval on exit. 
+			   // You should also stop the interval if you navigate out of your view and start it again when you navigate back. 
+			   if (this.intervalHandle) 
+			      clearInterval(this.intervalHandle);
+			},
 
 		/* =========================================================== */
 		/* event handlers                                              */
@@ -121,18 +128,34 @@ sap.ui.define([
 
 		//MP: Quick filter per filtrare tra gli stati delle richieste
 
-		onQuickFilter: function(oEvent, sTabKey) {
-
+		onQuickFilter: function(oEvent, sTabKey, oList, oView) {
+            
+            
+            
+             var oFilter;
+             
 			if (oEvent) {
 				var sKey = oEvent.getParameter("selectedKey");
-
+                oFilter = this._mFilters[sKey];
 			} else {
-				sKey = sTabKey;
+				if (sTabKey == "A"){
+					sKey = "approved";
+				}else{
+					sKey = "rejected";
+				}
+				oFilter = new sap.ui.model.Filter("ZreqStatus", "EQ", sTabKey);
 			}
-			var _sKey = sKey,
-				oFilter = this._mFilters[sKey],
+			
+			var oBinding, oItem;
+			
+			if(oList){
+				oBinding = oList.getBinding("items");
+			}else{
 				oBinding = this._oList.getBinding("items");
-
+				this._oList.removeSelections();
+				this.getRouter().getTargets().display("select");
+			}
+			
 			if (oFilter) {
 				oBinding.filter(oFilter);
 			} else {
@@ -142,17 +165,23 @@ sap.ui.define([
 			// MP: Codice per disabilitare i bottoni approva e rifiuta nel caso in cui ci si trovi nel tab 
 			// delle richieste approvate o di quelle rifiutate. Nel caso in cui l'utente loggato è amministratore,
 			// allora tutti i bottoni rimangono in stato enabled.
-			var sOwnerId = this.getView()._sOwnerId;
+			var sOwnerId;
+			if(oView){
+				sOwnerId = oView._sOwnerId;
+			}else{
+			sOwnerId = this.getView()._sOwnerId;
+			}
 			var sId1 = sOwnerId + "---detail" + "--btn1";
 			var sId2 = sOwnerId + "---detail" + "--btn2";
+			
 
 			var oButton1 = sap.ui.getCore().byId(sId1);
 			var oButton2 = sap.ui.getCore().byId(sId2);
 			if (sAdmin !== 'X') {
-				if (_sKey == "approved") {
+				if (sKey == "approved") {
 					oButton1.setEnabled(false);
 					oButton2.setEnabled(true);
-				} else if (_sKey == "rejected") {
+				} else if (sKey == "rejected") {
 					oButton1.setEnabled(false);
 					oButton2.setEnabled(false);
 				} else {
@@ -161,10 +190,10 @@ sap.ui.define([
 				}
 
 			} else {
-				if (_sKey == "approved") {
+				if (sKey == "approved") {
 					oButton1.setEnabled(false);
 					oButton2.setEnabled(true);
-				} else if (_sKey == "rejected") {
+				} else if (sKey == "rejected") {
 					oButton1.setEnabled(true);
 					oButton2.setEnabled(false);
 				} else {
@@ -173,7 +202,8 @@ sap.ui.define([
 				}
 
 			}
-
+             
+            
 		},
 
 		// MP: per il refresh del binding della lista delle richieste
@@ -229,6 +259,8 @@ sap.ui.define([
 				this._updateTotal();
 				this._updateListItemCount(count);
 			}
+			
+			
 
 		},
 
@@ -323,7 +355,9 @@ sap.ui.define([
 					shellHash: "#Shell-home"
 				}
 			});
-
+			  if (this.intervalHandle) {
+			      clearInterval(this.intervalHandle);
+}
 		},
 
 		/* =========================================================== */

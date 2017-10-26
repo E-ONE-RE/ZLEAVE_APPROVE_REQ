@@ -1,0 +1,15 @@
+<mvc:View
+	controllerName="zetms.controller.BaseController"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m">
+
+	<MessagePage
+		id="page"
+		title="Selezionare una richiesta"
+		text="Selezionare una richiesta dalla lista"
+		description=""
+		showNavButton="{device>/system/phone}"
+		navButtonPress="onNavBack">
+	</MessagePage>
+
+</mvc:View>
