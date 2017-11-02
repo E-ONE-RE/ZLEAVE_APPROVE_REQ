@@ -97,6 +97,7 @@ sap.ui.define([
 			function fnReadE(oError) {
 
 			}
+			
 
 		},
 
@@ -104,7 +105,9 @@ sap.ui.define([
 		// nell'iconTabBar sia quello delle richieste da approvare e che le richieste
 		// siano filtrate in base a questo.
 		onAfterRendering: function() {
+		
 			this._oList.getBinding("items").filter(this._mFilters["pending"]);
+			
 		},
 			//pulisco il contatore dell'auto refresh
 			onExit:function() {
@@ -173,10 +176,11 @@ sap.ui.define([
 			}else{
 			sOwnerId = this.getView()._sOwnerId;
 			}
+			var sId0 = sOwnerId + "---detail" + "--btn0"; //id bottone per sblocco richiesta
 			var sId1 = sOwnerId + "---detail" + "--btn1";
 			var sId2 = sOwnerId + "---detail" + "--btn2";
 			
-
+            var oButton0 = sap.ui.getCore().byId(sId0); //bottone per sblocco richiesta
 			var oButton1 = sap.ui.getCore().byId(sId1);
 			var oButton2 = sap.ui.getCore().byId(sId2);
 			if (sAdmin !== 'X') {
@@ -193,12 +197,15 @@ sap.ui.define([
 
 			} else {
 				if (sKey == "approved") {
+					oButton0.setEnabled(true);
 					oButton1.setEnabled(false);
 					oButton2.setEnabled(true);
 				} else if (sKey == "rejected") {
+				    oButton0.setEnabled(true);
 					oButton1.setEnabled(true);
 					oButton2.setEnabled(false);
 				} else {
+			     	oButton0.setEnabled(false);
 					oButton1.setEnabled(true);
 					oButton2.setEnabled(true);
 				}
@@ -261,8 +268,6 @@ sap.ui.define([
 				this._updateTotal();
 				this._updateListItemCount(count);
 			}
-			
-			
 
 		},
 

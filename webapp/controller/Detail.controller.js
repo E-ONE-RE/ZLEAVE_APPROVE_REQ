@@ -109,7 +109,7 @@ sap.ui.define([
 							method: "PUT",
 							success: function() {
 								var msg = "Operazione eseguita con successo";
-								var msg = "Richiesta " + sAction + " con successo.\nID: " + sObjId + "";
+								var msg = "Richiesta " + sAction + " con successo.\nID: " + formatter.formatRequestId(sObjId) + "";
 								sap.m.MessageToast.show(msg, {
 									duration: 5000,
 									autoClose: true,
@@ -169,6 +169,100 @@ sap.ui.define([
 		
 
 		},
+		
+		
+		onElaboratePress: function(oEvent){
+			var oModel = this.getView().getModel();
+			var oEntry = {};
+			var oView = this.getView();
+			var oObject = oView.getBindingContext().getObject();
+			var sObjId = oObject.ZrequestId;
+			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+			var sClicked = oEvent.getSource().getId();
+			var oView = this.getView();
+			var sOwnerId = this.getView()._sOwnerId;
+
+			//MP: Dialog di conferma con all'interno la logica per l'accettazione o il rifiuto di una richiesta
+			var dialog = new sap.m.Dialog({
+				title: 'Confermare?',
+				type: 'Message',
+				content: [
+					new sap.m.Label({
+						text: 'Sei sicuro di voler sbloccare la richiesta?',
+						labelFor: 'approveDialogTextarea'
+					})
+				],
+				//MP: logica per l'approvazione o il rifiuto di una richiesta	
+				beginButton: new sap.m.Button({
+					text: 'Conferma',
+					press: function() {
+						var sAction;
+						// MP: Logica per fare l'update sullo stato ed eventualmente sulle note		
+							oEntry.ZreqStatus = 'I';
+							sAction = "Sbloccata";
+							oEntry.Zunlocked = 'X';
+					
+
+						oModel.update("/LeaveRequestAppSet(" + "'" + sObjId + "'" + ")", oEntry, {
+							method: "PUT",
+							success: function() {
+								var msg = "Operazione eseguita con successo";
+								var msg = "Richiesta " + sAction + " con successo.\nID: " + sObjId + "";
+								sap.m.MessageToast.show(msg, {
+									duration: 5000,
+									autoClose: true,
+									closeOnBrowserNavigation: false
+								});
+							},
+
+							error: function(oData) {
+								var msg2 = "Error";
+								sap.m.MessageToast.show(msg2, {
+									duration: 5000,
+									autoClose: true,
+									closeOnBrowserNavigation: false
+
+								});
+							}
+						});
+						dialog.close();
+							
+		  // MP: refresh al modello e ritorno indietro alla vista Master
+		    oView.getModel().refresh(true);
+		     	var oSplitApp = oView.getParent().getParent();
+			var oMaster = oSplitApp.getMasterPages()[0];
+			oSplitApp.toMaster(oMaster, "slide");
+			var sOwnerId = oView._sOwnerId;
+			var sId = sOwnerId + "---master" + "--iconTabBar1";
+			var sId2 = sOwnerId + "---master" + "--list";
+			var oIconTabBar = sap.ui.getCore().byId(sId);
+			var oList = sap.ui.getCore().byId(sId2);
+			var oFilter, oBinding, oMasterView;
+			oMasterView = sap.ui.getCore().byId(sOwnerId+"---master");
+			
+		
+				oIconTabBar.setSelectedKey("pending");
+					sap.ui.controller("zetms.controller.Master").onQuickFilter(undefined, "I", oList, oMasterView);
+	
+
+					}
+				}),
+
+				endButton: new sap.m.Button({
+					text: 'Annulla',
+					press: function() {
+						dialog.close();
+					}
+				}),
+				afterClose: function() {
+					dialog.destroy();
+				}
+			});
+
+			dialog.open();
+			
+			
+		},             
 
 		onShareEmailPress: function() {
 			var oViewModel = this.getModel("detailView");
