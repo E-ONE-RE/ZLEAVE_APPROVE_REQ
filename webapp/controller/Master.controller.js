@@ -64,10 +64,14 @@ sap.ui.define([
 
 			this.getRouter().getRoute("master").attachPatternMatched(this._onMasterMatched, this);
 			this.getRouter().attachBypassed(this.onBypassed, this);
-
+            var oView = this.getView();
+            	var sOwnerId = oView._sOwnerId;
+				var sIdList = sOwnerId + "---detail" + "--lineItemsList";
+				var oListDetail = sap.ui.getCore().byId(sIdList);
 			/// MP refresh tabella richieste
 			setInterval(function() {
 				oList.getBinding("items").refresh();
+				oListDetail.getBinding("items").refresh();
 				var msg = "Updating...";
 				sap.m.MessageToast.show(msg, {
 					duration: 3000,
@@ -75,6 +79,7 @@ sap.ui.define([
 					closeOnBrowserNavigation: true
 				});
 			}, 300000);
+			
 
 			// MP: per differenziare comportamento pagina per accesso Admin o Team Leader
 			// logica per l'abilitazione dei bottoni se l'utente che entra è un admin.
@@ -97,7 +102,6 @@ sap.ui.define([
 			function fnReadE(oError) {
 
 			}
-			
 
 		},
 
@@ -105,17 +109,17 @@ sap.ui.define([
 		// nell'iconTabBar sia quello delle richieste da approvare e che le richieste
 		// siano filtrate in base a questo.
 		onAfterRendering: function() {
-		
+
 			this._oList.getBinding("items").filter(this._mFilters["pending"]);
-			
+
 		},
-			//pulisco il contatore dell'auto refresh
-			onExit:function() {
-			   // You should stop the interval on exit. 
-			   // You should also stop the interval if you navigate out of your view and start it again when you navigate back. 
-			   if (this.intervalHandle) 
-			      clearInterval(this.intervalHandle);
-			},
+		//pulisco il contatore dell'auto refresh
+		onExit: function() {
+			// You should stop the interval on exit. 
+			// You should also stop the interval if you navigate out of your view and start it again when you navigate back. 
+			if (this.intervalHandle)
+				clearInterval(this.intervalHandle);
+		},
 
 		/* =========================================================== */
 		/* event handlers                                              */
@@ -132,35 +136,33 @@ sap.ui.define([
 		//MP: Quick filter per filtrare tra gli stati delle richieste
 
 		onQuickFilter: function(oEvent, sTabKey, oList, oView) {
-            
-            
-            
-             var oFilter;
-             
+
+			var oFilter;
+
 			if (oEvent) {
 				var sKey = oEvent.getParameter("selectedKey");
-                oFilter = this._mFilters[sKey];
+				oFilter = this._mFilters[sKey];
 			} else {
-				if (sTabKey == "A"){
+				if (sTabKey == "A") {
 					sKey = "approved";
-				}else{
+				} else {
 					sKey = "rejected";
 				}
 				oFilter = new sap.ui.model.Filter("ZreqStatus", "EQ", sTabKey);
 			}
-			
+
 			var oBinding, oItem;
-			
-			if(oList){
+
+			if (oList) {
 				oBinding = oList.getBinding("items");
-			}else{
+			} else {
 				oBinding = this._oList.getBinding("items");
-				if (!sap.ui.Device.system.phone){
-				this._oList.removeSelections();
-				this.getRouter().getTargets().display("select");
+				if (!sap.ui.Device.system.phone) {
+					this._oList.removeSelections();
+					this.getRouter().getTargets().display("select");
 				}
 			}
-			
+
 			if (oFilter) {
 				oBinding.filter(oFilter);
 			} else {
@@ -171,16 +173,16 @@ sap.ui.define([
 			// delle richieste approvate o di quelle rifiutate. Nel caso in cui l'utente loggato è amministratore,
 			// allora tutti i bottoni rimangono in stato enabled.
 			var sOwnerId;
-			if(oView){
+			if (oView) {
 				sOwnerId = oView._sOwnerId;
-			}else{
-			sOwnerId = this.getView()._sOwnerId;
+			} else {
+				sOwnerId = this.getView()._sOwnerId;
 			}
 			var sId0 = sOwnerId + "---detail" + "--btn0"; //id bottone per sblocco richiesta
 			var sId1 = sOwnerId + "---detail" + "--btn1";
 			var sId2 = sOwnerId + "---detail" + "--btn2";
-			
-            var oButton0 = sap.ui.getCore().byId(sId0); //bottone per sblocco richiesta
+
+			var oButton0 = sap.ui.getCore().byId(sId0); //bottone per sblocco richiesta
 			var oButton1 = sap.ui.getCore().byId(sId1);
 			var oButton2 = sap.ui.getCore().byId(sId2);
 			if (sAdmin !== 'X') {
@@ -201,18 +203,17 @@ sap.ui.define([
 					oButton1.setEnabled(false);
 					oButton2.setEnabled(true);
 				} else if (sKey == "rejected") {
-				    oButton0.setEnabled(true);
+					oButton0.setEnabled(true);
 					oButton1.setEnabled(true);
 					oButton2.setEnabled(false);
 				} else {
-			     	oButton0.setEnabled(false);
+					oButton0.setEnabled(false);
 					oButton1.setEnabled(true);
 					oButton2.setEnabled(true);
 				}
 
 			}
-             
-            
+
 		},
 
 		// MP: per il refresh del binding della lista delle richieste
@@ -220,9 +221,12 @@ sap.ui.define([
 
 			var oView = this.getView();
 			var oList = oView.byId("list");
+			var sOwnerId = this.getView()._sOwnerId;
+			var sIdList = sOwnerId + "---detail" + "--lineItemsList";
+			var oListDetail = sap.ui.getCore().byId(sIdList);
 
 			this._oList.getBinding("items").refresh();
-
+			oListDetail.getBinding("items").refresh();
 			// MP: per aggiorare il contatore delle richieste
 			this._updateTotal();
 
@@ -268,6 +272,12 @@ sap.ui.define([
 				this._updateTotal();
 				this._updateListItemCount(count);
 			}
+			
+			// refresh della lista detail
+			var sOwnerId = this.getView()._sOwnerId;
+			var sIdList = sOwnerId + "---detail" + "--lineItemsList";
+			var oListDetail = sap.ui.getCore().byId(sIdList);
+			oListDetail.getBinding("items").refresh();
 
 		},
 
@@ -315,10 +325,10 @@ sap.ui.define([
 		 * @public
 		 */
 		onSelectionChange: function(oEvent) {
-		
+
 			// get the list item, either from the listItem parameter or from the event's source itself (will depend on the device-dependent mode).
 			this._showDetail(oEvent.getParameter("listItem") || oEvent.getSource());
-		    // MP: per navigare alla pagina di dettaglio cliccando sull'item precedentemente selezionato
+			// MP: per navigare alla pagina di dettaglio cliccando sull'item precedentemente selezionato
 			this.getRouter().getTargets().display("object");
 
 		},
@@ -362,9 +372,9 @@ sap.ui.define([
 					shellHash: "#Shell-home"
 				}
 			});
-			  if (this.intervalHandle) {
-			      clearInterval(this.intervalHandle);
-}
+			if (this.intervalHandle) {
+				clearInterval(this.intervalHandle);
+			}
 		},
 
 		/* =========================================================== */
