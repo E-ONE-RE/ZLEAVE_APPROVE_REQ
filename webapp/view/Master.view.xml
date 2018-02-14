@@ -107,6 +107,7 @@ xmlns:html="http://www.w3.org/1999/xhtml">
 				    <ObjectAttribute text="n° {path : 'ZrequestId', formatter : '.formatter.formatRequestId'}"/>
 					<ObjectAttribute text="Inserita il: { path: 'ZdateRec', formatter: '.formatter.formatDate'}"/>
 					<ObjectAttribute text="Tipo: {path: 'ZabsType', formatter:'.formatter.formatAbsence' }" />
+					<ObjectAttribute text="Società: {Company} " />
 					<ObjectAttribute text="Approvatore: {UnameAppToNameApprover/NameLast} {UnameAppToNameApprover/NameFirst} " />
 				    </attributes>
 				<firstStatus>

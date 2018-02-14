@@ -244,35 +244,29 @@ sap.ui.define([
 
 			var oModel = this.getModel(),
 				oViewModel = this.getModel("masterView");
+				var that = this;
 
 			// update the master list object counter after new data is loaded
 
 			// hide pull to refresh if necessary
 			this.byId("pullToRefresh").hide();
 
-			jQuery.each(this._mFilters, function(sFilterKey, oFilter) {
+		jQuery.each(this._mFilters, function(sFilterKey, oFilter) {
 				oModel.read("/LeaveRequestAppSet/$count", {
 					filters: oFilter,
 					success: function(oData) {
 						var sPath = "/" + sFilterKey;
 						oViewModel.setProperty(sPath, oData);
+						that._updateTotal();
+				        that._updateListItemCount(count);
 					}
 				});
 			});
 
 			// MP: Logica per aggiornare il numero totale delle richieste
 			// man mano che queste vengono inserite
-			if (count == undefined || isNaN(count)) {
-				this._oList.getBinding("items").refresh();
-				this._updateTotal();
-				this._updateListItemCount(count);
-			}
-			if (!isNaN(count)) {
-				this._oList.getBinding("items").refresh();
-				this._updateTotal();
-				this._updateListItemCount(count);
-			}
-			
+	 
+	
 			// refresh della lista detail
 			var sOwnerId = this.getView()._sOwnerId;
 			var sIdList = sOwnerId + "---detail" + "--lineItemsList";
