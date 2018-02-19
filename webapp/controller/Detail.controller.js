@@ -42,12 +42,9 @@ sap.ui.define([
 
 		// MP: per andare indietro alla vista master da smartphone. 
 		onNavBack: function(oEvent) {
-		
-		
-		var sOwnerId = this.getView()._sOwnerId;
-				
-		
-		
+
+			var sOwnerId = this.getView()._sOwnerId;
+
 			var sId = sOwnerId + "---master" + "--list";
 
 			var oList = sap.ui.getCore().byId(sId);
@@ -128,27 +125,27 @@ sap.ui.define([
 							}
 						});
 						dialog.close();
-							
-		  // MP: refresh al modello e ritorno indietro alla vista Master
-		    oView.getModel().refresh(true);
-		     	var oSplitApp = oView.getParent().getParent();
-			var oMaster = oSplitApp.getMasterPages()[0];
-			oSplitApp.toMaster(oMaster, "slide");
-			var sOwnerId = oView._sOwnerId;
-			var sId = sOwnerId + "---master" + "--iconTabBar1";
-			var sId2 = sOwnerId + "---master" + "--list";
-			var oIconTabBar = sap.ui.getCore().byId(sId);
-			var oList = sap.ui.getCore().byId(sId2);
-			var oFilter, oBinding, oMasterView;
-			oMasterView = sap.ui.getCore().byId(sOwnerId+"---master");
-			
-			if(oEntry.ZreqStatus == "A"){
-				oIconTabBar.setSelectedKey("approved");
-					sap.ui.controller("zetms.controller.Master").onQuickFilter(undefined, "A", oList, oMasterView);
-			}else if(oEntry.ZreqStatus == "R"){
-	                    oIconTabBar.setSelectedKey("rejected");
-			     		sap.ui.controller("zetms.controller.Master").onQuickFilter(undefined, "R", oList, oMasterView);
-			}
+
+						// MP: refresh al modello e ritorno indietro alla vista Master
+						oView.getModel().refresh(true);
+						var oSplitApp = oView.getParent().getParent();
+						var oMaster = oSplitApp.getMasterPages()[0];
+						oSplitApp.toMaster(oMaster, "slide");
+						var sOwnerId = oView._sOwnerId;
+						var sId = sOwnerId + "---master" + "--iconTabBar1";
+						var sId2 = sOwnerId + "---master" + "--list";
+						var oIconTabBar = sap.ui.getCore().byId(sId);
+						var oList = sap.ui.getCore().byId(sId2);
+						var oFilter, oBinding, oMasterView;
+						oMasterView = sap.ui.getCore().byId(sOwnerId + "---master");
+
+						if (oEntry.ZreqStatus == "A") {
+							oIconTabBar.setSelectedKey("approved");
+							sap.ui.controller("zetms.controller.Master").onQuickFilter(undefined, "A", oList, oMasterView);
+						} else if (oEntry.ZreqStatus == "R") {
+							oIconTabBar.setSelectedKey("rejected");
+							sap.ui.controller("zetms.controller.Master").onQuickFilter(undefined, "R", oList, oMasterView);
+						}
 
 					}
 				}),
@@ -165,13 +162,82 @@ sap.ui.define([
 			});
 
 			dialog.open();
-			
-		
 
 		},
-		
-		
-		onElaboratePress: function(oEvent){
+
+		handleResponsivePopoverPress: function(oEvent) {
+			var oVbox;
+			if (!this._oPopoverHelp) {
+				this._oPopoverHelp = sap.ui.xmlfragment("zetms.view.PopoverHelp", this, "zetms.controller.Detail");
+				this.getView().addDependent(this._oPopoverHelp);
+			}
+			oVbox = sap.ui.getCore().byId("Vbox");
+			oVbox.destroyItems();
+
+			var oAccessParams = sap.ui.controller("zetms.controller.Master").getAccesParameters();
+			var sAdmin = oAccessParams.Admin;
+			var sNotifica = oAccessParams.Notifica;
+			var sNotificaFI_ICT = oAccessParams.NotificaFI_ICT;
+			var oHTML, oHTML_Footer;
+
+			if (sAdmin == 'X') {
+				oHTML = new sap.ui.core.HTML({
+					content: '<strong>Linee guida per l\'utilizzo dell\'applicazione (Admin)</strong>' +
+						'<ul>' +
+
+						'In qualità di <strong>amministratore</strong> puoi visualizzare, approvare o rifiutare le richieste inserite da tutti gli utenti di tua competenza.' +
+						' Inoltre, puoi modificare lo stato delle richieste precedentemente approvate da un TL o sbloccare le richieste per gli utenti che' +
+						' intendono modificare i dati della richiesta attraverso il tasto "Sblocca".' +
+						'</ul>',
+					sanitizeContent: true
+				});
+			}else if(sNotifica == 'X' || sNotificaFI_ICT == 'X'){
+				oHTML = new sap.ui.core.HTML({
+					content: '<strong>Linee guida per l\'utilizzo dell\'applicazione</strong>' +
+						'<ul>' +
+
+						' L\'applicazione permette di visualizzare le richieste inserite dai componenti del proprio team.' +
+						'</ul>',
+					sanitizeContent: true
+				});
+			}else{
+					oHTML = new sap.ui.core.HTML({
+					content: '<strong>Linee guida per l\'utilizzo dell\'applicazione (Approvatore/TL)</strong>' +
+						'<ul>' +
+
+						'In qualità di <strong>approvatore</strong> puoi visualizzare, approvare o rifiutare le richieste inserite da tutti gli utenti afferenti alla tua' +
+						' area di competenza. Inoltre, se necessario, puoi modificare lo stato di una richiesta da "approvata" a "rifiutata".' +
+						'</ul>',
+					sanitizeContent: true
+				});
+			}
+
+			oHTML_Footer = new sap.ui.core.HTML({
+				content: '<strong>Struttura dell\'applicazione</strong>' +
+					'<ul>' +
+
+					' L\'applicazione si divide in due sezioni:' +
+					' <li>la prima presenta una lista delle richieste, suddivise secondo lo stato (Pending, Approvate, Non Approvate).' +
+					' Selezionando una delle richieste, verrà visualizzato il dettaglio di questa;</li>' +
+					' <li>la seconda sezione mostra il dettaglio della richiesta selezionata (numero di giorni per la richiesta, tipo...)' +
+					' oltre che dei tab per visualizzare eventuali commenti inseriti dagli utenti, dai TL o dagli amministratori. </li>' +
+
+					'</ul>',
+				sanitizeContent: true
+			});
+
+			oVbox.addItem(oHTML_Footer);
+			oVbox.addItem(oHTML);
+
+			this._oPopoverHelp.openBy(oEvent.getSource());
+		},
+
+		// chiude help
+		handleCloseButton: function(oEvent) {
+			this._oPopoverHelp.close();
+		},
+
+		onElaboratePress: function(oEvent) {
 			var oModel = this.getView().getModel();
 			var oEntry = {};
 			var oView = this.getView();
@@ -181,6 +247,7 @@ sap.ui.define([
 			var sClicked = oEvent.getSource().getId();
 			var oView = this.getView();
 			var sOwnerId = this.getView()._sOwnerId;
+			var that = this;
 
 			//MP: Dialog di conferma con all'interno la logica per l'accettazione o il rifiuto di una richiesta
 			var dialog = new sap.m.Dialog({
@@ -198,11 +265,9 @@ sap.ui.define([
 					press: function() {
 						var sAction;
 						// MP: Logica per fare l'update sullo stato ed eventualmente sulle note		
-							oEntry.ZreqStatus = 'I';
-							sAction = "Sbloccata";
-							oEntry.Zunlocked = 'X';
-					
-
+						oEntry.ZreqStatus = 'I';
+						sAction = "Sbloccata";
+						oEntry.Zunlocked = 'X';
 						oModel.update("/LeaveRequestAppSet(" + "'" + sObjId + "'" + ")", oEntry, {
 							method: "PUT",
 							success: function() {
@@ -213,6 +278,7 @@ sap.ui.define([
 									autoClose: true,
 									closeOnBrowserNavigation: false
 								});
+								
 							},
 
 							error: function(oData) {
@@ -226,25 +292,23 @@ sap.ui.define([
 							}
 						});
 						dialog.close();
-							
-		  // MP: refresh al modello e ritorno indietro alla vista Master
-		    oView.getModel().refresh(true);
-		     	var oSplitApp = oView.getParent().getParent();
-			var oMaster = oSplitApp.getMasterPages()[0];
-			oSplitApp.toMaster(oMaster, "slide");
-			var sOwnerId = oView._sOwnerId;
-			var sId = sOwnerId + "---master" + "--iconTabBar1";
-			var sId2 = sOwnerId + "---master" + "--list";
-			var oIconTabBar = sap.ui.getCore().byId(sId);
-			var oList = sap.ui.getCore().byId(sId2);
-			var oFilter, oBinding, oMasterView;
-			oMasterView = sap.ui.getCore().byId(sOwnerId+"---master");
-			
-		
-				oIconTabBar.setSelectedKey("pending");
-					sap.ui.controller("zetms.controller.Master").onQuickFilter(undefined, "I", oList, oMasterView);
-	
 
+						// MP: refresh al modello e ritorno indietro alla vista Master
+						oView.getModel().refresh(true);
+						var oSplitApp = oView.getParent().getParent();
+						var oMaster = oSplitApp.getMasterPages()[0];
+						oSplitApp.toMaster(oMaster, "slide");
+						var sOwnerId = oView._sOwnerId;
+						var sId = sOwnerId + "---master" + "--iconTabBar1";
+						var sId2 = sOwnerId + "---master" + "--list";
+						var oIconTabBar = sap.ui.getCore().byId(sId);
+						var oList = sap.ui.getCore().byId(sId2);
+						var oFilter, oBinding, oMasterView;
+						oMasterView = sap.ui.getCore().byId(sOwnerId + "---master");
+
+						oIconTabBar.setSelectedKey("pending");
+						sap.ui.controller("zetms.controller.Master").onQuickFilter(undefined, "I", oList, oMasterView);
+                        
 					}
 				}),
 
@@ -260,9 +324,8 @@ sap.ui.define([
 			});
 
 			dialog.open();
-			
-			
-		},             
+
+		},
 
 		onShareEmailPress: function() {
 			var oViewModel = this.getModel("detailView");
@@ -317,10 +380,7 @@ sap.ui.define([
 			var oHeader = oView.byId("objectHeader");
 			var oTable = oView.byId("lineItemsList");
 			var oBinding = oTable.getBinding("items");
-            
-            
-            
-         
+
 			oHeader.setNumber(oBinding.getLength());
 
 			// MP: controllo che ci siano i commenti.
@@ -344,8 +404,6 @@ sap.ui.define([
 			} else {
 				oListItemApp.setVisible(true);
 			}
-			
-			
 
 		},
 

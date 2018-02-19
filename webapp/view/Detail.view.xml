@@ -5,6 +5,7 @@
 	xmlns:semantic="sap.m.semantic"
 	xmlns:footerbar="sap.ushell.ui.footerbar"
 	xmlns:html="http://www.w3.org/1999/xhtml">
+	
 
 	<semantic:DetailPage
 		id="page"
@@ -13,11 +14,18 @@
 		title="{i18n>detailTitle}"
 		busy="{detailView>/busy}"
 		busyIndicatorDelay="{detailView>/delay}">
-		
-		
-
+	
+  <semantic:customHeaderContent>
+				<FlexBox id="flex" alignItems="End" justifyContent="End">
+			<items>
+				<Button id="help2" text="Help" press="handleResponsivePopoverPress" type="Emphasized" icon="sap-icon://message-information"
+					tooltip="Clicca per informazioni sull'uso dell'applicazione"></Button>
+			</items>
+		</FlexBox>
+	 </semantic:customHeaderContent>
 
 		<semantic:content>
+				
 			<ObjectHeader
 				id="objectHeader"
 				title="Richiesta n° {path:'ZrequestId', formatter: '.formatter.formatRequestId'}"
@@ -164,14 +172,17 @@
 		</semantic:shareInJamAction>-->
 		
 
-
+ <semantic:customFooterContent>
+                    <Button id="btn0" text="Sblocca" type="Emphasized" press="onElaboratePress" visible="true" 
+					enabled="false"/>
+          </semantic:customFooterContent>
 		
-		       <semantic:editAction>
+		      <!-- <semantic:editAction>
 					<semantic:EditAction id="btn0" tooltip="Sblocca la richiesta (Admin only)"
 					press="onElaboratePress" 
 					visible="true" 
 					enabled="false"/>
-				</semantic:editAction>
+				</semantic:editAction>-->
 		       <semantic:positiveAction>
 					<semantic:PositiveAction id="btn1" text="Approva" press="onButtonPress"/>
 				</semantic:positiveAction>
