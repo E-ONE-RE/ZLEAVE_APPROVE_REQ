@@ -11,6 +11,7 @@ sap.ui.define([
 ], function(BaseController, JSONModel, History, Filter, FilterOperator, GroupHeaderListItem, Device, formatter) {
 	"use strict";
 	var sAdmin;
+	var sNotifica, sNotifica_FI_ICT;
 	var count, countFilter1, countFilter2, countFilter3;
 
 	return BaseController.extend("zetms.controller.Master", {
@@ -71,7 +72,7 @@ sap.ui.define([
 			/// MP refresh tabella richieste
 			setInterval(function() {
 				oList.getBinding("items").refresh();
-				oListDetail.getBinding("items").refresh();
+				//oListDetail.getBinding("items").refresh();
 				var msg = "Updating...";
 				sap.m.MessageToast.show(msg, {
 					duration: 3000,
@@ -82,7 +83,8 @@ sap.ui.define([
 			
 
 			// MP: per differenziare comportamento pagina per accesso Admin o Team Leader
-			// logica per l'abilitazione dei bottoni se l'utente che entra è un admin.
+			// logica per l'abilitazione dei bottoni se l'utente che entra è un admin un utente
+			// che riceve solo una notifica
 			var oModel = this.getOwnerComponent().getModel();
 
 			var sPath = "/UserLoggedSet";
@@ -94,9 +96,11 @@ sap.ui.define([
 			});
 
 			function fnReadS(oData, response) {
-				// mi salvo il valore del flag admin nella vista, così da poterlo riutilizzare.
+				// mi salvo il valore del flag admin, sNotifica e sNotifica_FI_ICT nella vista, così da poterli riutilizzare.
 				sAdmin = oData.results[0].Admin;
-				console.log(oData);
+				sNotifica = oData.results[0].Notifica;
+				sNotifica_FI_ICT = oData.results[0].Notificafinict;
+				//console.log(oData);
 			}
 
 			function fnReadE(oError) {
@@ -109,10 +113,9 @@ sap.ui.define([
 		// nell'iconTabBar sia quello delle richieste da approvare e che le richieste
 		// siano filtrate in base a questo.
 		onAfterRendering: function() {
-
 			this._oList.getBinding("items").filter(this._mFilters["pending"]);
-
 		},
+		
 		//pulisco il contatore dell'auto refresh
 		onExit: function() {
 			// You should stop the interval on exit. 
@@ -132,6 +135,11 @@ sap.ui.define([
 		 * @param {sap.ui.base.Event} oEvent the update finished event
 		 * @public
 		 */
+		 
+		 getAccesParameters:function(){
+		 var oAccesParameters = {Admin:sAdmin, Notifica:sNotifica, NotificaFI_ICT:sNotifica_FI_ICT};
+		 return oAccesParameters;	
+		 },
 
 		//MP: Quick filter per filtrare tra gli stati delle richieste
 
@@ -145,8 +153,10 @@ sap.ui.define([
 			} else {
 				if (sTabKey == "A") {
 					sKey = "approved";
-				} else {
+				} else if (sTabKey == "R") {
 					sKey = "rejected";
+				}else{
+					sKey = "";
 				}
 				oFilter = new sap.ui.model.Filter("ZreqStatus", "EQ", sTabKey);
 			}
@@ -172,6 +182,7 @@ sap.ui.define([
 			// MP: Codice per disabilitare i bottoni approva e rifiuta nel caso in cui ci si trovi nel tab 
 			// delle richieste approvate o di quelle rifiutate. Nel caso in cui l'utente loggato è amministratore,
 			// allora tutti i bottoni rimangono in stato enabled.
+			// nel caso in cui l'utente che vi accede non può fare nessuna operazione, i bottoni vengono disabilitati
 			var sOwnerId;
 			if (oView) {
 				sOwnerId = oView._sOwnerId;
@@ -196,7 +207,6 @@ sap.ui.define([
 					oButton1.setEnabled(true);
 					oButton2.setEnabled(true);
 				}
-
 			} else {
 				if (sKey == "approved") {
 					oButton0.setEnabled(true);
@@ -213,6 +223,8 @@ sap.ui.define([
 				}
 
 			}
+			
+		
 
 		},
 
@@ -241,6 +253,30 @@ sap.ui.define([
 		},
 
 		onUpdateFinished: function(oEvent) {
+			
+			
+			// refresh della lista detail
+			var sOwnerId = this.getView()._sOwnerId;
+			var sIdList = sOwnerId + "---detail" + "--lineItemsList";
+			var oListDetail = sap.ui.getCore().byId(sIdList);
+			oListDetail.getBinding("items").refresh();
+	
+			var	sOwnerId = this.getView()._sOwnerId;
+			
+			var sId0 = sOwnerId + "---detail" + "--btn0"; //id bottone per sblocco richiesta
+			var sId1 = sOwnerId + "---detail" + "--btn1";
+			var sId2 = sOwnerId + "---detail" + "--btn2";
+
+			var oButton0 = sap.ui.getCore().byId(sId0); //bottone per sblocco richiesta
+			var oButton1 = sap.ui.getCore().byId(sId1);
+			var oButton2 = sap.ui.getCore().byId(sId2);
+			
+				if(sNotifica == 'X' || sNotifica_FI_ICT == 'X'){
+					oButton0.setEnabled(false);
+					oButton1.setEnabled(false);
+					oButton2.setEnabled(false);
+			}
+			
 
 			var oModel = this.getModel(),
 				oViewModel = this.getModel("masterView");
@@ -267,11 +303,6 @@ sap.ui.define([
 			// man mano che queste vengono inserite
 	 
 	
-			// refresh della lista detail
-			var sOwnerId = this.getView()._sOwnerId;
-			var sIdList = sOwnerId + "---detail" + "--lineItemsList";
-			var oListDetail = sap.ui.getCore().byId(sIdList);
-			oListDetail.getBinding("items").refresh();
 
 		},
 

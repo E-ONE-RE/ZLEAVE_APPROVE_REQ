@@ -1,0 +1,22 @@
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:l="sap.ui.layout"
+   xmlns:core="sap.ui.core"
+   xmlns:mvc="sap.ui.core.mvc"
+   xmlns:html="http://www.w3.org/1999/xhtml">
+	
+		<ResponsivePopover
+		class="sapUiPopupWithPadding"
+		title="Help"
+		placement="Bottom"
+		verticalScrolling="true"
+		horizontalScrolling="false">
+		<content>
+		<VBox id="Vbox" class="sapUiSmallMargin">
+        <items>
+	
+    </items>
+	</VBox>
+		</content>
+		</ResponsivePopover>
+	</core:FragmentDefinition>
