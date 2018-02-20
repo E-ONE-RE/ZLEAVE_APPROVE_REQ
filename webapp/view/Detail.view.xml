@@ -3,7 +3,9 @@
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.m.semantic"
-	xmlns:footerbar="sap.ushell.ui.footerbar">
+	xmlns:footerbar="sap.ushell.ui.footerbar"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	
 
 	<semantic:DetailPage
 		id="page"
@@ -12,30 +14,52 @@
 		title="{i18n>detailTitle}"
 		busy="{detailView>/busy}"
 		busyIndicatorDelay="{detailView>/delay}">
+	
+  <semantic:customHeaderContent>
+				<FlexBox id="flex" alignItems="End" justifyContent="End">
+			<items>
+				<Button id="help2" text="Help" press="handleResponsivePopoverPress" type="Emphasized" icon="sap-icon://message-information"
+					tooltip="Clicca per informazioni sull'uso dell'applicazione"></Button>
+			</items>
+		</FlexBox>
+	 </semantic:customHeaderContent>
 
 		<semantic:content>
+				
 			<ObjectHeader
 				id="objectHeader"
-				title="{ZrequestId}"
-				number=""
-				numberUnit="Day(s)"
->
+				title="Richiesta n° {path:'ZrequestId', formatter: '.formatter.formatRequestId'}"
+				numberUnit="Giorno/i"
+				icon="sap-icon://general-leave-request">
 				<attributes>
-					<ObjectAttribute
-					text="{ZabsType}"
-					/>
 				<ObjectAttribute
-					text="{Tmsuser}"
+					title="Tipo"  text="{ path:'ZabsType', formatter:'.formatter.formatAbsence'}"
 					/>
 						<ObjectAttribute
-					text="{Znote}"
+				
 					/>
+						<ObjectAttribute
+					
+					/>
+				<ObjectAttribute title="Inserita da" text="{UnameAppToName/NameLast} {UnameAppToName/NameFirst}  { path: 'ZdateRec', formatter: '.formatter.formatDate'} { path: 'ZtimeRec', formatter: '.formatter.formatTime'}"/>
+
+			    <ObjectAttribute id = "elab_text" title="Elaborata da" text="{UnameAppToNameApprover/NameLast} {UnameAppToNameApprover/NameFirst} { path: 'ZdateAction', formatter: '.formatter.formatDate'} { path: 'ZtimeAction', formatter: '.formatter.formatTime'}"/>
+
+			    
 				</attributes>
+			
+				 
 				<statuses>
-				<ObjectStatus
+				<!--<ObjectStatus
 				text="{ZreqStatus}"
-				state="Success"/>
-				</statuses>
+				state="{ path: 'ZreqStatus', formatter: '.formatter.formatReqStatus'}"/>
+				-->
+				<ObjectStatus title="Stato" 	icon="{ path: 'ZreqStatus', formatter: '.formatter.formatIconStatus'}"
+				state = "{ path: 'ZreqStatus', formatter: '.formatter.formatReqStatus'}"/>
+				<ObjectStatus title="Ore totali" text="{ZoreTotali}"/>
+				
+			    
+			    </statuses>
 			</ObjectHeader>
 			<IconTabBar
 				id="iconTabBar"
@@ -45,10 +69,10 @@
 						id="iconTabBarFilter1"
 						icon="sap-icon://hint"
 						tooltip="{i18n>detailIconTabBarInfo}">
-							<Table
+			   <Table
 				id="lineItemsList"
 				width="auto"
-				items="{ToLeaveReqPos}"
+				items="{ToLeaveReqAppPos}"
 				updateFinished="onListUpdateFinished"
 				noDataText="{i18n>detailLineItemTableNoDataText}"
 				busyIndicatorDelay="{detailView>/lineItemTableDelay}"
@@ -64,72 +88,108 @@
 					<Column>
 						<Text text="{i18n>detailLineItemTableIDColumn}"/>
 					</Column>
-					<Column
-						minScreenWidth="Tablet"
-						demandPopin="true"
-						hAlign="Right">
-						<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
+							<Column>
+						<Text text="Ora inizio"/>
+					</Column>
+							<Column>
+						<Text text="Ora fine"/>
+					</Column>
+					
+						<Column>
+						<Text text="Ore assenza"/>
 					</Column>
 				</columns>
 				<items>
 					<ColumnListItem>
 						<cells>
 							<ObjectIdentifier
-								title="{}"
-								text="{}"/>
-							<ObjectNumber
-								number="{
-									path: 'ZrequestPos',
-									formatter: '.formatter.currencyValue'
-								}"
-/>
+								title="{path: 'Zdate', formatter:'.formatter.formatDate'}"/>
+									<ObjectIdentifier
+								title="{Ztimestart}"/>
+									<ObjectIdentifier
+								title="{Ztimeend}"/>
+								<ObjectIdentifier
+								title="{Zorep}"/>
 						</cells>
 					</ColumnListItem>
 				</items>
 			</Table>
 					</IconTabFilter>
-					<IconTabFilter
-						id="iconTabBarFilter2"
-						icon="sap-icon://attachment"
-						tooltip="Allegati">
-					</IconTabFilter>
+				
+					
 						<IconTabFilter
 						id="iconTabBarFilter3"
 						icon="sap-icon://notes"
-						tooltip="Note">
+						tooltip="Note Utente">
+								<List id="commentList"
+								showSeparators="Inner"
+							    noDataText="Nessun commento alla richiesta"
+						        backgroundDesign="Translucent">
+								<items>
+								<FeedListItem
+								    id="FLI"
+								    sender="{UnameAppToName/NameLast} {UnameAppToName/NameFirst}"
+								    timestamp="{ path: 'ZdateRec', formatter: '.formatter.formatDate'} { path: 'ZtimeRec', formatter: '.formatter.formatTime'}"
+								    info="Richiesta {path : 'ZabsType', formatter: '.formatter.formatAbsence'}"
+									icon="sap-icon://employee"
+									iconDensityAware="false"
+									text="{Znote}"/>
+									</items>
+								</List>
+					</IconTabFilter>
+					
+				
+						<IconTabFilter
+						id="iconTabBarFilter4"
+						icon="sap-icon://approvals"
+						tooltip="Note Approvatore">
+								<List id="commentListApp"
+								showSeparators="Inner"
+							    noDataText="Nessun commento alla richiesta"
+						        backgroundDesign="Translucent">
+								<items>
+								<FeedListItem
+								    id="FLI_APP"
+								    sender="{UnameAppToNameApprover/NameLast} {UnameAppToNameApprover/NameFirst}"
+								    timestamp="{ path: 'ZdateAction', formatter: '.formatter.formatDate'} { path: 'ZtimeAction', formatter: '.formatter.formatTime'}"
+								    info="Richiesta {path : 'ZabsType', formatter: '.formatter.formatAbsence'}"
+									icon="sap-icon://employee-approvals"
+									iconDensityAware="false"
+									text="{ZnoteAPP}"/>
+									</items>
+								</List>
 					</IconTabFilter>
 				</items>
 			</IconTabBar>
 		
 		</semantic:content>
 
-		<semantic:sendEmailAction>
-			<semantic:SendEmailAction
-				id="shareEmail"
-				press="onShareEmailPress"/>
-		</semantic:sendEmailAction>
-
-		<semantic:shareInJamAction>
+<!--		<semantic:shareInJamAction>
 			<semantic:ShareInJamAction
 				id="shareInJam"
 				visible="{FLP>/isShareInJamActive}"
 				press="onShareInJamPress"/>
-		</semantic:shareInJamAction>
+		</semantic:shareInJamAction>-->
 		
 
-
-		<semantic:saveAsTileAction>
-			<footerbar:AddBookmarkButton
-				id="shareTile"
-				title="{detailView>/saveAsTileTitle}"/>
-		</semantic:saveAsTileAction>
+ <semantic:customFooterContent>
+                    <Button id="btn0" text="Sblocca" type="Emphasized" press="onElaboratePress" visible="true" 
+					enabled="false"/>
+          </semantic:customFooterContent>
 		
-		<semantic:positiveAction>
+		      <!-- <semantic:editAction>
+					<semantic:EditAction id="btn0" tooltip="Sblocca la richiesta (Admin only)"
+					press="onElaboratePress" 
+					visible="true" 
+					enabled="false"/>
+				</semantic:editAction>-->
+		       <semantic:positiveAction>
 					<semantic:PositiveAction id="btn1" text="Approva" press="onButtonPress"/>
 				</semantic:positiveAction>
 				<semantic:negativeAction>
 					<semantic:NegativeAction id="btn2" text="Rifiuta" press="onButtonPress"/>
 				</semantic:negativeAction>
+	
 		
 	</semantic:DetailPage>
 

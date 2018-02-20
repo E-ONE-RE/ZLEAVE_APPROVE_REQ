@@ -14,6 +14,7 @@ sap.ui.define([
 			 */
 
 			constructor : function () {
+				
 				this._oWhenListHasBeenSet = new Promise(function (fnResolveListHasBeenSet) {
 					this._fnResolveListHasBeenSet = fnResolveListHasBeenSet;
 				}.bind(this));
@@ -31,16 +32,23 @@ sap.ui.define([
 											error : true
 										});
 									}
+									
+									
 									var oFirstListItem = oList.getItems()[0];
-									if (oFirstListItem) {
+								
+									if (oFirstListItem ) {
 										// Have to make sure that first list Item is selected
 										// and a select event is triggered. Like that, the corresponding
 										// detail page is loaded automatically
+									
 										fnResolve({
 											list : oList,
 											firstListitem : oFirstListItem
 										});
 									} else {
+										oFirstListItem = oData.getParameter("data").results[0];
+										oList.setSelectedItem(oFirstListItem);
+										
 										// No items in the list
 										fnReject({
 											list : oList,
@@ -51,6 +59,8 @@ sap.ui.define([
 							);
 						});
 				}.bind(this));
+				
+			
 			},
 
 			/**
@@ -72,7 +82,6 @@ sap.ui.define([
 			 * @public
 			 */
 			selectAListItem : function (sBindingPath) {
-
 				this.oWhenListLoadingIsDone.then(
 					function () {
 						var oList = this._oList,

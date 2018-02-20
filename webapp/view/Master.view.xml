@@ -6,7 +6,8 @@ controllerName="zetms.controller.Master"
 xmlns:html="http://www.w3.org/1999/xhtml">
 
 	<semantic:MasterPage id="page" title="{masterView>/title}" navButtonPress="onNavBack" showNavButton="true">
-	
+
+
 	  <html:style>
 
    #application-LeaveRequestApproval-display-component---master--iconTabBar1--header {
@@ -14,8 +15,29 @@ xmlns:html="http://www.w3.org/1999/xhtml">
                                         width: 110%
 
                                  }
+                                  
+    <!-- app deployata cambia il suffisso -->
+    #application-ZLeaveApprove-display-component---master--iconTabBar1--header {
 
+                                        width: 110%
+
+                                 }
+                                                               
+                                 
+                                 .myclass {
+                                 background-color: rgba(209,73,0, 0.5)!important
+                                 }
           </html:style>
+          
+          <semantic:customHeaderContent>
+	     <Button
+                icon="sap-icon://synchronize"
+                press="onClickRefresh" 
+                type="Emphasized"
+                tooltip="Aggiorna"/>
+</semantic:customHeaderContent>
+
+
           
 			<PullToRefresh id="pullToRefresh" visible="{device>/support/touch}" refresh="onRefresh"/>
             
@@ -62,10 +84,9 @@ xmlns:html="http://www.w3.org/1999/xhtml">
 		<semantic:content>
 			<!-- For client side filtering add this to the items attribute:  parameters: {operationMode: 'Client'}}" -->
 			<List id="list" 
-			items="{      path: '/LeaveRequestSet',      
-			sorter: {       path: 'ZrequestId',       
-			descending: true       },     
-			groupHeaderFactory: '.createGroupHeader'}"
+			items="{  path: '/LeaveRequestAppSet',      
+			groupHeaderFactory: '.createGroupHeader',
+			parameters : {expand:'UnameAppToName,UnameAppToNameApprover', operationMode: 'Client'}}"
 			busyIndicatorDelay="{masterView>/delay}" 
 			noDataText="{masterView>/noDataText}" 
 			mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" 
@@ -79,17 +100,21 @@ xmlns:html="http://www.w3.org/1999/xhtml">
 					</Toolbar>
 				</infoToolbar>
 				<items>
-					<ObjectListItem type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}" 
+					<ObjectListItem id="objList" type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}" 
 					press="onSelectionChange" 
-					title="{Tmsuser}">
+					title="{UnameAppToName/NameLast} {UnameAppToName/NameFirst}">
 					<attributes>
-					<ObjectAttribute text="Data: { path: 'ZdateRec', formatter: '.formatter.formatDate'}"/>
-					<ObjectAttribute text="Tipo: {ZabsType}" />
+				    <ObjectAttribute text="n° {path : 'ZrequestId', formatter : '.formatter.formatRequestId'}"/>
+					<ObjectAttribute text="Inserita il: { path: 'ZdateRec', formatter: '.formatter.formatDate'}"/>
+					<ObjectAttribute text="Tipo: {path: 'ZabsType', formatter:'.formatter.formatAbsence' }" />
+					<ObjectAttribute text="Società: {Company} " />
+					<ObjectAttribute text="Approvatore: {UnameAppToNameApprover/NameLast} {UnameAppToNameApprover/NameFirst} " />
 				    </attributes>
 				<firstStatus>
 					<ObjectStatus
-						text="{ZreqStatus}"
-						state = "Success"
+			
+						icon = "{ path: 'ZreqStatus', formatter: '.formatter.formatIconStatus'}"
+						state = "{ path: 'ZreqStatus', formatter: '.formatter.formatReqStatus'}"
 					 />
 				</firstStatus>
 					</ObjectListItem>
@@ -97,7 +122,8 @@ xmlns:html="http://www.w3.org/1999/xhtml">
 			</List>
 		
 		</semantic:content>
-	
+		
+		 
 		
 	</semantic:MasterPage>
 

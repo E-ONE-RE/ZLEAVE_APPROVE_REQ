@@ -317,7 +317,7 @@
                 </AssociationSet>
                 <AssociationSet Name="LeaveReqToPosSet" Association="ZLEAVE_REQUEST_SRV.LeaveReqToPos" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="LeaveRequestSet" Role="FromRole_LeaveReqToPos"/>
-                    <End EntitySet="LeaveRequestAppPosSet" Role="ToRole_LeaveReqToPos"/>
+                    <End EntitySet="LeaveRequestPosSet" Role="ToRole_LeaveReqToPos"/>
                 </AssociationSet>
                 <AssociationSet Name="RequestAppToNameSet" Association="ZLEAVE_REQUEST_SRV.RequestAppToName" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="LeaveRequestAppSet" Role="FromRole_RequestAppToName"/>

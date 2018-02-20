@@ -164,7 +164,7 @@ sap.ui.define([
 
 					iRememberAnIdOfAnObjectThatsNotInTheList : function () {
 						return this.waitFor(this.createAWaitForAnEntitySet({
-							entitySet : "LeaveRequestSet",
+							entitySet : "LeaveRequestAppSet",
 							success : function (aEntityData) {
 								this.waitFor({
 									id : "list",
@@ -187,7 +187,7 @@ sap.ui.define([
 
 										var oCurrentItem = this.getContext().currentItem;
 										// Construct a binding path since the list item is not created yet and we only have the id.
-										oCurrentItem.bindingPath = "/" + oList.getModel().createKey("LeaveRequestSet", {
+										oCurrentItem.bindingPath = "/" + oList.getModel().createKey("LeaveRequestAppSet", {
 											ZrequestId : sCurrentId
 										});
 										oCurrentItem.id = sCurrentId;
@@ -470,9 +470,9 @@ sap.ui.define([
 					theListShouldHaveAllEntries : function () {
 						var aAllEntities,
 							iExpectedNumberOfItems;
-						// retrieve all LeaveRequestSet to be able to check for the total amount
+						// retrieve all LeaveRequestAppSet to be able to check for the total amount
 						this.waitFor(this.createAWaitForAnEntitySet({
-							entitySet : "LeaveRequestSet",
+							entitySet : "LeaveRequestAppSet",
 							success : function (aEntityData) {
 								aAllEntities = aEntityData;
 							}

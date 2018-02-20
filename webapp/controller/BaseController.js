@@ -58,7 +58,21 @@ sap.ui.define([
 					if (sPreviousHash !== undefined || !oCrossAppNavigator.isInitialNavigation()) {
 					history.go(-1);
 				} else {
-					this.getRouter().navTo("master", {}, true);
+						// MP: per andare indietro alla vista master da smartphone. 
+	
+			var sOwnerId = this.getView()._sOwnerId;
+			var sId = sOwnerId + "---master" + "--list";
+
+			var oList = sap.ui.getCore().byId(sId);
+			var oSelectedItem = oList.getSelectedItem();
+			// MP: per deselezionare l'item selezionato 
+			if (oSelectedItem) {
+				oList.setSelectedItem(oSelectedItem, false);
+			}
+			var oSplitApp = this.getView().getParent().getParent();
+			var oMaster = oSplitApp.getMasterPages()[0];
+			oSplitApp.toMaster(oMaster, "slide");
+	
 				}
 			}
 
