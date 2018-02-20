@@ -186,8 +186,8 @@ sap.ui.define([
 						'<ul>' +
 
 						'In qualità di <strong>amministratore</strong> puoi visualizzare, approvare o rifiutare le richieste inserite da tutti gli utenti di tua competenza.' +
-						' Inoltre, puoi modificare lo stato delle richieste precedentemente approvate da un TL o sbloccare le richieste per gli utenti che' +
-						' intendono modificare i dati della richiesta attraverso il tasto "Sblocca".' +
+						' Inoltre, puoi modificare lo stato delle richieste precedentemente approvate da un TL o sbloccare (attraverso il tasto "Sblocca") le richieste per gli utenti che' +
+						' intendono modificare i dati della richiesta.' +
 						'</ul>',
 					sanitizeContent: true
 				});
