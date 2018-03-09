@@ -139,13 +139,19 @@ sap.ui.define([
 						var oFilter, oBinding, oMasterView;
 						oMasterView = sap.ui.getCore().byId(sOwnerId + "---master");
 
-						if (oEntry.ZreqStatus == "A") {
+						/*if (oEntry.ZreqStatus == "A") {
 							oIconTabBar.setSelectedKey("approved");
 							sap.ui.controller("zetms.controller.Master").onQuickFilter(undefined, "A", oList, oMasterView);
 						} else if (oEntry.ZreqStatus == "R") {
 							oIconTabBar.setSelectedKey("rejected");
 							sap.ui.controller("zetms.controller.Master").onQuickFilter(undefined, "R", oList, oMasterView);
-						}
+						}*/
+						
+						///////////////////////////////////AGGIUNTO 08/03/2018///////PROVA///////
+							oIconTabBar.setSelectedKey("pending");
+							sap.ui.controller("zetms.controller.Master").onQuickFilter(undefined, "I", oList, oMasterView);
+						/////////////////////////////////////////////////////////////////////////
+						
 
 					}
 				}),
@@ -305,10 +311,12 @@ sap.ui.define([
 						var oList = sap.ui.getCore().byId(sId2);
 						var oFilter, oBinding, oMasterView;
 						oMasterView = sap.ui.getCore().byId(sOwnerId + "---master");
-
+ 
+						//******NEW******//
+						// Aggiunto per tornare alle richieste pending una volta che ho eseguito l'azione
 						oIconTabBar.setSelectedKey("pending");
 						sap.ui.controller("zetms.controller.Master").onQuickFilter(undefined, "I", oList, oMasterView);
-                        
+                        ////////////////////////////////////////////////////////
 					}
 				}),
 

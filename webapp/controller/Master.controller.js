@@ -157,6 +157,11 @@ sap.ui.define([
 					sKey = "rejected";
 				}else{
 					sKey = "";
+					//******NEW******//
+					// Aggiunto per resettare la detail view e la selexzione nella lista Master
+					oView.getController().getRouter().getTargets().display("select");
+				    oView.getController().getOwnerComponent().oListSelector.clearMasterListSelection();
+					////////////////////////////////////////////
 				}
 				oFilter = new sap.ui.model.Filter("ZreqStatus", "EQ", sTabKey);
 			}
