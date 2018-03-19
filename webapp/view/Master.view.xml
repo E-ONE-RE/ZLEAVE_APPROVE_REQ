@@ -30,11 +30,16 @@ xmlns:html="http://www.w3.org/1999/xhtml">
           </html:style>
           
           <semantic:customHeaderContent>
+          	   
+                
+				
+		
 	     <Button
                 icon="sap-icon://synchronize"
                 press="onClickRefresh" 
                 type="Emphasized"
                 tooltip="Aggiorna"/>
+             
 </semantic:customHeaderContent>
 
 
@@ -80,7 +85,33 @@ xmlns:html="http://www.w3.org/1999/xhtml">
 				</items>
 		
 			</IconTabBar>
-	
+			<Panel id="filtri" headerText="Filtri e ricerca" expandable="true" backgroundDesign="Translucent">
+			
+				<MessageStrip
+				text="Usare i campi sottostanti per applicare dei filtri sulla company o sugli utenti"
+				showIcon="true"
+				showCloseButton="true"
+				class="sapUiMediumMarginBottom">
+			</MessageStrip>
+				
+			
+				<content>
+						<Select id="Sele" width="100%" forceSelection="true" change="onSelectChange">
+	<items>
+		<core:Item text="--" key="--"></core:Item>
+		<core:Item text="EONE" key="EONE"></core:Item>
+		<core:Item text="IONE" key="IONE"></core:Item>
+		<core:Item text="FONE" key="FONE"></core:Item>
+	</items>
+	</Select>
+ <SearchField id="SF" width="100%" placeholder="Filtra per nome..." search="onUserSearch" enableSuggestions="true"
+   suggestionItems="{path: '/AllUserSet', parameters: {operationMode: 'Client'}}" suggest="onSuggest">
+    <suggestionItems>
+            <SuggestionItem text="{NameLast} {NameFirst}" key="{Tmsuser}"/>
+        </suggestionItems>
+       </SearchField>
+	</content>
+	</Panel>
 		<semantic:content>
 			<!-- For client side filtering add this to the items attribute:  parameters: {operationMode: 'Client'}}" -->
 			<List id="list" 
