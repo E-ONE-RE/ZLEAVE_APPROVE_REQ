@@ -244,7 +244,9 @@ sap.ui.define([
 		 }
 		 
 		 this.getView().getController().getOwnerComponent().oListSelector.clearMasterListSelection();
-		 this.getView().getController().getRouter().getTargets().display("select");
+	 if(!sap.ui.Device.system.phone){
+		 	this.getView().getController().getRouter().getTargets().display("select");
+		     }
 		 
 		 },
 		 
@@ -283,8 +285,13 @@ sap.ui.define([
 		    //oIconTabBar.setSelectedKey(sSelectedTab);
 		 	oBinding.filter(this._mFilters[sSelectedTab]);
 		    }
+		    
+		   
 		    this.getView().getController().getOwnerComponent().oListSelector.clearMasterListSelection();
+		     
+		     if(!sap.ui.Device.system.phone){
 		 	this.getView().getController().getRouter().getTargets().display("select");
+		     }
 		 	
 		 	var oSearchField = this.getView().byId("SF");
 		 	oSearchField.setValue("");
