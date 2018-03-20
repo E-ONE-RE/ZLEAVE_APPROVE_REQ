@@ -212,11 +212,22 @@ sap.ui.define([
 		  var oStatusFilter = new Filter("ZreqStatus", sap.ui.model.FilterOperator.EQ, sSelectedTabStatus);
 		  var oCompanyFilter = new Filter("Company", sap.ui.model.FilterOperator.EQ, sOffice);
 		  
-		  if(sOffice != "--"){
+		  
+		   if(sValue != "" & sOffice != "--"){
 		  var oFinalFilter = new sap.ui.model.Filter({
 		 	filters: [
       oComFilter,
       oStatusFilter,
+      oCompanyFilter
+    ],
+            and: true
+		 });
+		  }
+		  
+		  else if(sValue == "" & sOffice != "--"){
+		  var oFinalFilter = new sap.ui.model.Filter({
+		 	filters: [
+    
       oCompanyFilter
     ],
             and: true
@@ -237,7 +248,7 @@ sap.ui.define([
 	
 	
 		 
-		 if(sValue != ""){
+		 if(sValue != "" || sOffice != "--"){
 		 oBinding.filter(oFinalFilter);
 		 }else{
 		 	oBinding.filter(this._mFilters[sSelectedTab]);
