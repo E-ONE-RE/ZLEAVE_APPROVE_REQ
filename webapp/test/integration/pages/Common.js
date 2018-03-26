@@ -9,9 +9,9 @@ sap.ui.define([
 			sUrlParameters = sUrlParameters ? "?" + sUrlParameters : "";
 
 			if (sHash) {
-				sHash = "#LeaveRequestApproval-display&/" + (sHash.indexOf("/") === 0 ? sHash.substring(1) : sHash);
+				sHash = "#ZLeaveApprove-approve&/" + (sHash.indexOf("/") === 0 ? sHash.substring(1) : sHash);
 			} else {
-				sHash = "#LeaveRequestApproval-display";
+				sHash = "#ZLeaveApprove-approve";
 			}
 
 			return sUrl + sUrlParameters + sHash;

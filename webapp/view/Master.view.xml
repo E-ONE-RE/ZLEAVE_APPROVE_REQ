@@ -10,14 +10,15 @@ xmlns:html="http://www.w3.org/1999/xhtml">
 
 	  <html:style>
 
-   #application-LeaveRequestApproval-display-component---master--iconTabBar1--header {
+   #application-LeaveRequestApproval-approve-component---master--iconTabBar1--header {
 
                                         width: 110%
 
                                  }
+                                 
                                   
     <!-- app deployata cambia il suffisso -->
-    #application-ZLeaveApprove-display-component---master--iconTabBar1--header {
+    #application-ZLeaveApprove-approve-component---master--iconTabBar1--header {
 
                                         width: 110%
 
@@ -27,6 +28,11 @@ xmlns:html="http://www.w3.org/1999/xhtml">
                                  .myclass {
                                  background-color: rgba(209,73,0, 0.5)!important
                                  }
+                                 
+      #application-ZLeaveApprove-approve-component---master--SF-I {
+								    text-transform:capitalize;
+								 }                           
+                           
           </html:style>
           
           <semantic:customHeaderContent>
