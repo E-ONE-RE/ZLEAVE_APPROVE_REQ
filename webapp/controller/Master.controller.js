@@ -311,8 +311,17 @@ sap.ui.define([
 		  
 		  //MP: Funzione per resettare i filtri 
 		 resetFilters: function(){
-		 	var oSelect = this.getView().byId("Sele");
-		 	var oSearchField = this.getView().byId("SF");
+		 	
+		var oView = this.getView();
+		   //(SE) arrivando dall view detail this.getview era undifined	
+		 if (oView === undefined) {
+        		oView= sap.ui.getCore().byId("application-LeaveRequestApproval-display-component---master");
+		   }
+	
+	//	 	var oSelect = this.getView().byId("Sele");
+	//	 	var oSearchField = this.getView().byId("SF");
+		 	var oSelect = oView.byId("Sele");
+		 	var oSearchField = oView.byId("SF");
 		 	oSelect.setSelectedKey("--");
 		 	oSearchField.setValue("");
 		 },
@@ -320,11 +329,26 @@ sap.ui.define([
 		//MP: Quick filter per filtrare tra gli stati delle richieste
 		onQuickFilter: function(oEvent, sTabKey, oList, oView) {
 			
+		
 		   // resetto i filtri
 		   this.resetFilters();
 		   ///////////////////
+	
+           //(SE) arrivando dall view detail this.getview era undifined
+           if (oView === undefined) {
+                oView = this.getView();
+           }
+           
+           if (oView === undefined) {
+           oView = sap.ui.getCore().byId("application-LeaveRequestApproval-display-component---master");
+		   }
 		   
-           this.getView().byId("SF").getAggregation("suggestionItems");
+	  
+      //     this.getView().byId("SF").getAggregation("suggestionItems");
+   
+             oView.byId("SF").getAggregation("suggestionItems");
+	 
+		   
 			var oFilter;
 
 			if (oEvent) {
