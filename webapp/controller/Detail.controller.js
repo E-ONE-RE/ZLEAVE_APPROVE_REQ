@@ -139,13 +139,19 @@ sap.ui.define([
 						var oFilter, oBinding, oMasterView;
 						oMasterView = sap.ui.getCore().byId(sOwnerId + "---master");
 
-						if (oEntry.ZreqStatus == "A") {
+						/*if (oEntry.ZreqStatus == "A") {
 							oIconTabBar.setSelectedKey("approved");
 							sap.ui.controller("zetms.controller.Master").onQuickFilter(undefined, "A", oList, oMasterView);
 						} else if (oEntry.ZreqStatus == "R") {
 							oIconTabBar.setSelectedKey("rejected");
 							sap.ui.controller("zetms.controller.Master").onQuickFilter(undefined, "R", oList, oMasterView);
-						}
+						}*/
+						
+						///////////////////////////////////AGGIUNTO 08/03/2018///////PROVA///////
+							oIconTabBar.setSelectedKey("pending");
+							sap.ui.controller("zetms.controller.Master").onQuickFilter(undefined, "I", oList, oMasterView);
+						/////////////////////////////////////////////////////////////////////////
+						
 
 					}
 				}),
@@ -186,8 +192,8 @@ sap.ui.define([
 						'<ul>' +
 
 						'In qualità di <strong>amministratore</strong> puoi visualizzare, approvare o rifiutare le richieste inserite da tutti gli utenti di tua competenza.' +
-						' Inoltre, puoi modificare lo stato delle richieste precedentemente approvate da un TL o sbloccare le richieste per gli utenti che' +
-						' intendono modificare i dati della richiesta attraverso il tasto "Sblocca".' +
+						' Inoltre, puoi modificare lo stato delle richieste precedentemente approvate da un TL o sbloccare (attraverso il tasto "Sblocca") le richieste per gli utenti che' +
+						' intendono modificare i dati della richiesta.' +
 						'</ul>',
 					sanitizeContent: true
 				});
@@ -305,10 +311,12 @@ sap.ui.define([
 						var oList = sap.ui.getCore().byId(sId2);
 						var oFilter, oBinding, oMasterView;
 						oMasterView = sap.ui.getCore().byId(sOwnerId + "---master");
-
+ 
+						//******NEW******//
+						// Aggiunto per tornare alle richieste pending una volta che ho eseguito l'azione
 						oIconTabBar.setSelectedKey("pending");
 						sap.ui.controller("zetms.controller.Master").onQuickFilter(undefined, "I", oList, oMasterView);
-                        
+                        ////////////////////////////////////////////////////////
 					}
 				}),
 
@@ -493,6 +501,7 @@ sap.ui.define([
 			oViewModel.setProperty("/shareSendEmailMessage",
 				oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
 		},
+		
 
 		_onMetadataLoaded: function() {
 			// Store original busy indicator delay for the detail view

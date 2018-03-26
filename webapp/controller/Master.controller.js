@@ -114,6 +114,9 @@ sap.ui.define([
 		// siano filtrate in base a questo.
 		onAfterRendering: function() {
 			this._oList.getBinding("items").filter(this._mFilters["pending"]);
+		    this.getView().getController().getOwnerComponent().oListSelector.clearMasterListSelection();
+			var oSearchField = this.getView().byId("SF");
+			oSearchField.getModel().setSizeLimit(1000);
 		},
 		
 		//pulisco il contatore dell'auto refresh
@@ -140,11 +143,232 @@ sap.ui.define([
 		 var oAccesParameters = {Admin:sAdmin, Notifica:sNotifica, NotificaFI_ICT:sNotifica_FI_ICT};
 		 return oAccesParameters;	
 		 },
+		 
+		 capitalizeFirstLetter: function (sValue) {
+		 	if (sValue){
+			    return sValue.replace(/^./, sValue[0].toUpperCase());
+		 	}
+			},
+			
+		 //MP: Funzione per la suggestion del SearchField
+		 onSuggest: function(oEvent){
+		 	var oSearchField = oEvent.getSource();
+		 	var sValue = oSearchField.getValue();
+		 	
+		 	sValue = this.capitalizeFirstLetter(sValue);
+
+		 	var aFilters = [];
+		 	var oFilterSur = new Filter("NameLast", sap.ui.model.FilterOperator.Contains, sValue);
+		 	var oFilterName = new Filter("NameFirst", sap.ui.model.FilterOperator.Contains, sValue);
+		 	
+//		 	var oFilterSur = new Filter("tolower(NameLast)", sap.ui.model.FilterOperator.Contains, sValue);
+//		 	var oFilterName = new Filter("tolower(NameFirst)", sap.ui.model.FilterOperator.Contains, sValue);
+		 	
+	//	 	aFilter.push(new Filter("tolower(ProductID)", FilterOperator.Contains, "'" + sQuery.toLowerCase() +
+
+//  "'"));
+  
+  
+		 	aFilters.push(oFilterSur, oFilterName);
+		    var oComFilter = new sap.ui.model.Filter({
+		 	filters: aFilters,
+            and: false
+			});
+		 	var oBinding = oSearchField.getBinding("suggestionItems");
+		 	if (oBinding.aAllKeys == null) {
+						oBinding.aAllKeys = oBinding.aKeys;
+			}
+		 	oBinding.filter(oComFilter);
+		 	oEvent.getSource().suggest();
+		 },   
+		 
+		 
+		 
+	
+		 
+		 // MP: Funzione per filtrare da SearchField
+		 onUserSearch: function(oEvent){
+		 var oSelect = this.getView().byId("Sele");
+		 var sOffice = oSelect.getSelectedKey(); //COMPANY
+		 var oSearchField = this.getView().byId("SF");
+		 var sValue = oSearchField.getValue();
+		 var sSurname; 
+		 var sName; 
+		 var oRequestList = this.getView().byId("list");
+		 var oBinding = oRequestList.getBinding("items");
+		 var oFilterSur;
+		 var oFilterName;
+		 var bFlag; // per operatore logico del filtro
+		 if(sValue.split(" ").length == 1){
+		 oFilterSur = new Filter("UnameAppToName/NameLast", sap.ui.model.FilterOperator.Contains, sValue.trim());
+	   	 oFilterName = new Filter("UnameAppToName/NameFirst", sap.ui.model.FilterOperator.Contains, sValue.trim());
+	   	 bFlag = false;
+		 }else{
+		 sSurname = sValue.substring(0, sValue.lastIndexOf(" ")).trim(); 
+		 sName = sValue.substring(sValue.lastIndexOf(" "), sValue.length).trim();
+		 oFilterSur = new Filter("UnameAppToName/NameLast", sap.ui.model.FilterOperator.Contains, sSurname);
+	   	 oFilterName = new Filter("UnameAppToName/NameFirst", sap.ui.model.FilterOperator.Contains, sName);	
+	   	 bFlag = true;
+		 }
+		 var aFilters = [];
+	   	 aFilters.push(oFilterSur, oFilterName);
+		 var oComFilter = new sap.ui.model.Filter({
+		 	filters: aFilters,
+            and: bFlag
+		 });
+		 var oIconTabBar = this.getView().byId("iconTabBar1");
+		 var sSelectedTab = oIconTabBar.getSelectedKey();
+		  var sSelectedTabStatus;
+		    if(sSelectedTab == "pending"){
+		    	sSelectedTabStatus = "I";
+		    }else if(sSelectedTab == "approved"){
+		    	sSelectedTabStatus = "A";
+		    }else{
+		    	sSelectedTabStatus = "R";
+		    }
+		    
+		  var oStatusFilter = new Filter("ZreqStatus", sap.ui.model.FilterOperator.EQ, sSelectedTabStatus);
+		  var oCompanyFilter = new Filter("Company", sap.ui.model.FilterOperator.EQ, sOffice);
+		  
+		  
+		   if(sValue != "" & sOffice != "--"){
+		  var oFinalFilter = new sap.ui.model.Filter({
+		 	filters: [
+      oComFilter,
+      oStatusFilter,
+      oCompanyFilter
+    ],
+            and: true
+		 });
+		  }
+		  
+		  else if(sValue == "" & sOffice != "--"){
+		  var oFinalFilter = new sap.ui.model.Filter({
+		 	filters: [
+    
+      oCompanyFilter
+    ],
+            and: true
+		 });
+		  }else{
+		  	  var oFinalFilter = new sap.ui.model.Filter({
+		 	filters: [
+      oComFilter,
+      oStatusFilter
+    ],
+            and: true
+		 });
+		  }
+		 
+		 	if (oBinding.aAllKeys == null) {
+						oBinding.aAllKeys = oBinding.aKeys;
+				}
+	
+	
+		 
+		 if(sValue != "" || sOffice != "--"){
+		 oBinding.filter(oFinalFilter);
+		 }else{
+		 	oBinding.filter(this._mFilters[sSelectedTab]);
+		 }
+		 
+		 this.getView().getController().getOwnerComponent().oListSelector.clearMasterListSelection();
+	 if(!sap.ui.Device.system.phone){
+		 	this.getView().getController().getRouter().getTargets().display("select");
+		     }
+		 
+		 },
+		 
+		 
+		  // MP: Funzione per filtrare sulla company da Select (DropDown menu)
+		  onSelectChange: function(oEvent){
+		  	var oSelect = this.getView().byId("Sele");
+		  	var sValue = oSelect.getSelectedKey();
+		    var oRequestList = this.getView().byId("list");
+		    var oBinding = oRequestList.getBinding("items");
+		    var oIconTabBar = this.getView().byId("iconTabBar1");
+		    var sSelectedTab = oIconTabBar.getSelectedKey();
+		    var sSelectedTabStatus;
+		    if(sSelectedTab == "pending"){
+		    	sSelectedTabStatus = "I";
+		    }else if(sSelectedTab == "approved"){
+		    	sSelectedTabStatus = "A";
+		    }else{
+		    	sSelectedTabStatus = "R";
+		    }
+		    
+		     if (oBinding.aAllKeys == null) {
+						oBinding.aAllKeys = oBinding.aKeys;
+			}
+			
+		    var oCompanyFilter = new Filter("Company", sap.ui.model.FilterOperator.EQ, sValue);
+		    var oStatusFilter = new Filter ("ZreqStatus", sap.ui.model.FilterOperator.EQ, sSelectedTabStatus);
+		    var aFilters = [];
+		    if(sValue != "--"){// -- è un item per la selezione blank inserito appositamente 
+		    aFilters.push(oCompanyFilter, oStatusFilter); // questo mi serve per fare in modo di visualizzare solo gli elementi contenuti nel tab in cui mi trovo, altrimenti mi mostrerebbe tutto (pending, approvate, rifiutate)
+		    var oComboFilter = new sap.ui.model.Filter(aFilters, true);
+		    oBinding.filter(oComboFilter);     
+		    /*oBinding.filter(oCompanyFilter);
+			oBinding.filter(this._mFilters[sSelectedTab]); */
+		    }else{
+		    //oIconTabBar.setSelectedKey(sSelectedTab);
+		 	oBinding.filter(this._mFilters[sSelectedTab]);
+		    }
+		    
+		   
+		    this.getView().getController().getOwnerComponent().oListSelector.clearMasterListSelection();
+		     
+		     if(!sap.ui.Device.system.phone){
+		 	this.getView().getController().getRouter().getTargets().display("select");
+		     }
+		 	
+		 	var oSearchField = this.getView().byId("SF");
+		 	oSearchField.setValue("");
+		 	
+		  },
+		  
+		  //MP: Funzione per resettare i filtri 
+		 resetFilters: function(){
+		  	
+		var oView = this.getView();
+		
+		   //(SE) arrivando dall view detail this.getview era undifined	
+		 if (oView === undefined) {
+		 	
+        	oView = sap.ui.getCore().byId("application-ZLeaveApprove-approve-component---master");
+	
+		   }
+	
+	//	 	var oSelect = this.getView().byId("Sele");
+	//	 	var oSearchField = this.getView().byId("SF");
+		 	var oSelect = oView.byId("Sele");
+		 	var oSearchField = oView.byId("SF");
+		 	oSelect.setSelectedKey("--");
+		 	oSearchField.setValue("");
+		 },
 
 		//MP: Quick filter per filtrare tra gli stati delle richieste
-
 		onQuickFilter: function(oEvent, sTabKey, oList, oView) {
-
+			
+		   // resetto i filtri
+		   this.resetFilters();
+		   ///////////////////
+	
+           //(SE) arrivando dall view detail this.getview era undifined
+           if (oView === undefined) {
+                oView = this.getView();
+           }
+           
+           if (oView === undefined) {
+           oView = sap.ui.getCore().byId("application-ZLeaveApprove-approve-component---master");
+		   }
+		   
+	  
+      //     this.getView().byId("SF").getAggregation("suggestionItems");
+   
+             oView.byId("SF").getAggregation("suggestionItems");
+	 
+		   
 			var oFilter;
 
 			if (oEvent) {
@@ -157,6 +381,11 @@ sap.ui.define([
 					sKey = "rejected";
 				}else{
 					sKey = "";
+					//******NEW******//
+					// Aggiunto per resettare la detail view e la selexzione nella lista Master
+					oView.getController().getRouter().getTargets().display("select");
+				    oView.getController().getOwnerComponent().oListSelector.clearMasterListSelection();
+					////////////////////////////////////////////
 				}
 				oFilter = new sap.ui.model.Filter("ZreqStatus", "EQ", sTabKey);
 			}

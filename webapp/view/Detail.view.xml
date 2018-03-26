@@ -173,6 +173,7 @@
 		
 
  <semantic:customFooterContent>
+ 
                     <Button id="btn0" text="Sblocca" type="Emphasized" press="onElaboratePress" visible="true" 
 					enabled="false"/>
           </semantic:customFooterContent>

@@ -9,120 +9,127 @@
                 <Key>
                     <PropertyRef Name="Tmsuser"/>
                 </Key>
-                <Property Name="Tmsuser" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tmsuser" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameFirst" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameLast" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Cognome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
-            <EntityType Name="LeaveRequestAppPos" sap:content-version="1">
+            <EntityType Name="LeaveRequestPos" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="ZrequestId"/>
                     <PropertyRef Name="ZrequestPos"/>
                 </Key>
-                <Property Name="ZrequestId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Id" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="ZrequestPos" Type="Edm.Int32" Nullable="false" sap:label="Posizione" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Tmsuser" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Tmsapprover" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Approvatore" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="ZabsType" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Tipo" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="ZreqStatus" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Stato" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Zdate" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Data assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Ztimestart" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Ora inizio assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Ztimeend" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Ora fine assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZdateRec" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Data richiesta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZtimeRec" Type="Edm.Time" Nullable="false" Precision="0" sap:label="Ora richiesta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zorep" Type="Edm.Decimal" Nullable="false" Precision="3" Scale="1" sap:label="Ore assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zdeleted" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Flag di cancellazione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZrequestId" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Id" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ZrequestPos" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="Posizione" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Tmsuser" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Tmsapprover" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Approvatore" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ZabsType" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Tipo" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ZreqStatus" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Stato" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Zdate" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Data assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ztimestart" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Ora inizio assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ztimeend" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Ora fine assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZdateRec" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Data richiesta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZtimeRec" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Ora richiesta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zorep" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="1" sap:unicode="false" sap:label="Ore assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zdeleted" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Flag di cancellazione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="User" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="Requestid"/>
                 </Key>
-                <Property Name="Username" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Requestid" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Persnumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Numero persona" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="DateFrom" Type="Edm.DateTime" Precision="7" sap:label="Da" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Nation" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Versione ind." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="DateTo" Type="Edm.DateTime" Precision="7" sap:label="A" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Intestazione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="NameFirst" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="NameLast" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Cognome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Name2" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Cogn. nasc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Namemiddle" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Secondo nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="NameLast2" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Secondo cognome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="NameText" Type="Edm.String" Nullable="false" MaxLength="80" sap:label="Nome completo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Converted" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="convertito" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="TitleAca1" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Titolo accadem." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="TitleAca2" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="2. titolo acc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Prefix1" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Prefisso nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Prefix2" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="2. titolo onor." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="TitleSppl" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Suffisso nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Nickname" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Soprannome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Initials" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Iniziali" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Nameformat" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Formato nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Namcountry" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Paese p. edit." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Profession" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Professione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Sex" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Sesso" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Langu" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Lingua" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="PersGroup" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Status dip." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Flaggroups" Type="Edm.Boolean" Nullable="false" sap:label="Flag: esistono ulteriori attribuzioni a gruppi di persone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Sort1" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Criterio ric. 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Sort2" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Criterio ric. 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="SortPhn" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Class. fonetica" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="AddrComp" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="1.indir.azienda" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="AddrPers" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="1.indir.privato" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Flperstel" Type="Edm.Boolean" Nullable="false" sap:label="Telefono priv." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Flperscomm" Type="Edm.Boolean" Nullable="false" sap:label="N. com. propri" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Persorigin" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Fonte dati per." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="McNamefir" Type="Edm.String" Nullable="false" MaxLength="25" sap:label="Nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="McNamelas" Type="Edm.String" Nullable="false" MaxLength="25" sap:label="Cognome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="McName2" Type="Edm.String" Nullable="false" MaxLength="25" sap:label="Cogn. nasc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="LanguCrea" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Li. creazione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="AdrpUuid" Type="Edm.Guid" Nullable="false" sap:label="UUID indirizzo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="UuidBelated" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="UUID successivo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="IdCategory" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Categoria ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="AdrpErrStatus" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Stato errore" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Dataaging" Type="Edm.DateTime" Precision="7" sap:label="Data Filter Value for Data Aging" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Username" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Requestid" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Persnumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Numero persona" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DateFrom" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Da" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Nation" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Versione ind." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DateTo" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="A" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Intestazione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameFirst" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameLast" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Cognome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Name2" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Cogn. nasc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Namemiddle" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Secondo nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameLast2" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Secondo cognome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameText" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Nome completo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Converted" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="convertito" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TitleAca1" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Titolo accadem." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TitleAca2" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="2. titolo acc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Prefix1" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Prefisso nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Prefix2" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="2. titolo onor." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TitleSppl" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Suffisso nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Nickname" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Soprannome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Initials" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Iniziali" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Nameformat" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Formato nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Namcountry" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Paese p. edit." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Profession" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Professione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sex" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Sesso" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Langu" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Lingua" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PersGroup" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Status dip." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Flaggroups" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Flag: esistono ulteriori attribuzioni a gruppi di persone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sort1" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Criterio ric. 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sort2" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Criterio ric. 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SortPhn" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Class. fonetica" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AddrComp" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="1.indir.azienda" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AddrPers" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="1.indir.privato" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Flperstel" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Telefono priv." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Flperscomm" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="N. com. propri" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Persorigin" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Fonte dati per." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="McNamefir" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="Nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="McNamelas" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="Cognome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="McName2" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="Cogn. nasc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LanguCrea" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Li. creazione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AdrpUuid" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="UUID indirizzo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UuidBelated" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="UUID successivo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IdCategory" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Categoria ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AdrpErrStatus" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Stato errore" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dataaging" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Data Filter Value for Data Aging" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="UserLoggedSet" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="Username"/>
                 </Key>
-                <Property Name="Username" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Mandante" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Tmsuser" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Matricola" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Matricola consulente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Company" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Società" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Ruolo" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Ruolo aziendale" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Citta" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Sede lavoro" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Office" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Sede lavoro" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Area" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Area" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Roltot" Type="Edm.Decimal" Nullable="false" Precision="4" Scale="1" sap:label="Ore ROL Totali" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Ferietot" Type="Edm.Decimal" Nullable="false" Precision="4" Scale="1" sap:label="Ore Ferie Totali" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Rolres" Type="Edm.Decimal" Nullable="false" Precision="4" Scale="1" sap:label="Ore ROL Residue" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Ferieres" Type="Edm.Decimal" Nullable="false" Precision="4" Scale="1" sap:label="Ore Ferie Residue" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Tipoassun" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Tipo assunzione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Dataassunz" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Data" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Datadimiss" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Data" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Approver" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Approvatore" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Admin" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Admin" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Username" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Mandante" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tmsuser" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Matricola" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Matricola consulente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Company" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Società" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ruolo" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Ruolo aziendale" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Citta" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Sede lavoro" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Office" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Sede lavoro" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Area" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Area" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Roltot" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="1" sap:unicode="false" sap:label="Ore ROL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ferietot" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="1" sap:unicode="false" sap:label="Ore Ferie" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Permessitot" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="1" sap:unicode="false" sap:label="Ore Permessi" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Recuperitot" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="1" sap:unicode="false" sap:label="Ore Recuperi" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Rolres" Type="Edm.Decimal" Nullable="false" Precision="4" Scale="1" sap:unicode="false" sap:label="Ore ROL Residue" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ferieres" Type="Edm.Decimal" Nullable="false" Precision="4" Scale="1" sap:unicode="false" sap:label="Ore Ferie Residue" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tipoassun" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Tipo assunzione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dataassunz" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Data" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Datadimiss" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Data" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Approver" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Approvatore" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Notifica" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Notifica" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Notificafinict" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Notificafinict" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Admin" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Admin" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="LeaveRequest" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="ZrequestId"/>
                 </Key>
-                <Property Name="ZrequestId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Richiesta n°" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="Tmsuser" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Tmsapprover" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Approvatore" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="ZabsType" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Tipo" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="ZreqStatus" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Stato" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="ZdateRec" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Data richiesta" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
-                <Property Name="ZtimeRec" Type="Edm.Time" Nullable="false" Precision="0" sap:label="Ora richiesta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZdateAction" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Data azione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZtimeAction" Type="Edm.Time" Nullable="false" Precision="0" sap:label="Ora azione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZuserAction" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="User Azione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zdeleted" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Flag di cancellazione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZnoteAPP" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Note approver" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Ztmskey" Type="Edm.String" Nullable="false" MaxLength="16" sap:label="Chiave timesheet" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZoreTotali" Type="Edm.Decimal" Nullable="false" Precision="3" Scale="1" sap:label="Ore totali assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Znote" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Note" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <NavigationProperty Name="ToLeaveAppReqPos" Relationship="ZLEAVE_REQUEST_SRV.LeaveReqToPos" FromRole="FromRole_LeaveReqToPos" ToRole="ToRole_LeaveReqToPos"/>
+                <Property Name="ZrequestId" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Richiesta n°" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Tmsuser" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Tmsapprover" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Approvatore" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ZabsType" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Tipo" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ZreqStatus" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Stato" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ZdateRec" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Data richiesta" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="ZtimeRec" Type="Edm.Time" Precision="0" sap:unicode="false" sap:label="Ora richiesta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZdateAction" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Data azione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZtimeAction" Type="Edm.Time" Precision="0" sap:unicode="false" sap:label="Ora azione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZuserAction" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User Azione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zdeleted" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Flag di cancellazione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZnoteAPP" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="Note approver" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ztmskey" Type="Edm.String" Nullable="false" MaxLength="16" sap:unicode="false" sap:label="Chiave timesheet" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZoreTotali" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="1" sap:unicode="false" sap:label="Ore totali assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zunlocked" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Znote" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="Note" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="ToLeaveReqPos" Relationship="ZLEAVE_REQUEST_SRV.LeaveReqToPos" FromRole="FromRole_LeaveReqToPos" ToRole="ToRole_LeaveReqToPos"/>
                 <NavigationProperty Name="UnameToName" Relationship="ZLEAVE_REQUEST_SRV.RequestToName" FromRole="FromRole_RequestToName" ToRole="ToRole_RequestToName"/>
                 <NavigationProperty Name="UnameToNameApprover" Relationship="ZLEAVE_REQUEST_SRV.RequestToNameApprover" FromRole="FromRole_RequestToNameApprover" ToRole="ToRole_RequestToNameApprover"/>
             </EntityType>
@@ -130,88 +137,129 @@
                 <Key>
                     <PropertyRef Name="Type"/>
                 </Key>
-                <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Message" Type="Edm.String" Nullable="false" MaxLength="50" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Message" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="AbsenceType" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="IdAbs"/>
                 </Key>
-                <Property Name="IdAbs" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Identificativo del tipo assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="TipoAbs" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Tipo di assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IdAbs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Identificativo del tipo assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TipoAbs" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Tipo di assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="ApproverInfo" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="Requestid"/>
                 </Key>
-                <Property Name="Username" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Requestid" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Persnumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Numero persona" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="DateFrom" Type="Edm.DateTime" Precision="7" sap:label="Da" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Nation" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Versione ind." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="DateTo" Type="Edm.DateTime" Precision="7" sap:label="A" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Intestazione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="NameFirst" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="NameLast" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Cognome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Name2" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Cogn. nasc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Namemiddle" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Secondo nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="NameLast2" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Secondo cognome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="NameText" Type="Edm.String" Nullable="false" MaxLength="80" sap:label="Nome completo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Converted" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="convertito" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="TitleAca1" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Titolo accadem." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="TitleAca2" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="2. titolo acc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Prefix1" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Prefisso nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Prefix2" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="2. titolo onor." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="TitleSppl" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Suffisso nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Nickname" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Soprannome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Initials" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Iniziali" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Nameformat" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Formato nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Namcountry" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Paese p. edit." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Profession" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Professione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Sex" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Sesso" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Langu" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Lingua" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="PersGroup" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Status dip." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Flaggroups" Type="Edm.Boolean" Nullable="false" sap:label="Flag: esistono ulteriori attribuzioni a gruppi di persone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Sort1" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Criterio ric. 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Sort2" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Criterio ric. 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="SortPhn" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Class. fonetica" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="AddrComp" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="1.indir.azienda" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="AddrPers" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="1.indir.privato" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Flperstel" Type="Edm.Boolean" Nullable="false" sap:label="Telefono priv." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Flperscomm" Type="Edm.Boolean" Nullable="false" sap:label="N. com. propri" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Persorigin" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Fonte dati per." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="McNamefir" Type="Edm.String" Nullable="false" MaxLength="25" sap:label="Nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="McNamelas" Type="Edm.String" Nullable="false" MaxLength="25" sap:label="Cognome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="McName2" Type="Edm.String" Nullable="false" MaxLength="25" sap:label="Cogn. nasc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="LanguCrea" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Li. creazione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="AdrpUuid" Type="Edm.Guid" Nullable="false" sap:label="UUID indirizzo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="UuidBelated" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="UUID successivo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="IdCategory" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Categoria ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="AdrpErrStatus" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Stato errore" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Dataaging" Type="Edm.DateTime" Precision="7" sap:label="Data Filter Value for Data Aging" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Username" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Requestid" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Persnumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Numero persona" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DateFrom" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Da" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Nation" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Versione ind." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DateTo" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="A" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Intestazione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameFirst" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameLast" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Cognome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Name2" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Cogn. nasc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Namemiddle" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Secondo nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameLast2" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Secondo cognome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameText" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Nome completo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Converted" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="convertito" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TitleAca1" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Titolo accadem." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TitleAca2" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="2. titolo acc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Prefix1" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Prefisso nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Prefix2" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="2. titolo onor." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TitleSppl" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Suffisso nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Nickname" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Soprannome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Initials" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Iniziali" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Nameformat" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Formato nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Namcountry" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Paese p. edit." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Profession" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Professione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sex" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Sesso" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Langu" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Lingua" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PersGroup" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Status dip." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Flaggroups" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Flag: esistono ulteriori attribuzioni a gruppi di persone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sort1" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Criterio ric. 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sort2" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Criterio ric. 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SortPhn" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Class. fonetica" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AddrComp" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="1.indir.azienda" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AddrPers" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="1.indir.privato" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Flperstel" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Telefono priv." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Flperscomm" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="N. com. propri" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Persorigin" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Fonte dati per." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="McNamefir" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="Nome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="McNamelas" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="Cognome" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="McName2" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="Cogn. nasc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LanguCrea" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Li. creazione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AdrpUuid" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="UUID indirizzo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UuidBelated" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="UUID successivo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IdCategory" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Categoria ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AdrpErrStatus" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Stato errore" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dataaging" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Data Filter Value for Data Aging" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="LeaveRequestApp" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="ZrequestId"/>
                 </Key>
-                <Property Name="ZrequestId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Richiesta n°" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="Tmsuser" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Tmsapprover" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Approvatore" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="ZabsType" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Tipo" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="ZreqStatus" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Stato" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="ZdateRec" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Data richiesta" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
-                <Property Name="ZtimeRec" Type="Edm.Time" Nullable="false" Precision="0" sap:label="Ora richiesta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZdateAction" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Data azione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZtimeAction" Type="Edm.Time" Nullable="false" Precision="0" sap:label="Ora azione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZuserAction" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="User Azione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zdeleted" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Flag di cancellazione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZnoteAPP" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Note approver" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Ztmskey" Type="Edm.String" Nullable="false" MaxLength="16" sap:label="Chiave timesheet" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZoreTotali" Type="Edm.Decimal" Nullable="false" Precision="3" Scale="1" sap:label="Ore totali assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Znote" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Note" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZrequestId" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Richiesta n°" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Tmsuser" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Company" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Company" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Tmsapprover" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Approvatore" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ZabsType" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Tipo" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ZreqStatus" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Stato" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ZdateRec" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Data richiesta" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="ZtimeRec" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Ora richiesta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZdateAction" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Data azione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZtimeAction" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Ora azione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZuserAction" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User Azione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zdeleted" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Flag di cancellazione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZnoteAPP" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="Note approver" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ztmskey" Type="Edm.String" Nullable="false" MaxLength="16" sap:unicode="false" sap:label="Chiave timesheet" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZoreTotali" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="1" sap:unicode="false" sap:label="Ore totali assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zunlocked" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Znote" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="Note" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <NavigationProperty Name="ToLeaveReqAppPos" Relationship="ZLEAVE_REQUEST_SRV.LeaveReqAppToPos" FromRole="FromRole_LeaveReqAppToPos" ToRole="ToRole_LeaveReqAppToPos"/>
                 <NavigationProperty Name="UnameAppToName" Relationship="ZLEAVE_REQUEST_SRV.RequestAppToName" FromRole="FromRole_RequestAppToName" ToRole="ToRole_RequestAppToName"/>
                 <NavigationProperty Name="UnameAppToNameApprover" Relationship="ZLEAVE_REQUEST_SRV.RequestAppToNameApprover" FromRole="FromRole_RequestAppToNameApprover" ToRole="ToRole_RequestAppToNameApprover"/>
+            </EntityType>
+            <EntityType Name="LeaveRequestAppPos" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ZrequestId"/>
+                    <PropertyRef Name="ZrequestPos"/>
+                </Key>
+                <Property Name="ZrequestId" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Id" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ZrequestPos" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="Posizione" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Tmsuser" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Tmsapprover" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Approvatore" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ZabsType" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Tipo" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ZreqStatus" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Stato" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Zdate" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Data assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ztimestart" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Ora inizio assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ztimeend" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Ora fine assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZdateRec" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Data richiesta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZtimeRec" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Ora richiesta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zorep" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="1" sap:unicode="false" sap:label="Ore assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zdeleted" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Flag di cancellazione" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="DynTileConfig" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="title"/>
+                </Key>
+                <Property Name="icon" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Testo (40 posizioni)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="info" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Testo (40 posizioni)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="infoState" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Testo (40 posizioni)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="number" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Testo (40 posizioni)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="numberDigits" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Testo (40 posizioni)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="numberState" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Testo (40 posizioni)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="numberUnit" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Testo (40 posizioni)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="stateArrow" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Testo (40 posizioni)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="title" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Testo (40 posizioni)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="AllUser" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Tmsuser"/>
+                </Key>
+                <Property Name="Tmsuser" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Utente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <ComplexType Name="ItAbsType">
                 <Property Name="IdAbs" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Identificativo del tipo assenza" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -243,7 +291,7 @@
             </Association>
             <Association Name="LeaveReqToPos" sap:content-version="1">
                 <End Type="ZLEAVE_REQUEST_SRV.LeaveRequest" Multiplicity="1" Role="FromRole_LeaveReqToPos"/>
-                <End Type="ZLEAVE_REQUEST_SRV.LeaveRequestAppPos" Multiplicity="*" Role="ToRole_LeaveReqToPos"/>
+                <End Type="ZLEAVE_REQUEST_SRV.LeaveRequestPos" Multiplicity="*" Role="ToRole_LeaveReqToPos"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_LeaveReqToPos">
                         <PropertyRef Name="ZrequestId"/>
@@ -291,7 +339,7 @@
             </Association>
             <EntityContainer Name="ZLEAVE_REQUEST_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
                 <EntitySet Name="ApproverSet" EntityType="ZLEAVE_REQUEST_SRV.Approver" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
-                <EntitySet Name="LeaveRequestAppPosSet" EntityType="ZLEAVE_REQUEST_SRV.LeaveRequestAppPos" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="LeaveRequestPosSet" EntityType="ZLEAVE_REQUEST_SRV.LeaveRequestPos" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
                 <EntitySet Name="UserSet" EntityType="ZLEAVE_REQUEST_SRV.User" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
                 <EntitySet Name="UserLoggedSet" EntityType="ZLEAVE_REQUEST_SRV.UserLoggedSet" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
                 <EntitySet Name="LeaveRequestSet" EntityType="ZLEAVE_REQUEST_SRV.LeaveRequest" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
@@ -299,6 +347,9 @@
                 <EntitySet Name="AbsenceTypeSet" EntityType="ZLEAVE_REQUEST_SRV.AbsenceType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
                 <EntitySet Name="ApproverInfoSet" EntityType="ZLEAVE_REQUEST_SRV.ApproverInfo" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
                 <EntitySet Name="LeaveRequestAppSet" EntityType="ZLEAVE_REQUEST_SRV.LeaveRequestApp" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="LeaveRequestAppPosSet" EntityType="ZLEAVE_REQUEST_SRV.LeaveRequestAppPos" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="DynTileConfigSet" EntityType="ZLEAVE_REQUEST_SRV.DynTileConfig" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="AllUserSet" EntityType="ZLEAVE_REQUEST_SRV.AllUser" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
                 <AssociationSet Name="RequestAppToNameApproverSet" Association="ZLEAVE_REQUEST_SRV.RequestAppToNameApprover" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="LeaveRequestAppSet" Role="FromRole_RequestAppToNameApprover"/>
                     <End EntitySet="ApproverInfoSet" Role="ToRole_RequestAppToNameApprover"/>
@@ -324,8 +375,8 @@
                     <End EntitySet="UserSet" Role="ToRole_RequestAppToName"/>
                 </AssociationSet>
                 <FunctionImport Name="ZNote" ReturnType="ZLEAVE_REQUEST_SRV.MsgReturn" EntitySet="MsgReturnCollection" m:HttpMethod="POST">
-                    <Parameter Name="ZnoteText" Type="Edm.String" Mode="In" MaxLength="50000"/>
                     <Parameter Name="ZrequestId" Type="Edm.String" Mode="In" MaxLength="10"/>
+                    <Parameter Name="ZnoteText" Type="Edm.String" Mode="In" MaxLength="50000"/>
                 </FunctionImport>
             </EntityContainer>
             <atom:link
