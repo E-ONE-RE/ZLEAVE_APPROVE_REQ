@@ -144,13 +144,31 @@ sap.ui.define([
 		 return oAccesParameters;	
 		 },
 		 
+		 capitalizeFirstLetter: function (sValue) {
+		 	if (sValue){
+			    return sValue.replace(/^./, sValue[0].toUpperCase());
+		 	}
+			},
+			
 		 //MP: Funzione per la suggestion del SearchField
 		 onSuggest: function(oEvent){
 		 	var oSearchField = oEvent.getSource();
 		 	var sValue = oSearchField.getValue();
+		 	
+		 	sValue = this.capitalizeFirstLetter(sValue);
+
 		 	var aFilters = [];
 		 	var oFilterSur = new Filter("NameLast", sap.ui.model.FilterOperator.Contains, sValue);
 		 	var oFilterName = new Filter("NameFirst", sap.ui.model.FilterOperator.Contains, sValue);
+		 	
+//		 	var oFilterSur = new Filter("tolower(NameLast)", sap.ui.model.FilterOperator.Contains, sValue);
+//		 	var oFilterName = new Filter("tolower(NameFirst)", sap.ui.model.FilterOperator.Contains, sValue);
+		 	
+	//	 	aFilter.push(new Filter("tolower(ProductID)", FilterOperator.Contains, "'" + sQuery.toLowerCase() +
+
+//  "'"));
+  
+  
 		 	aFilters.push(oFilterSur, oFilterName);
 		    var oComFilter = new sap.ui.model.Filter({
 		 	filters: aFilters,
@@ -311,11 +329,14 @@ sap.ui.define([
 		  
 		  //MP: Funzione per resettare i filtri 
 		 resetFilters: function(){
-		 	
+		  	
 		var oView = this.getView();
+		
 		   //(SE) arrivando dall view detail this.getview era undifined	
 		 if (oView === undefined) {
-        		oView= sap.ui.getCore().byId("application-LeaveRequestApproval-display-component---master");
+		 	
+        	oView = sap.ui.getCore().byId("application-ZLeaveApprove-approve-component---master");
+	
 		   }
 	
 	//	 	var oSelect = this.getView().byId("Sele");
@@ -329,7 +350,6 @@ sap.ui.define([
 		//MP: Quick filter per filtrare tra gli stati delle richieste
 		onQuickFilter: function(oEvent, sTabKey, oList, oView) {
 			
-		
 		   // resetto i filtri
 		   this.resetFilters();
 		   ///////////////////
@@ -340,7 +360,7 @@ sap.ui.define([
            }
            
            if (oView === undefined) {
-           oView = sap.ui.getCore().byId("application-LeaveRequestApproval-display-component---master");
+           oView = sap.ui.getCore().byId("application-ZLeaveApprove-approve-component---master");
 		   }
 		   
 	  
