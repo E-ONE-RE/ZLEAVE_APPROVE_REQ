@@ -144,10 +144,19 @@ sap.ui.define([
 		 return oAccesParameters;	
 		 },
 		 
+		 capitalizeFirstLetter: function (sValue) {
+		 	if (sValue){
+			    return sValue.replace(/^./, sValue[0].toUpperCase());
+		 	}
+			},
+			
 		 //MP: Funzione per la suggestion del SearchField
 		 onSuggest: function(oEvent){
 		 	var oSearchField = oEvent.getSource();
 		 	var sValue = oSearchField.getValue();
+		 	
+		 	sValue = this.capitalizeFirstLetter(sValue);
+
 		 	var aFilters = [];
 		 	var oFilterSur = new Filter("NameLast", sap.ui.model.FilterOperator.Contains, sValue);
 		 	var oFilterName = new Filter("NameFirst", sap.ui.model.FilterOperator.Contains, sValue);
