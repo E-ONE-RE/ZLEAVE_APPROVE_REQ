@@ -501,6 +501,7 @@ sap.ui.define([
 			oViewModel.setProperty("/shareSendEmailMessage",
 				oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
 		},
+		
 
 		_onMetadataLoaded: function() {
 			// Store original busy indicator delay for the detail view
