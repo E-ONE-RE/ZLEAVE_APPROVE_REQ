@@ -2,8 +2,9 @@
 sap.ui.define([
 	"zetms/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
-	"zetms/model/formatter"
-], function(BaseController, JSONModel, formatter, MessageToast, MessageBox, Dialog, Button, Label, TextArea) {
+	"zetms/model/formatter",
+	"sap/m/MessageBox"
+], function(BaseController, JSONModel, formatter, MessageBox, MessageToast, Dialog, Button, Label, TextArea) {
 	"use strict";
 	return BaseController.extend("zetms.controller.Detail", {
 
@@ -412,6 +413,12 @@ sap.ui.define([
 			} else {
 				oListItemApp.setVisible(true);
 			}
+			
+			// resetto calendario team
+				var oCal1 = oView.byId("PC1");
+				oCal1.destroyRows();
+				oView.byId("SLCT_TEAMS").setSelectedKey("");
+				
 
 		},
 
@@ -501,6 +508,240 @@ sap.ui.define([
 			oViewModel.setProperty("/shareSendEmailMessage",
 				oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
 		},
+		
+		
+			_onCalendarHandle: function() {
+
+				var oView = this.getView();
+				var oModel = this.getView().getModel();
+				sap.ui.getCore().setModel(oModel);
+				
+				var oCal1 = oView.byId("PC1");
+				
+			//	var oRefDate = new Date();
+						
+			//	oCal1.startDate(oRefDate);
+				oCal1.destroyRows();
+				
+	
+	                     
+                var zarea = oView.byId("SLCT_TEAMS").getSelectedKey();
+              
+                 
+	         	var sRead = "/LeaveRequestPosTeamSet";
+
+				oModel.read(sRead, {
+					
+					filters: [new sap.ui.model.Filter({
+
+						filters: [new sap.ui.model.Filter({
+							path: "Area",
+							operator: sap.ui.model.FilterOperator.EQ,
+							value1: zarea
+
+						})],
+
+						and: true
+
+					})],
+
+					success: fnReadS,
+
+					error: fnReadE
+				});
+
+				function fnReadS(oData, response) {
+				//	console.log(oData);
+				//	console.log(response);
+
+					// controllo che la funzione è andata a buon fine 
+					if (response.statusCode == "200") {
+						////////////////////////////////				
+
+						var oFormatYYyyymmdd = sap.ui.core.format.DateFormat.getInstance({
+							pattern: "yyyyMMdd",
+							calendarType: sap.ui.core.CalendarType.Gregorian
+						});
+
+				
+
+						var oDateRange;
+						var person;
+						var abs_type_title;
+						var abs_type_type;
+						var abs_type_icon;
+						var abs_tooltip;
+						var abs_text;
+						
+						var abs_hour;
+						var abs_min;
+						
+						
+						 var viewKey = oView.byId("PC1").getViewKey();
+		               
+
+						if (oData.results.length > 0) {
+							for (var i = 0; i < oData.results.length; i++) {
+								//escludo richieste rifiutate
+                            //	if (oData.results[i].ZreqStatus === 'A' || oData.results[i].ZreqStatus === 'I') {
+								//						var res = oData.results[i].Zdate.substring(8);
+								
+									if (oData.results[i].Tmsuser != person) {
+									
+									person = oData.results[i].Tmsuser;
+	                               
+	                              
+	                                var oRow = new sap.m.PlanningCalendarRow({
+										icon: "sap-icon://employee",
+										title: person
+									});
+									oCal1.addRow(oRow);
+								}
+								
+									var res = oData.results[i].Zdate;
+								
+									
+									var abs_date_start = oFormatYYyyymmdd.parse(res);
+									 var abs_date_end = oFormatYYyyymmdd.parse(res);
+										var abs_hour_start = oData.results[i].Ztimestart.substring(0,2);
+										
+										if (abs_hour_start != '') {
+									//	if (1 == 2) {
+											
+										var abs_min_start = oData.results[i].Ztimestart.substring(3);
+										var abs_hour_end = oData.results[i].Ztimeend.substring(0,2);
+										var abs_min_end = oData.results[i].Ztimeend.substring(3);
+										
+	                                    abs_date_start.setHours(abs_hour_start,abs_min_start );
+	                                    
+	                                    abs_date_end.setHours(abs_hour_end,abs_min_end );
+	                                    
+	                                    abs_text = "Dalle " + oData.results[i].Ztimestart + " alle " + oData.results[i].Ztimeend;
+				
+				
+										} else {
+											
+	
+	                                    abs_date_end.setHours('23','59');
+	                                     //		abs_date_end.setDate(abs_date_end.getDate()+1);
+	                                     
+	                                    abs_text = "Giornata intera";
+				
+										}
+					//		
+					
+					
+	                switch (oData.results[i].ZabsType){
+	                		case "0001":
+	                	
+	                	abs_type_title = "Ferie iD: " + formatter.formatRequestId(oData.results[i].ZrequestId) + " \nStato: " + formatter.formatStatus(oData.results[i].ZreqStatus) + " \nGiorno: " + formatter.formatDate(oData.results[i].Zdate);
+				//		abs_type_type = sap.ui.unified.CalendarDayType.Type08;
+						abs_tooltip = "Ferie iD: " + formatter.formatRequestId(oData.results[i].ZrequestId) + " \nStato: " + formatter.formatStatus(oData.results[i].ZreqStatus) + " \nGiorno: " + formatter.formatDate(oData.results[i].Zdate);
+					
+						
+						abs_type_icon = "sap-icon://general-leave-request";
+	                
+	                	break;
+	                	case "0002":
+	                		
+	                	abs_type_title = "Permesso iD: " + formatter.formatRequestId(oData.results[i].ZrequestId) + " \nStato: " + formatter.formatStatus(oData.results[i].ZreqStatus) + " \nGiorno: " + formatter.formatDate(oData.results[i].Zdate);
+				//		abs_type_type = sap.ui.unified.CalendarDayType.Type07;
+						abs_tooltip ="Permesso iD: " + formatter.formatRequestId(oData.results[i].ZrequestId) + " \nStato: " + formatter.formatStatus(oData.results[i].ZreqStatus) + " \nGiorno: " + formatter.formatDate(oData.results[i].Zdate);
+					
+					
+						abs_type_icon = "sap-icon://customer-history";
+						break;
+							case "0003":
+	                		
+	                	abs_type_title = "Recupero iD: " + formatter.formatRequestId(oData.results[i].ZrequestId) + " \nStato: " + formatter.formatStatus(oData.results[i].ZreqStatus) + " \nGiorno: " + formatter.formatDate(oData.results[i].Zdate);
+				//		abs_type_type = sap.ui.unified.CalendarDayType.Type06;
+						
+						abs_tooltip = "Recupero iD: " + formatter.formatRequestId(oData.results[i].ZrequestId) + " \nStato: " + formatter.formatStatus(oData.results[i].ZreqStatus) + " \nGiorno: " + formatter.formatDate(oData.results[i].Zdate);
+				
+					
+						abs_type_icon = "sap-icon://cause";
+						break;
+							case "0004":
+	                		
+	                	abs_type_title = "Rol iD: " + formatter.formatRequestId(oData.results[i].ZrequestId) + " \nStato: " + formatter.formatStatus(oData.results[i].ZreqStatus) + " \nGiorno: " + formatter.formatDate(oData.results[i].Zdate);
+				//		abs_type_type = sap.ui.unified.CalendarDayType.Type05;
+						abs_tooltip = "Rol iD: " + formatter.formatRequestId(oData.results[i].ZrequestId) + " \nStato: " + formatter.formatStatus(oData.results[i].ZreqStatus) + " \nGiorno: " + formatter.formatDate(oData.results[i].Zdate);
+					
+						abs_type_icon = "sap-icon://customer-history";
+						
+								
+	                }
+	                
+	                if (oData.results[i].ZreqStatus == "A"){
+						abs_type_type = sap.ui.unified.CalendarDayType.Type08;
+								
+				         }else	{
+			              abs_type_type = sap.ui.unified.CalendarDayType.Type05;
+			                	
+			               }	
+			                		
+			                		
+	                var oAppointment = new sap.ui.unified.CalendarAppointment({
+					startDate: abs_date_start,
+				//	 nowP.setDate(nowP.getDate()-365);
+				//	endDate: oFormatYYyyymmdd.parse(res),
+					endDate: abs_date_end,
+					type: abs_type_type,
+					title: abs_type_title,
+					tooltip: abs_tooltip,
+					text: abs_text,
+					icon: abs_type_icon
+				});
+				 oRow.addAppointment(oAppointment);
+				 
+
+							}
+
+
+						}
+
+					} else {
+
+						//jQuery.sap.require("sap.m.MessageBox");
+						sap.m.MessageBox.show(
+							"Error: Nessun record recuperato", {
+								icon: sap.m.MessageBox.Icon.WARNING,
+								title: "Error",
+								actions: [sap.m.MessageBox.Action.CLOSE]
+
+							});
+
+					}
+
+				} // END FUNCTION SUCCESS
+
+				function fnReadE(oError) {
+				//	console.log(oError);
+
+					alert("Error in read: " + oError.message);
+				}
+
+
+			},
+			
+			
+			handleViewChange: function (oEvent) {
+					this._onBindingChange();
+			},
+			
+			
+
+			handleAppointmentSelect: function (oEvent) {
+				var oAppointment = oEvent.getParameter("appointment");
+				if (oAppointment) {
+					MessageBox.show(oAppointment.getTitle() + " \nDettaglio ore: " +
+					oAppointment.getText());
+				} else {
+					var aAppointments = oEvent.getParameter("appointments");
+					var sValue = aAppointments.length + " eventi selezionati, scegliere un intervallo di date minore per visualizzare il dettaglio.";
+					MessageBox.show(sValue);
+				}
+			},
 		
 
 		_onMetadataLoaded: function() {
