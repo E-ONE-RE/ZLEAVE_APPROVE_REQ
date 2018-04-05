@@ -144,6 +144,7 @@ sap.ui.define([
 		 return oAccesParameters;	
 		 },
 		 
+		 //(SE)
 		 capitalizeFirstLetter: function (sValue) {
 		 	if (sValue){
 			    return sValue.replace(/^./, sValue[0].toUpperCase());
@@ -155,19 +156,14 @@ sap.ui.define([
 		 	var oSearchField = oEvent.getSource();
 		 	var sValue = oSearchField.getValue();
 		 	
+		  //(SE) forzo lettera maiuscola come prima lettera per binding corretto con i nomi digitati nel
+		 	//campo di ricerca
 		 	sValue = this.capitalizeFirstLetter(sValue);
 
 		 	var aFilters = [];
 		 	var oFilterSur = new Filter("NameLast", sap.ui.model.FilterOperator.Contains, sValue);
 		 	var oFilterName = new Filter("NameFirst", sap.ui.model.FilterOperator.Contains, sValue);
 		 	
-//		 	var oFilterSur = new Filter("tolower(NameLast)", sap.ui.model.FilterOperator.Contains, sValue);
-//		 	var oFilterName = new Filter("tolower(NameFirst)", sap.ui.model.FilterOperator.Contains, sValue);
-		 	
-	//	 	aFilter.push(new Filter("tolower(ProductID)", FilterOperator.Contains, "'" + sQuery.toLowerCase() +
-
-//  "'"));
-  
   
 		 	aFilters.push(oFilterSur, oFilterName);
 		    var oComFilter = new sap.ui.model.Filter({
