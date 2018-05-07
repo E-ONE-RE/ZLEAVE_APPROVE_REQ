@@ -195,6 +195,7 @@ sap.ui.define([
 						'In qualità di <strong>amministratore</strong> puoi visualizzare, approvare o rifiutare le richieste inserite da tutti gli utenti di tua competenza.' +
 						' Inoltre, puoi modificare lo stato delle richieste precedentemente approvate da un TL o sbloccare (attraverso il tasto "Sblocca") le richieste per gli utenti che' +
 						' intendono modificare i dati della richiesta.' +
+						' Selezionando il Tab "Calendario Team" è possibile visualizzare il calendario delle assenze per ciascun team. Il team è selezionabile tramite l\'apposito menù a tendina.' +
 						'</ul>',
 					sanitizeContent: true
 				});
@@ -204,6 +205,7 @@ sap.ui.define([
 						'<ul>' +
 
 						' L\'applicazione permette di visualizzare le richieste inserite dai componenti del proprio team.' +
+						' Selezionando il Tab "Calendario Team" è possibile visualizzare il calendario delle assenze per il team di cui fai parte.' +
 						'</ul>',
 					sanitizeContent: true
 				});
@@ -214,6 +216,7 @@ sap.ui.define([
 
 						'In qualità di <strong>approvatore</strong> puoi visualizzare, approvare o rifiutare le richieste inserite da tutti gli utenti afferenti alla tua' +
 						' area di competenza. Inoltre, se necessario, puoi modificare lo stato di una richiesta da "approvata" a "rifiutata".' +
+						' Selezionando il Tab "Calendario Team" è possibile visualizzare il calendario delle assenze per il team di cui sei TL.' +
 						'</ul>',
 					sanitizeContent: true
 				});
@@ -699,7 +702,7 @@ sap.ui.define([
 											abs_text = "Giornata intera";
 											abs_tooltip = " per giornata intera"
 										}else{
-										 abs_text = "Dalle " + oData.results[i].Ztimestart + " alle " + oData.results[i].Ztimeend;
+										 abs_text = oData.results[i].Ztimestart + "-" + oData.results[i].Ztimeend;
 										 abs_tooltip = " dalle ore "  + oData.results[i].Ztimestart + " alle ore " + oData.results[i].Ztimeend;
 										}
 	
