@@ -1,6 +1,7 @@
 <mvc:View
 	controllerName="zetms.controller.Detail"
 	xmlns="sap.m"
+	xmlns:sap.ui.core="sap.ui.core" 
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.m.semantic"
 	xmlns:footerbar="sap.ushell.ui.footerbar"
@@ -159,6 +160,39 @@
 									</items>
 								</List>
 					</IconTabFilter>
+					
+						<IconTabFilter
+						id="iconTabBarFilter5"
+						icon="sap-icon://collaborate"
+						tooltip="Calendario Team">
+							
+								<PlanningCalendar
+								viewKey = "Week"
+								id="PC1"
+								showIntervalHeaders="true"
+								appointmentsVisualization="Filled"
+								appointmentSelect="handleAppointmentSelect"
+						
+								showEmptyIntervalHeaders="false"
+								showRowHeaders="true"
+								groupAppointmentsMode = "Expanded"
+					
+							    >
+									<!--		viewChange = "handleViewChange"-->	
+								<toolbarContent>
+									<Title text="Seleziona Team" titleStyle="H5"/>
+									
+									
+									<Select id="SLCT_TEAMS" forceSelection="false" change="_onCalendarHandle" items="{ path: '/TeamsSet' }">
+									<sap.ui.core:Item key="{NomeArea}" text="{DescrArea}"/>
+									</Select>
+								</toolbarContent>
+
+							</PlanningCalendar>
+		
+					</IconTabFilter>
+					
+					
 				</items>
 			</IconTabBar>
 		
